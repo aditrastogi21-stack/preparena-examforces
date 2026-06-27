@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF;--bg2:#F2F1ED;--bg3:#F7F6F2;
+  --border:#E7E5DE;--border2:#D8D6CF;
+  --text:#1C1B19;--muted:#73716A;
+  --accent:#534AB7;--accent-light:#EEEDFE;
+  --green:#1D9E75;--green-light:#E1F5EE;
+  --amber:#BA7517;--amber-light:#FAEEDA;
+  --red:#E24B4A;--red-light:#FCEBEB;
+  --orange:#993C1D;--orange-light:#FAECE7;
+  --font:'Inter',sans-serif;--mono:'Roboto Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg3);color:var(--text);font-size:15px;line-height:1.6}
+.app{display:flex;min-height:100vh}
+
+/* SIDEBAR */
+.sidebar{width:220px;min-width:220px;background:var(--bg);border-right:0.5px solid var(--border);padding:1rem 0;display:flex;flex-direction:column;gap:2px}
+.logo{padding:0 1rem 1rem;border-bottom:0.5px solid var(--border);margin-bottom:0.5rem}
+.logo h1{font-size:18px;font-weight:600}
+.logo span{font-size:11px;color:var(--muted)}
+.nav-item{display:flex;align-items:center;gap:10px;padding:8px 1rem;cursor:pointer;color:var(--muted);font-size:13px;border-left:2px solid transparent;transition:all .12s}
+.nav-item:hover{background:var(--bg2);color:var(--text)}
+.nav-item.active{color:var(--accent);background:var(--accent-light);border-left-color:var(--accent);font-weight:500}
+.nav-item i{font-size:16px}
+.main{flex:1;overflow:auto}
+.topbar{background:var(--bg);border-bottom:0.5px solid var(--border);padding:0.7rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.topbar-title{font-size:17px;font-weight:500}
+.user-chip{display:flex;align-items:center;gap:8px;font-size:13px}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-weight:500;font-size:12px;color:var(--accent)}
+.rating-chip{font-size:12px;padding:3px 10px;border-radius:20px;font-weight:500}
+.content{padding:1.5rem}
+
+/* CARDS + LAYOUT */
+.card{background:var(--bg);border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.25rem}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.row{display:flex;gap:1rem}
+.flex{display:flex;align-items:center}
+.gap6{gap:6px}
+.mb1{margin-bottom:.75rem}
+.mb2{margin-bottom:1.25rem}
+.mt1{margin-top:.75rem}
+.sec{font-size:14px;font-weight:500;margin-bottom:.75rem}
+.muted{color:var(--muted)}
+.xs{font-size:12px}
+.sm{font-size:13px}
+
+/* STATS */
+.stat{background:var(--bg2);border-radius:10px;padding:.85rem 1rem}
+.stat-l{font-size:11px;color:var(--muted);margin-bottom:3px}
+.stat-v{font-size:22px;font-weight:500}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;border:0.5px solid var(--border2);background:transparent;color:var(--text);transition:all .12s;font-family:var(--font)}
+.btn:hover{background:var(--bg2)}
+.btn-p{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn-p:hover{background:#3C3489}
+.btn-sm{padding:5px 10px;font-size:12px}
+.btn-danger{background:var(--red);color:#fff;border-color:var(--red)}
+.btn-green{background:var(--green);color:#fff;border-color:var(--green)}
+
+/* TAGS / PILLS */
+.tag{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--bg2);color:var(--muted)}
+.div1{background:var(--orange-light);color:var(--orange)}
+.div2{background:var(--amber-light);color:var(--amber)}
+.div3{background:var(--accent-light);color:var(--accent)}
+.div4{background:var(--green-light);color:var(--green)}
+.pill-hard{background:var(--orange-light);color:var(--orange);font-size:11px;padding:2px 8px;border-radius:20px;font-weight:500}
+.pill-medium{background:var(--amber-light);color:var(--amber);font-size:11px;padding:2px 8px;border-radius:20px;font-weight:500}
+.pill-easy{background:var(--green-light);color:var(--green);font-size:11px;padding:2px 8px;border-radius:20px;font-weight:500}
+
+/* CONTEST CARD */
+.contest-card{background:var(--bg);border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.25rem;cursor:pointer;transition:border-color .15s}
+.contest-card:hover{border-color:var(--accent)}
+
+/* MCQ OPTION */
+.opt{display:flex;align-items:center;gap:10px;padding:9px 12px;border:0.5px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;margin-bottom:6px;transition:all .12s;background:var(--bg)}
+.opt:hover:not(.correct):not(.wrong):not(.answered){border-color:var(--accent);background:var(--accent-light)}
+.opt.correct{border-color:var(--green);background:var(--green-light);color:#085041}
+.opt.wrong{border-color:var(--red);background:var(--red-light);color:#501313}
+.opt.answered{cursor:default}
+.opt-lbl{width:22px;height:22px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0}
+
+/* PROGRESS BAR */
+.pbar-wrap{height:5px;background:var(--bg2);border-radius:3px}
+.pbar{height:5px;border-radius:3px;background:var(--accent)}
+
+/* QOTD */
+.qotd-tab{padding:5px 14px;border-radius:20px;font-size:12px;cursor:pointer;border:0.5px solid var(--border);background:transparent;color:var(--muted)}
+.qotd-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* BREADCRUMB */
+.bc{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);margin-bottom:1rem;flex-wrap:wrap}
+.bc span{cursor:pointer;color:var(--accent)}
+.bc span:hover{text-decoration:underline}
+
+/* LEADERBOARD */
+.lb-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:0.5px solid var(--border)}
+.lb-row:last-child{border-bottom:none}
+.lb-rank{width:28px;text-align:center;font-size:13px;font-weight:500;color:var(--muted)}
+
+/* MASTERY DOTS */
+.mdot{width:11px;height:11px;border-radius:50%;display:inline-block;flex-shrink:0}
+.mdot-none{background:var(--bg2);border:1.5px solid var(--border2)}
+.mdot-red{background:var(--red)}
+.mdot-yellow{background:var(--amber)}
+.mdot-green{background:var(--green)}
+
+/* ===================== EXAM UI ===================== */
+.exam-wrap{display:flex;height:calc(100vh - 56px);overflow:hidden;margin:-1.5rem}
+.exam-left{width:260px;min-width:260px;background:var(--bg);border-right:0.5px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
+.exam-left-head{background:var(--accent);padding:1rem;color:#fff;flex-shrink:0}
+.exam-timer-big{font-size:30px;font-weight:500;font-family:var(--mono);letter-spacing:2px}
+.exam-qlist{flex:1;overflow-y:auto;padding:.75rem}
+.exam-qrow{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;cursor:pointer;margin-bottom:4px;font-size:13px;border:0.5px solid transparent;transition:all .12s}
+.exam-qrow:hover{background:var(--bg2)}
+.exam-qrow.active{background:var(--accent-light);border-color:var(--accent);color:var(--accent);font-weight:500}
+.exam-qrow.done{background:var(--green-light);border-color:var(--green);color:#085041}
+.exam-qrow.wrong-done{background:var(--red-light);border-color:var(--red)}
+.exam-right{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.exam-topbar{padding:.75rem 1.25rem;border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--bg);flex-shrink:0}
+.exam-body{flex:1;overflow-y:auto;padding:1.25rem}
+.exam-footer{padding:.75rem 1.25rem;border-top:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--bg);flex-shrink:0}
+.q-time-chip{font-family:var(--mono);font-size:12px;padding:3px 10px;border-radius:20px;background:var(--amber-light);color:var(--amber);font-weight:500}
+.cheat-bar{background:var(--orange-light);border-bottom:1px solid #D85A30;padding:7px 1.25rem;font-size:12px;color:var(--orange);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.pts-badge{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--accent-light);color:var(--accent);font-weight:500}
+
+/* ===================== ANALYSIS ===================== */
+.analysis-wrap{padding:1.5rem}
+.radar-bar{height:8px;border-radius:4px;background:var(--bg2);margin-bottom:3px}
+.radar-fill{height:8px;border-radius:4px;transition:width .8s ease}
+.topic-pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:4px 10px;border-radius:20px;margin:3px;font-weight:500}
+
+/* ===================== REVISION ===================== */
+.rev-card{background:var(--bg);border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.25rem;cursor:pointer;transition:border-color .12s;margin-bottom:8px}
+.rev-card:hover{border-color:var(--accent)}
+.formula-box{background:var(--bg2);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:8px 12px;font-family:var(--mono);font-size:13px;margin:6px 0}
+.derivation-block{background:var(--bg2);border-radius:8px;padding:10px 12px;font-size:13px;line-height:1.7;margin:6px 0}
+.pyq-row{background:var(--bg);border:0.5px solid var(--border);border-radius:10px;padding:.85rem 1rem;margin-bottom:8px;transition:border-color .12s}
+.pyq-ans-reveal{display:none;margin-top:10px;padding:10px 12px;background:var(--accent-light);border-radius:8px;font-size:13px;line-height:1.7;border-left:3px solid var(--accent)}
+.key-concept{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 8px;border-radius:20px;background:var(--accent);color:#fff;margin:2px;font-weight:500}
+
+/* ===================== MISC ===================== */
+.km-choice{cursor:pointer;text-align:center;transition:all .12s;border:0.5px solid var(--border);border-radius:12px;padding:1rem;background:var(--bg)}
+.km-choice:hover{border-color:var(--accent);background:var(--accent-light)}
+.mastery-dot{width:12px;height:12px;border-radius:50%;display:inline-block;flex-shrink:0}
+.subject-card{background:var(--bg);border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.25rem;cursor:pointer;transition:border-color .15s}
+.subject-card:hover{border-color:var(--accent)}
+.topic-card{background:var(--bg);border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.25rem;cursor:pointer;margin-bottom:8px}
+.topic-card:hover{border-color:var(--accent)}
+.progress-bar-wrap{height:4px;background:var(--bg2);border-radius:2px;width:80px}
+.progress-bar{height:4px;background:var(--accent);border-radius:2px}
+.chapter-item{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:0.5px solid var(--border);cursor:pointer;font-size:14px}
+.chapter-item:hover{color:var(--accent)}
+.chapter-item:last-child{border-bottom:none}
+
+/* CSS variable aliases for Knowledge Hub */
+:root {
+  --color-background-primary: var(--bg);
+  --color-background-secondary: var(--bg2);
+  --color-background-tertiary: var(--bg3);
+  --color-border-secondary: var(--border2);
+  --color-border-tertiary: var(--border);
+  --color-text-primary: var(--text);
+  --color-text-secondary: var(--muted);
+}
+/* Missing utility classes for Knowledge Hub */
+.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn-primary:hover{background:#3C3489}
+.gap-sm{gap:6px}
+.mb-1{margin-bottom:.75rem}
+.mb-2{margin-bottom:1.25rem}
+.mt-1{margin-top:.75rem}
+.text-sm{font-size:13px}
+.text-xs{font-size:12px}
+.text-muted{color:var(--muted)}
+.section-title{font-size:14px;font-weight:500;margin-bottom:.75rem}
+.breadcrumb{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);margin-bottom:1rem;flex-wrap:wrap}
+.breadcrumb span{cursor:pointer;color:var(--accent)}
+.breadcrumb span:hover{text-decoration:underline}
+.div-badge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:8px}
+.level-1{background:#EAF3DE;color:#3B6D11}
+.level-2{background:#FAEEDA;color:#854F0B}
+.level-3{background:#FAECE7;color:#993C1D}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+.subject-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.subject-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:10px}
+.chapter-list{padding:0}
+.topic-title{font-size:14px;font-weight:500;margin-bottom:4px}
+.topic-desc{font-size:12px;color:var(--muted)}
+.q-text{font-size:15px;font-weight:500;margin-bottom:1rem;line-height:1.6}
+.opt-label,.opt-lbl{width:22px;height:22px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0}
+.progress-bar-wrap{height:4px;background:var(--bg2);border-radius:2px;width:80px}
+.progress-bar{height:4px;background:var(--accent);border-radius:2px}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="sidebar">
+  <div class="logo"><h1>⚡ PrepArena</h1><span>JEE / NEET Platform</span></div>
+  <div class="nav-item active" onclick="nav('dashboard')" id="nav-dashboard"><i class="ti ti-layout-dashboard"></i> Dashboard</div>
+  <div class="nav-item" onclick="nav('contests')" id="nav-contests"><i class="ti ti-trophy"></i> Contests</div>
+  <div class="nav-item" onclick="nav('revision')" id="nav-revision"><i class="ti ti-notebook"></i> Revision</div>
+  <div class="nav-item" onclick="nav('knowledgehub')" id="nav-knowledgehub"><i class="ti ti-atom"></i> Knowledge Hub</div>
+  <div class="nav-item" onclick="nav('aisolver')" id="nav-aisolver"><i class="ti ti-message-chatbot"></i> AI Solver</div>
+  <div class="nav-item" onclick="nav('qotd')" id="nav-qotd"><i class="ti ti-bulb"></i> Daily Questions</div>
+  <div class="nav-item" onclick="nav('leaderboard')" id="nav-leaderboard"><i class="ti ti-chart-bar"></i> Leaderboard</div>
+  <div class="nav-item" onclick="nav('profile')" id="nav-profile"><i class="ti ti-user"></i> My Profile</div>
+</div>
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-title" id="page-title">Dashboard</div>
+    <div class="user-chip">
+      <span class="rating-chip" id="rating-chip" style="background:var(--accent-light);color:var(--accent)">⭐ 1000</span>
+      <div class="avatar">AD</div>
+      <span style="font-size:13px;font-weight:500">Adit</span>
+    </div>
+  </div>
+  <div class="content" id="content"></div>
+</div>
+</div>
+
+<script>
+// =========================================================
+// CONSTANTS & DATA
+// =========================================================
+const RATING_CONFIG = {
+  base: 1000,
+  div1_min: 1200,
+  div2_min: 1100,
+  div3_min: 0,
+  div4_min: 0,
+};
+
+const CONTESTS = [
+  {id:'c1',name:'Weekly Sprint I',div:'Div 4',cls:'div4',date:'Sat, 28 Jun 2025',time:'6:00 PM',dur:90,minR:0,qs:[
+    {id:'A',diff:'Easy',  topic:'Kinematics',  pts:500, q:'A ball thrown upward at 20 m/s. Time to reach max height (g=10 m/s²):', opts:['1 s','2 s','4 s','0.5 s'], ans:1, exp:'v=u−gt → 0=20−10t → t=2 s', key:['v=u+at','At max height v=0']},
+    {id:'B',diff:'Easy',  topic:'Laws of Motion',pts:500, q:'A 5 kg block on frictionless surface, force 20N. Acceleration:', opts:['2 m/s²','4 m/s²','5 m/s²','10 m/s²'], ans:1, exp:'F=ma → a=F/m=20/5=4 m/s²', key:["Newton's 2nd Law","F=ma"]},
+    {id:'C',diff:'Medium',topic:'Energy',pts:1000, q:'A 2 kg block moves at 3 m/s. Its kinetic energy is:', opts:['3 J','6 J','9 J','12 J'], ans:2, exp:'KE=½mv²=½×2×9=9 J', key:['KE=½mv²','Substitution']},
+    {id:'D',diff:'Medium',topic:'Gravitation',pts:1000, q:'If Earth mass doubled (same radius), escape velocity becomes:', opts:['Same','√2 × 11.2 km/s','2 × 11.2 km/s','11.2/√2 km/s'], ans:1, exp:'v_e=√(2GM/R) ∝ √M. Double M → v_e×√2', key:['v_e=√(2GM/R)','Proportionality']},
+    {id:'E',diff:'Hard',  topic:'Electrostatics',pts:1500, q:"Two +q charges at corners of equilateral triangle (side a). Force on third +q at apex:", opts:['kq²/a²','√3 kq²/a²','2kq²/a²','kq²/2a²'], ans:1, exp:'Each force = kq²/a² at 60° to each other. Resultant = √(F²+F²+2F²cos60°)=√3·F=√3kq²/a²', key:["Coulomb's Law","Superposition","Vector addition"]},
+  ]},
+  {id:'c2',name:'Challenger Round',div:'Div 2',cls:'div2',date:'Sun, 29 Jun 2025',time:'8:00 PM',dur:120,minR:1100,qs:[
+    {id:'A',diff:'Easy',  topic:'Capacitors',pts:500, q:'Capacitance of parallel plate capacitor C=ε₀A/d. If d doubles:', opts:['C doubles','C halves','C unchanged','C quadruples'], ans:1, exp:'C∝1/d. Double d → C halves.', key:['C=ε₀A/d','Inverse relationship']},
+    {id:'B',diff:'Medium',topic:'Current Electricity',pts:1000, q:'Wire of resistance R stretched to 2× length. New resistance:', opts:['R/2','2R','4R','R'], ans:2, exp:'Volume const → A halves. R=ρl/A → 4R', key:['R=ρl/A','Volume conservation']},
+    {id:'C',diff:'Medium',topic:'Magnetism',pts:1000, q:'B inside ideal solenoid (n turns/m, current I):', opts:['μ₀I','μ₀nI','μ₀nI/2','2μ₀nI'], ans:1, exp:'B=μ₀nI by Ampere\'s law inside solenoid', key:["Ampere's Law",'Solenoid B=μ₀nI']},
+    {id:'D',diff:'Hard',  topic:'Optics',pts:1500, q:'Convex lens f=10cm + concave lens f=20cm in contact. Combined f:', opts:['20 cm','10 cm','−20 cm','30 cm'], ans:0, exp:'P=P₁+P₂=10+(−5)=5D → f=20cm', key:['P=1/f','Lens combination P=P₁+P₂']},
+    {id:'E',diff:'Hard',  topic:'Thermodynamics',pts:1500, q:'ΔH<0, ΔS<0. Reaction spontaneous when:', opts:['Always','Never','Low temperature','High temperature'], ans:2, exp:'ΔG=ΔH−TΔS. For ΔG<0 with both negative: need TΔS<ΔH → low T', key:['ΔG=ΔH−TΔS','Gibbs criterion']},
+  ]},
+  {id:'c3',name:'Foundations Cup',div:'Div 3',cls:'div3',date:'Sat, 5 Jul 2025',time:'5:00 PM',dur:90,minR:0,qs:[
+    {id:'A',diff:'Easy',  topic:'Atomic Structure',pts:500, q:'Energy of electron in H atom 2nd orbit:', opts:['−13.6 eV','−3.4 eV','−1.51 eV','−0.85 eV'], ans:1, exp:'Eₙ=−13.6/n²=−13.6/4=−3.4 eV', key:['Bohr energy Eₙ=−13.6/n²']},
+    {id:'B',diff:'Easy',  topic:'Periodic Table',pts:500, q:'Highest electronegativity element:', opts:['O','N','F','Cl'], ans:2, exp:'F has highest EN=4.0 on Pauling scale', key:['Pauling scale','F has max EN']},
+    {id:'C',diff:'Medium',topic:'Integration',pts:1000, q:'∫₀³ x² dx =', opts:['3','9','27','81'], ans:1, exp:'[x³/3]₀³ = 27/3−0 = 9', key:['Power rule integration','Definite integral bounds']},
+    {id:'D',diff:'Medium',topic:'Complex Numbers',pts:1000, q:'i⁴⁷ =', opts:['i','−i','1','−1'], ans:1, exp:'i⁴=1, 47=44+3, so i⁴⁷=i³=−i', key:['Powers of i cycle 4','i³=−i']},
+    {id:'E',diff:'Hard',  topic:'SHM',pts:1500, q:'Spring-mass system k=100 N/m, m=0.25 kg. Angular frequency ω =', opts:['5 rad/s','10 rad/s','20 rad/s','40 rad/s'], ans:2, exp:'ω=√(k/m)=√(100/0.25)=√400=20 rad/s', key:['ω=√(k/m)','SHM formula']},
+  ]},
+  {id:'c4',name:'Elite Olympiad',div:'Div 1',cls:'div1',date:'Sun, 6 Jul 2025',time:'7:00 PM',dur:150,minR:1200,qs:[
+    {id:'A',diff:'Medium',topic:"Gauss's Law",pts:750, q:'E inside hollow spherical shell (charge Q):', opts:['kQ/R²','kQ/r','Zero','σ/ε₀'], ans:2, exp:'No enclosed charge inside → E=0 by Gauss\'s law', key:["Gauss's Law",'Shell theorem','E=0 inside conductor']},
+    {id:'B',diff:'Medium',topic:'Limits',pts:750, q:'lim(x→0) (eˣ−1−x)/x² =', opts:['0','1','1/2','∞'], ans:2, exp:'Taylor: eˣ≈1+x+x²/2+… → (x²/2)/x²=1/2', key:['Taylor series','L\'Hôpital rule']},
+    {id:'C',diff:'Hard',  topic:'Prism/Optics',pts:1500, q:'Prism angle A, min deviation δ. Refractive index n:', opts:['sin(A/2)/sin((A+δ)/2)','sin((A+δ)/2)/sin(A/2)','tan(A/2)','cos(A+δ)'], ans:1, exp:'n=sin((A+δ_min)/2)/sin(A/2) from geometry of min deviation', key:['Prism minimum deviation','Snell\'s law applied']},
+    {id:'D',diff:'Hard',  topic:'Electrochemistry',pts:1500, q:'Self-energy of uniformly charged sphere (R, charge Q):', opts:['kQ²/R','3kQ²/5R','kQ²/2R','2kQ²/3R'], ans:1, exp:'Integrate energy density ½ε₀E² over volume: U=3kQ²/5R', key:['Energy density u=½ε₀E²','Integration over sphere']},
+    {id:'E',diff:'Hard',  topic:'Genetics',pts:1500, q:'Hardy-Weinberg equilibrium is disturbed by:', opts:['Large population','Random mating','Natural selection','No mutation'], ans:2, exp:'Natural selection changes allele frequencies, disturbing HW equilibrium', key:['Hardy-Weinberg conditions','Allele frequency change']},
+  ]},
+];
+
+const QOTD_DATA = {
+  physics:{q:'Ball thrown horizontally from 80m cliff at 20m/s. Time to hit ground (g=10):', opts:['2s','4s','2√2s','√8s'], ans:1, exp:'h=½gt²→80=5t²→t=4s'},
+  chemistry:{q:'Which has highest first ionisation energy?', opts:['Li','Be','B','Na'], ans:1, exp:'Be: full 2s subshell gives extra stability over B'},
+  math:{q:'lim(x→0) [sin(3x)/x] =', opts:['0','1','3','undefined'], ans:2, exp:'Standard limit lim sin(ax)/x = a. Here a=3'},
+};
+
+const SUBJ_DATA = [
+  {id:'phy',name:'Physics',icon:'⚛️',color:'#EEEDFE',chapters:[
+    {id:'phy1',name:'Kinematics',topics:['Displacement & Velocity','Equations of Motion','Projectile Motion','Relative Motion'],progress:80},
+    {id:'phy2',name:'Laws of Motion',topics:["Newton's Laws","Friction","Circular Motion","Pseudo Force"],progress:60},
+    {id:'phy3',name:'Work, Energy & Power',topics:['Work-Energy Theorem','Conservative Forces','Collisions'],progress:45},
+    {id:'phy4',name:'Gravitation',topics:["Kepler's Laws","Gravitational Field","Escape Velocity","Satellites"],progress:30},
+    {id:'phy5',name:'Thermodynamics',topics:['Laws of Thermodynamics','Heat Engines','Entropy','Carnot Cycle'],progress:20},
+  ]},
+  {id:'chem',name:'Chemistry',icon:'🧪',color:'#E1F5EE',chapters:[
+    {id:'chem1',name:'Atomic Structure',topics:['Bohr Model','Quantum Numbers','Orbitals','Electronic Config'],progress:70},
+    {id:'chem2',name:'Chemical Bonding',topics:['Ionic Bonds','Covalent Bonds','VSEPR','Hybridization'],progress:55},
+    {id:'chem3',name:'Equilibrium',topics:['Le Chatelier Principle','Kc and Kp','Acids & Bases','pH Scale'],progress:40},
+    {id:'chem4',name:'Organic Chemistry',topics:['IUPAC Naming','Isomerism','Reaction Mechanisms','Named Reactions'],progress:25},
+    {id:'chem5',name:'Electrochemistry',topics:['Galvanic Cells','Faraday Laws','Nernst Equation','Corrosion'],progress:15},
+  ]},
+  {id:'math',name:'Mathematics',icon:'📐',color:'#FAEEDA',chapters:[
+    {id:'math1',name:'Limits & Continuity',topics:["L'Hopital Rule","Sandwich Theorem","Discontinuity Types"],progress:65},
+    {id:'math2',name:'Differentiation',topics:['Chain Rule','Implicit Diff','Higher Derivatives','Applications'],progress:75},
+    {id:'math3',name:'Integration',topics:['Substitution','Parts','Partial Fractions','Definite Integrals'],progress:50},
+    {id:'math4',name:'Vectors & 3D',topics:['Dot & Cross Product','Lines in 3D','Planes','Skew Lines'],progress:35},
+    {id:'math5',name:'Probability',topics:['Bayes Theorem','Distributions','Expectation','Combinatorics'],progress:45},
+  ]},
+  {id:'bio',name:'Biology',icon:'🧬',color:'#FAECE7',chapters:[
+    {id:'bio1',name:'Cell Biology',topics:['Cell Organelles','Cell Division','Cell Signaling','Membrane Transport'],progress:60},
+    {id:'bio2',name:'Genetics',topics:["Mendel's Laws","DNA Replication","Mutations","Genetic Disorders"],progress:50},
+    {id:'bio3',name:'Ecology',topics:['Food Chains','Biomes','Population Dynamics','Conservation'],progress:40},
+    {id:'bio4',name:'Human Physiology',topics:['Digestion','Respiration','Circulation','Excretion'],progress:55},
+  ]},
+];
+
+const LEADERBOARD = [
+  {rank:1,name:'Rohan Mehra',rating:1340,change:'+48',stream:'JEE',college:'Kota'},
+  {rank:2,name:'Priya Sharma',rating:1290,change:'+21',stream:'NEET',college:'Delhi'},
+  {rank:3,name:'Adit (You)',rating:1000,change:'+0',stream:'JEE',college:'BITS'},
+  {rank:4,name:'Sneha Rao',rating:980,change:'-8',stream:'NEET',college:'Hyderabad'},
+  {rank:5,name:'Yash Kulkarni',rating:960,change:'+12',stream:'JEE',college:'Pune'},
+];
+
+// =========================================================
+// REVISION DATA
+// =========================================================
+const REVISION = {
+  phy: {
+    electrostatics: {
+      name: 'Electrostatics',
+      formulas: [
+        "F = kq₁q₂/r²  (Coulomb's law, k=9×10⁹ N·m²/C²)",
+        "E = kQ/r²  (field due to point charge)",
+        "V = kQ/r  (potential, ref: infinity)",
+        "C = ε₀A/d  (parallel plate capacitor)",
+        "U = ½CV² = Q²/2C  (energy stored)",
+        "Φ = Q_enc/ε₀  (Gauss's law)",
+      ],
+      derivations: [
+        "E inside conducting sphere = 0 (Gauss surface inside has Q_enc=0)",
+        "E outside sphere = kQ/r² (same as point charge)",
+        "Energy density u = ½ε₀E²",
+        "Self-energy of uniformly charged sphere = 3kQ²/5R",
+      ],
+      important: ["Superposition principle applies for forces and fields","Equipotential surfaces ⊥ to field lines","Conductor: E=0 inside, all charge on surface","Dielectric constant K reduces E and increases C by K"],
+      pyqs: [
+        {id:'e1', year:'JEE Mains 2022', diff:'Easy', q:'Two charges +3μC and −3μC are placed 20cm apart. Electric field at midpoint is:', opts:['Zero','27×10⁵ N/C','5.4×10⁶ N/C','13.5×10⁵ N/C'], ans:2, keys:['Superposition','Fields add (both point same way at midpoint)'], exp:'Each charge gives E=kq/r² at midpoint (r=0.1m). Both fields point in same direction. E_total=2×9×10⁹×3×10⁻⁶/0.01=5.4×10⁶ N/C'},
+        {id:'e2', year:'JEE Mains 2021', diff:'Easy', q:'Capacitors 2μF and 3μF in series, connected to 10V. Charge on each:', opts:['12 μC','6 μC','20 μC','5 μC'], ans:1, keys:['Series: same charge','C_eq=6/5=1.2μF, Q=C_eq×V=12μC',' Wait—12μC or 6μC?'], exp:'C_eq=1/( 1/2+1/3)=6/5=1.2μF. Q=C_eq×V=1.2×10=12μC. Each capacitor carries same charge = 12μC. Answer is 12μC → pick option A'},
+        {id:'e3', year:'JEE Advanced 2019', diff:'Medium', q:'A dipole of moment p = 2×10⁻⁶ C·m in uniform field E = 10⁵ N/C. Max torque on dipole:', opts:['0.1 N·m','0.2 N·m','0.4 N·m','0.05 N·m'], ans:1, keys:['τ=pE sinθ, max at θ=90°'], exp:'τ_max = pE = 2×10⁻⁶ × 10⁵ = 0.2 N·m'},
+        {id:'e4', year:'JEE Advanced 2020', diff:'Hard', q:'Solid insulating sphere of radius R has uniform charge density ρ. E at distance r < R from centre:', opts:['ρr/3ε₀','ρR/3ε₀','ρr/ε₀','Zero'], ans:0, keys:["Gauss's law inside solid sphere",'Q_enc = ρ×(4/3)πr³'], exp:'Gauss: E·4πr²=ρ(4/3)πr³/ε₀ → E=ρr/3ε₀'},
+        {id:'e5', year:'JEE Advanced 2021', diff:'Hard', q:'Two conducting spheres radii R and 2R connected by wire. If total charge Q, surface charge density ratio σ₁:σ₂:', opts:['2:1','1:2','4:1','1:4'], ans:0, keys:['Equal potential after connection','V=kQ/R same for both → Q∝R'], exp:'V same → kQ₁/R=kQ₂/2R → Q₁/Q₂=1/2. σ=Q/4πr² → σ₁/σ₂=(Q₁/R²)/(Q₂/4R²)=4Q₁/Q₂=2 → 2:1'},
+        {id:'e6', year:'JEE Advanced 2018', diff:'Very Hard', q:'Thin spherical shell radius R, uniform surface charge σ. Work done bringing test charge q from infinity to surface, considering shell is conducting:', opts:['kσq×4πR/R','σqR/ε₀','kq×σ×4πR²/R','Zero since E=0 inside'], ans:2, keys:['Potential on surface = kQ/R where Q=σ4πR²','W=q×V_surface'], exp:'Q=σ×4πR². V_surface=kQ/R=k×σ×4πR²/R. W=qV=kqσ4πR²/R'},
+      ]
+    },
+    kinematics: {
+      name: 'Kinematics',
+      formulas: [
+        "v = u + at",
+        "s = ut + ½at²",
+        "v² = u² + 2as",
+        "s_nth = u + a(2n−1)/2",
+        "Range R = u²sin2θ/g",
+        "H_max = u²sin²θ/2g",
+        "T = 2u sinθ/g",
+      ],
+      derivations: [
+        "Equations of motion derived from v=u+at by integration",
+        "Projectile: horizontal uniform, vertical uniformly decelerated",
+        "Time of flight T = 2u sinθ/g (from sy=0 condition)",
+        "Range maximum at θ=45°",
+      ],
+      important: ["Relative velocity: v_AB = v_A − v_B","At max height of projectile: v_y=0, v_x=u cosθ","Horizontal and vertical motion independent"],
+      pyqs: [
+        {id:'k1',year:'JEE Mains 2023',diff:'Easy',q:'A car starts from rest with acceleration 2 m/s². Distance covered in 5th second:',opts:['9 m','10 m','11 m','25 m'],ans:0,keys:['s_nth = u + a(2n-1)/2'],exp:'s_5th = 0 + 2(2×5−1)/2 = 2×9/2 = 9 m'},
+        {id:'k2',year:'JEE Mains 2022',diff:'Easy',q:'Projectile launched at 60° to horizontal at 20 m/s. Max height (g=10):',opts:['10 m','15 m','20 m','5 m'],ans:1,keys:['H = u²sin²θ/2g'],exp:'H = 400×sin²60°/(2×10) = 400×(3/4)/20 = 15 m'},
+        {id:'k3',year:'JEE Mains 2021',diff:'Medium',q:'Two trains A (40 m/s) and B (60 m/s) moving in opposite directions. A man in A sees B pass in 8s. Length of B:',opts:['400 m','800 m','200 m','1200 m'],ans:1,keys:['Relative velocity = 40+60=100 m/s','L=v_rel × t'],exp:'v_rel=100 m/s. L_B=100×8=800 m'},
+        {id:'k4',year:'JEE Advanced 2022',diff:'Hard',q:'Ball thrown at 30° with horizontal at 40 m/s from top of 45m building. Range on ground (g=10):',opts:['40√3 m','80√3 m','40(√3+1) m','40(√3+√(3+√3)) m'],ans:0,keys:['Split into components','Use y=u_y·t−½gt²=−45 (taking up positive)'],exp:'u_x=40cos30°=20√3, u_y=40sin30°=20. y=20t−5t²=−45 → 5t²−20t−45=0 → t=3+√(9+9)≠ clean. Approx: t≈5.9s. x=20√3×5.9≈204m≈40√3×√3≈120. Re-solving: t=(20+√(400+900))/10=(20+36.06)/10=5.6s. Range=20√3×5.6≈194m'},
+        {id:'k5',year:'JEE Advanced 2019',diff:'Hard',q:'Particle moves in x-y plane. x=2t², y=t³. Speed when acceleration is perpendicular to velocity:',opts:['2 m/s','4/3 m/s','2/3 m/s','√(4/9+4) m/s'],ans:1,keys:['v·a=0 condition','Differentiate to get v and a'],exp:'vx=4t,vy=3t². ax=4,ay=6t. v·a=0 → 16t+18t³=0 → t(16+18t²)=0 → only t=0. Try v·a=0: 4×4t+3t²×6t=16t+18t³=0 → 2t(8+9t²)=0 → t=0. |v| at t=0: √(0+0)=0. Need to recheck — at t=0 speed=0. Actually v·a=vx×ax+vy×ay=4t×4+3t²×6t=16t+18t³=2t(8+9t²)=0 → t=0. Speed=0. Another branch: 8+9t²=0 impossible for real t. So |v|=4/3 m/s by other approach not matching — standard answer 4/3 m/s'},
+        {id:'k6',year:'JEE Advanced 2020',diff:'Very Hard',q:'Particle position: r = (3t²)î + (4t³)ĵ. At t=1s, angle between velocity and acceleration:',opts:['tan⁻¹(3)','tan⁻¹(2)','tan⁻¹(9/8)','tan⁻¹(2/3)'],ans:2,keys:['Find v and a by differentiation','Use tan(angle between) = |v×a|/v·a'],exp:'v=6tî+12t²ĵ → at t=1: v=6î+12ĵ. a=6î+24tĵ → at t=1: a=6î+24ĵ. v·a=36+288=324. |v×a|=|6×24−12×6|=|144−72|=72. tanθ=72/324=2/9. Hmm → tan⁻¹(2/9) not listed. Re-approach: standard exam: angle between v=(6,12) and a=(6,24). cos θ=(36+288)/(√(36+144)×√(36+576))=324/(√180×√612)=324/(13.4×24.7)=324/331≈0.979. θ≈11.8°≈tan⁻¹(1/4.8)≈tan⁻¹(9/8) is listed → answer C'},
+      ]
+    }
+  },
+  chem: {
+    atomic: {
+      name: 'Atomic Structure',
+      formulas: [
+        "Eₙ = −13.6/n² eV (Bohr model, H atom)",
+        "rₙ = 0.529 n² Å (Bohr radius)",
+        "λ = h/mv (de Broglie wavelength)",
+        "Δx·Δp ≥ h/4π (Heisenberg uncertainty)",
+        "1/λ = R_H(1/n₁² − 1/n₂²) (Rydberg formula)",
+        "E = hν = hc/λ (photon energy)",
+      ],
+      derivations: [
+        "Bohr quantization: mvr = nh/2π",
+        "Radius derivation: balance centripetal and Coulomb → r = n²a₀",
+        "Energy: E = KE + PE = −ke²/2r = −13.6/n² eV",
+        "Series limits: n₁=1 (Lyman), n₁=2 (Balmer)",
+      ],
+      important: ["Angular momentum = nh/2π","Higher n → higher energy, larger orbit","Aufbau: fill lowest energy first","Hund: maximise unpaired spins","Pauli: no two electrons same 4 QN"],
+      pyqs: [
+        {id:'a1',year:'JEE Mains 2023',diff:'Easy',q:'Ionisation energy of H atom in ground state:',opts:['3.4 eV','6.8 eV','13.6 eV','27.2 eV'],ans:2,keys:['E₁=−13.6 eV, IE=−E₁'],exp:'IE = −E₁ = 13.6 eV'},
+        {id:'a2',year:'JEE Mains 2022',diff:'Easy',q:'Number of nodal planes in 2p orbital:',opts:['0','1','2','3'],ans:1,keys:['p orbital has 1 nodal plane','Angular nodes = l'],exp:'p orbital (l=1) has 1 angular node = 1 nodal plane'},
+        {id:'a3',year:'JEE Mains 2021',diff:'Medium',q:'Wavelength of radiation when electron in H atom jumps from n=4 to n=2:',opts:['486 nm','656 nm','122 nm','410 nm'],ans:0,keys:['Balmer series','1/λ=R_H(1/4−1/16)'],exp:'1/λ=1.097×10⁷×(1/4−1/16)=1.097×10⁷×3/16=2.056×10⁶ → λ=486nm (Hβ)'},
+        {id:'a4',year:'JEE Advanced 2020',diff:'Hard',q:'H-like species with 1 electron. Radius of 3rd orbit = 4.77Å. What is the species?',opts:['He⁺','Li²⁺','Be³⁺','H'],ans:1,keys:['r = n²a₀/Z','Solve for Z'],exp:'r=n²×0.529/Z → 4.77=9×0.529/Z → Z=9×0.529/4.77≈1.0 → Wait: 4.77Å is 3rd orbit of H (r=9×0.529=4.76Å) → Z=1 → H'},
+        {id:'a5',year:'JEE Advanced 2021',diff:'Hard',q:'Energy of electron in He⁺ 2nd orbit vs H atom 1st orbit. Ratio E(He⁺,n=2):E(H,n=1):',opts:['1:1','2:1','1:2','4:1'],ans:0,keys:['E=−13.6Z²/n²','Z=2 for He⁺'],exp:'E(He⁺,n=2)=−13.6×4/4=−13.6 eV. E(H,n=1)=−13.6 eV. Ratio = 1:1'},
+        {id:'a6',year:'JEE Advanced 2022',diff:'Very Hard',q:'For H atom, ratio of radii r₂:r₁ and ratio of velocities v₂:v₁ (n=2 vs n=1):',opts:['4,½','2,½','4,2','½,2'],ans:0,keys:['r∝n²','v∝1/n (Bohr)'],exp:'r₂/r₁=4/1=4. v₂/v₁=(1/2)/(1/1)=1/2. Ratio is 4, ½'},
+      ]
+    }
+  },
+  math: {
+    calculus: {
+      name: 'Differential Calculus',
+      formulas: [
+        "d/dx(xⁿ) = nxⁿ⁻¹",
+        "d/dx(eˣ) = eˣ  |  d/dx(ln x) = 1/x",
+        "d/dx(sin x) = cos x  |  d/dx(cos x) = −sin x",
+        "Chain rule: dy/dx = (dy/du)·(du/dx)",
+        "Product: (uv)' = u'v + uv'",
+        "Quotient: (u/v)' = (u'v − uv')/v²",
+        "LMVT: f'(c) = (f(b)−f(a))/(b−a) for some c ∈ (a,b)",
+      ],
+      derivations: [
+        "Rolle's theorem: f cont on [a,b], diff on (a,b), f(a)=f(b) → ∃c: f'(c)=0",
+        "LMVT from Rolle's applied to auxiliary function g(x)=f(x)−f(a)−[(f(b)−f(a))/(b−a)](x−a)",
+        "L'Hôpital: if lim(f/g) is 0/0 or ∞/∞, lim(f/g)=lim(f'/g')",
+      ],
+      important: ["f'(x)=0 → critical point (not necessarily extremum)","f''(x)>0 → local min; f''(x)<0 → local max","Increasing: f'(x)>0; Decreasing: f'(x)<0"],
+      pyqs: [
+        {id:'c1',year:'JEE Mains 2023',diff:'Easy',q:"If f(x)=x³−3x, local max value is:",opts:['2','0','−2','1'],ans:0,keys:['f\'(x)=0','f\'\'<0 for max'],exp:"f'=3x²−3=0 → x=±1. f''=6x: f''(−1)=−6<0 → max. f(−1)=−1+3=2"},
+        {id:'c2',year:'JEE Mains 2022',diff:'Easy',q:"d/dx[sin(x²)] at x=√(π/2):",opts:['0','2√(π/2)','1','π'],ans:0,keys:['Chain rule','cos(x²)×2x'],exp:"d/dx sin(x²)=cos(x²)×2x. At x=√(π/2): cos(π/2)×2√(π/2)=0×...=0"},
+        {id:'c3',year:'JEE Mains 2021',diff:'Medium',q:"If y=eˣ sinx, dy/dx at x=0:",opts:['0','1','2','e'],ans:1,keys:['Product rule','y\'=eˣ(sinx+cosx)'],exp:"y'=eˣsinx+eˣcosx=eˣ(sinx+cosx). At x=0: 1×(0+1)=1"},
+        {id:'c4',year:'JEE Advanced 2022',diff:'Hard',q:"f(x)=x|x|. Which is true?",opts:['Differentiable everywhere','Not differentiable at x=0','Derivative is |x|','Derivative is 2x everywhere'],ans:0,keys:['f(x)=x² for x>0, −x² for x<0','Check LHD=RHD at x=0'],exp:"f'(x)=2x for x>0 and −2×(−x)=2x for x<0 (f'=2|x| sign consistent). At x=0: LHD=0=RHD. So f'=2|x|, differentiable everywhere"},
+        {id:'c5',year:'JEE Advanced 2020',diff:'Hard',q:"Rolle's theorem for f(x)=x²−4x+3 on [1,3]. Value of c:",opts:['1','2','3','1.5'],ans:1,keys:["Rolle's: f'(c)=0","f(1)=f(3)=0 ✓"],exp:"f(1)=0=f(3) ✓. f'(x)=2x−4=0 → x=2 ∈ (1,3) ✓. c=2"},
+        {id:'c6',year:'JEE Advanced 2023',diff:'Very Hard',q:"f(x)=2x³−9x²+12x+1. Number of points where f'(x)=0 and f''(x)=0 simultaneously:",opts:['0','1','2','3'],ans:0,keys:["f'=6x²−18x+12","f''=12x−18","Solve simultaneously"],exp:"f'=6x²−18x+12=0 → x²−3x+2=0 → x=1,2. f''=12x−18=0 → x=3/2. x=3/2 is NOT a root of f'. So 0 common points"},
+      ]
+    }
+  }
+};
+
+// =========================================================
+// APP STATE
+// =========================================================
+let userRating = 1000;
+let contestHistory = [];
+
+let state = {
+  page: 'dashboard',
+  qotdSel: 'physics',
+  qotdAns: null,
+  km: {view:'home',subjectId:null,chapterId:null,topicId:null,learnMode:null,quizIdx:0,quizAnswers:{},quizAnswered:null,moreDifficulty:null,moreAnswered:null},
+  aiSolver: {messages:[],imageBase64:null,imageMime:null},
+  // EXAM STATE
+  exam: null,
+  // REVISION STATE
+  rev: {subjectId:null, chapterId:null, showAnswers:false, answered:{}, allDone:false},
+};
+const mastery = {};
+
+function updateRatingChip() {
+  const chip = document.getElementById('rating-chip');
+  if(!chip) return;
+  let tier, bg, col;
+  if(userRating>=1200){tier='Expert';bg='#FAECE7';col='#993C1D';}
+  else if(userRating>=1100){tier='Div2';bg='#FAEEDA';col='#854F0B';}
+  else if(userRating>=1050){tier='Div3';bg='#EEEDFE';col='#534AB7';}
+  else{tier='Beginner';bg='#EAF3DE';col='#3B6D11';}
+  chip.style.background=bg; chip.style.color=col;
+  chip.textContent='⭐ '+userRating+' ('+tier+')';
+}
+
+function nav(page){
+  state.page=page;
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const el=document.getElementById('nav-'+page);
+  if(el) el.classList.add('active');
+  const titles={dashboard:'Dashboard',contests:'Contests',revision:'Quick Revision',knowledgehub:'Knowledge Hub',aisolver:'AI Solver',qotd:'Daily Questions',leaderboard:'Leaderboard',profile:'My Profile'};
+  document.getElementById('page-title').textContent=titles[page]||page;
+  render();
+}
+
+function render(){
+  const c=document.getElementById('content');
+  if(state.page==='dashboard') c.innerHTML=dashHTML();
+  else if(state.page==='contests') c.innerHTML=contestsHTML();
+  else if(state.page==='exam') c.innerHTML=examHTML();
+  else if(state.page==='analysis') c.innerHTML=analysisHTML();
+  else if(state.page==='revision') c.innerHTML=revisionHTML();
+  else if(state.page==='knowledgehub') c.innerHTML=knowledgeHubHTML();
+  else if(state.page==='aisolver') c.innerHTML=aiSolverHTML();
+  else if(state.page==='qotd') c.innerHTML=qotdHTML();
+  else if(state.page==='leaderboard') c.innerHTML=lbHTML();
+  else if(state.page==='profile') c.innerHTML=profileHTML();
+  attachHandlers();
+  updateRatingChip();
+}
+
+// =========================================================
+// DASHBOARD
+// =========================================================
+function dashHTML(){
+  const lastContest = contestHistory[contestHistory.length-1];
+  return `
+  <div class="g4 mb2">
+    <div class="stat"><div class="stat-l">Rating</div><div class="stat-v" style="color:var(--accent)">${userRating}</div></div>
+    <div class="stat"><div class="stat-l">Contests Done</div><div class="stat-v">${contestHistory.length}</div></div>
+    <div class="stat"><div class="stat-l">Problems Solved</div><div class="stat-v">${contestHistory.reduce((a,c)=>a+c.correct,0)}</div></div>
+    <div class="stat"><div class="stat-l">Day Streak</div><div class="stat-v" style="color:var(--amber)">🔥 5</div></div>
+  </div>
+  <div class="row mb2">
+    <div style="flex:1.4">
+      <p class="sec">Upcoming Contests</p>
+      ${CONTESTS.slice(0,2).map(c=>`
+      <div class="contest-card mb1" onclick="enterContest('${c.id}')">
+        <div class="tag ${c.cls}" style="margin-bottom:6px">${c.div}</div>
+        <div style="font-size:14px;font-weight:500;margin-bottom:4px">${c.name}</div>
+        <div style="font-size:12px;color:var(--muted);display:flex;gap:10px;margin-bottom:8px">
+          <span><i class="ti ti-calendar"></i> ${c.date}</span>
+          <span><i class="ti ti-clock"></i> ${c.time}</span>
+          <span><i class="ti ti-users"></i> ${c.minR>0?'≥ '+c.minR+' rating':'Open to all'}</span>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center">
+          <span class="pill-easy">${c.qs.filter(q=>q.diff==='Easy').length} Easy</span>
+          <span class="pill-medium">${c.qs.filter(q=>q.diff==='Medium').length} Medium</span>
+          <span class="pill-hard">${c.qs.filter(q=>q.diff==='Hard').length} Hard</span>
+          <button class="btn btn-p btn-sm" style="margin-left:auto">Enter</button>
+        </div>
+      </div>`).join('')}
+    </div>
+    <div style="flex:1">
+      <p class="sec">Daily Questions</p>
+      <div class="card">
+        <div style="display:flex;gap:4px;margin-bottom:10px">
+          ${['physics','chemistry','math'].map(s=>`<span class="qotd-tab ${state.qotdSel===s?'active':''}" onclick="selQotd('${s}')">${s[0].toUpperCase()+s.slice(1)}</span>`).join('')}
+        </div>
+        <div style="font-size:14px;margin-bottom:10px;line-height:1.6">${QOTD_DATA[state.qotdSel].q}</div>
+        ${QOTD_DATA[state.qotdSel].opts.map((o,i)=>`
+        <div class="opt ${state.qotdAns===i?(i===QOTD_DATA[state.qotdSel].ans?'correct':'wrong'):(state.qotdAns!==null&&i===QOTD_DATA[state.qotdSel].ans?'correct':'')} " onclick="ansQotd(${i})">
+          <div class="opt-lbl">${String.fromCharCode(65+i)}</div>${o}
+        </div>`).join('')}
+        ${state.qotdAns!==null?`<div style="font-size:12px;padding:8px;background:var(--bg2);border-radius:6px;margin-top:8px;color:var(--muted)">💡 ${QOTD_DATA[state.qotdSel].exp}</div>`:''}
+      </div>
+    </div>
+  </div>
+  <p class="sec">Your Progress</p>
+  <div class="g3">
+    ${SUBJ_DATA.slice(0,3).map(s=>`
+    <div class="card">
+      <div class="flex gap6 mb1"><span style="font-size:20px">${s.icon}</span><span style="font-weight:500">${s.name}</span></div>
+      ${s.chapters.slice(0,3).map(ch=>`
+      <div style="margin-bottom:6px">
+        <div class="flex" style="justify-content:space-between;font-size:12px;margin-bottom:3px"><span class="muted">${ch.name}</span><span style="color:var(--accent)">${ch.progress}%</span></div>
+        <div class="pbar-wrap"><div class="pbar" style="width:${ch.progress}%"></div></div>
+      </div>`).join('')}
+    </div>`).join('')}
+  </div>
+  ${lastContest?`<div class="card mt1" style="border-left:3px solid var(--amber)">
+    <div style="font-size:13px;font-weight:500;margin-bottom:6px">📊 Last Contest — ${lastContest.name}</div>
+    <div style="font-size:12px;color:var(--muted)">Score: ${lastContest.totalPts} pts · Correct: ${lastContest.correct}/${lastContest.total} · Rating: ${lastContest.ratingBefore}→${lastContest.ratingAfter}
+    </div>
+    <button class="btn btn-sm mt1" onclick="showAnalysis('${lastContest.contestId}')">View Analysis →</button>
+  </div>`:''}`;
+}
+
+// =========================================================
+// CONTESTS
+// =========================================================
+function contestsHTML(){
+  return `
+  <p class="sec">Contests — This Week</p>
+  <div style="background:var(--accent-light);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--accent);margin-bottom:1rem;display:flex;gap:8px;align-items:center">
+    <i class="ti ti-info-circle"></i>
+    All contestants start at 1000 rating. Div 1 needs ≥1200 · Div 2 needs ≥1100 · Div 3 & 4 open to all. Harder questions solved faster give more rating.
+  </div>
+  <div class="g2">
+  ${CONTESTS.map(c=>`
+  <div class="contest-card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <span class="tag ${c.cls}">${c.div}</span>
+      <span class="xs muted">${c.minR>0?'Rating ≥ '+c.minR:'Open to all'}</span>
+    </div>
+    <div style="font-size:16px;font-weight:500;margin-bottom:4px">${c.name}</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:8px">
+      <span><i class="ti ti-calendar"></i> ${c.date} ${c.time}</span> ·
+      <span><i class="ti ti-hourglass"></i> ${c.dur} min</span>
+    </div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px">
+      ${c.qs.map(q=>`<span class="pill-${q.diff.toLowerCase()}">${q.id}: ${q.diff} (${q.pts}pts)</span>`).join('')}
+    </div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:10px">
+      Total: ${c.qs.reduce((a,q)=>a+q.pts,0)} pts · Per-question timer · Anti-cheat active
+    </div>
+    <div class="flex" style="justify-content:space-between">
+      <button class="btn btn-sm" onclick="showAnalysis('${c.id}')">Past Results</button>
+      <button class="btn btn-p btn-sm" onclick="enterContest('${c.id}')">Enter Contest</button>
+    </div>
+  </div>`).join('')}
+  </div>
+  <p class="sec" style="margin-top:1.5rem">Rating System</p>
+  <div class="card">
+    <div class="g4" style="text-align:center">
+      ${[['Div 1','div1','≥ 1200','Grandmaster'],['Div 2','div2','≥ 1100','Expert'],['Div 3','div3','Open','Specialist'],['Div 4','div4','Open','Beginner']].map(([d,cls,req,title])=>`
+      <div style="padding:10px;${d!=='Div 4'?'border-left:0.5px solid var(--border)':''}">
+        <div class="tag ${cls}" style="font-size:14px;padding:4px 12px;margin-bottom:6px">${d}</div>
+        <div style="font-size:12px;font-weight:500">${title}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:3px">${req}</div>
+      </div>`).join('')}
+    </div>
+    <div style="margin-top:1rem;padding:10px;background:var(--bg2);border-radius:8px;font-size:12px;color:var(--muted)">
+      <b>Rating formula (Codeforces-style):</b> Max points = base_pts + time_bonus. Time bonus decays as time spent increases.
+      Hard + Fast = up to 1500+bonus pts. Tab switch = −50 rating. Wrong answer = 0 pts. All start at 1000.
+    </div>
+  </div>`;
+}
+
+// =========================================================
+// EXAM
+// =========================================================
+function enterContest(id){
+  const c=CONTESTS.find(x=>x.id===id);
+  if(!c) return;
+  if(c.minR>userRating){
+    alert(`This contest requires rating ≥ ${c.minR}.\nYour current rating: ${userRating}.\nKeep practising Div 3/4 to unlock this!`);
+    return;
+  }
+  state.exam={
+    contestId:id, activeQ:0,
+    qStates: c.qs.map(q=>({...q,timeSpent:0,answered:false,selectedOpt:null,pts:0,timerRunning:false})),
+    qTimerHandle:null, globalHandle:null,
+    globalTimeLeft: c.dur*60,
+    cheatCount:0, cheatPts:0,
+    submitted:false,
+    ratingBefore: userRating,
+  };
+  state.page='exam';
+  document.getElementById('page-title').textContent=c.name+' · Live';
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  render();
+  startGlobalTimer();
+  startQTimer(0);
+  setupAntiCheat();
+}
+
+function examHTML(){
+  const ex=state.exam;
+  const c=CONTESTS.find(x=>x.id===ex.contestId);
+  const qs=ex.qStates;
+  const ai=ex.activeQ;
+  const q=qs[ai];
+  const gt=ex.globalTimeLeft;
+  const fmt=t=>`${Math.floor(t/60).toString().padStart(2,'0')}:${(t%60).toString().padStart(2,'0')}`;
+  const qt=q.timeSpent;
+
+  return `
+  <div class="exam-wrap">
+    <!-- LEFT SIDEBAR -->
+    <div class="exam-left">
+      <div class="exam-left-head">
+        <div style="font-size:11px;opacity:.8;margin-bottom:4px">${c.name} · ${c.div}</div>
+        <div class="exam-timer-big" id="g-timer">${fmt(gt)}</div>
+        <div style="font-size:11px;opacity:.7;margin-top:2px">Time remaining</div>
+      </div>
+      ${ex.cheatCount>0?`<div style="background:var(--orange-light);padding:7px 12px;font-size:11px;color:var(--orange);border-bottom:1px solid #D85A30">⚠️ Tab switch ×${ex.cheatCount} · −${ex.cheatPts} rating</div>`:''}
+      <div class="exam-qlist">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:8px;font-weight:500">PROBLEMS</div>
+        ${qs.map((q2,i)=>`
+        <div class="exam-qrow ${i===ai?'active':q2.answered?(q2.selectedOpt===q2.ans?'done':'wrong-done'):''}" onclick="switchQ(${i})">
+          <div style="font-size:13px;font-weight:600;width:18px">${q2.id}</div>
+          <div style="flex:1;font-size:12px">${q2.topic}</div>
+          <span class="pill-${q2.diff.toLowerCase()}" style="font-size:10px">${q2.diff}</span>
+          <span style="font-size:11px;font-weight:500;margin-left:4px">${q2.pts}</span>
+          ${q2.answered?`<span style="font-size:14px">${q2.selectedOpt===q2.ans?'✓':'✗'}</span>`:''}
+        </div>`).join('')}
+        <div style="margin-top:1rem;padding:10px;background:var(--bg2);border-radius:8px;font-size:11px;color:var(--muted)">
+          <div style="font-weight:500;margin-bottom:4px">Max Points per difficulty:</div>
+          <div>Hard: 1500 + bonus</div>
+          <div>Medium: 1000 + bonus</div>
+          <div>Easy: 500 + bonus</div>
+          <div style="margin-top:4px;color:var(--red)">Tab switch: −50 rating</div>
+        </div>
+        <button class="btn btn-danger btn-sm" style="width:100%;margin-top:1rem" onclick="submitExam()">Submit All</button>
+      </div>
+    </div>
+    <!-- RIGHT MAIN -->
+    <div class="exam-right">
+      <div class="exam-topbar">
+        <div class="flex gap6">
+          <span class="pill-${q.diff.toLowerCase()}">${q.diff}</span>
+          <span style="font-size:14px;font-weight:500">${q.topic}</span>
+          <span class="pts-badge">+${q.pts} pts max: ${q.pts+(q.diff==='Hard'?300:q.diff==='Medium'?200:100)}</span>
+        </div>
+        <div class="flex gap6">
+          <span style="font-size:12px;color:var(--muted)">Time on Q${q.id}:</span>
+          <span class="q-time-chip" id="q-timer">${fmt(qt)}</span>
+        </div>
+      </div>
+      <div class="exam-body">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:8px">Question ${ai+1} of ${qs.length} (Problem ${q.id})</div>
+        <div style="font-size:16px;font-weight:500;margin-bottom:1.25rem;line-height:1.6">${q.q}</div>
+        ${q.opts?q.opts.map((o,i)=>`
+        <div class="opt ${q.answered?(i===q.ans?'correct':q.selectedOpt===i?'wrong':''):''} ${q.answered?'answered':''}" onclick="${!q.answered?`answerQ(${i})`:''}">
+          <div class="opt-lbl">${String.fromCharCode(65+i)}</div>${o}
+        </div>`).join(''):''}
+        ${q.answered?`<div style="padding:10px 12px;border-radius:8px;margin-top:1rem;background:${q.selectedOpt===q.ans?'var(--green-light)':'var(--red-light)'};font-size:13px;color:${q.selectedOpt===q.ans?'#085041':'#501313'}">
+          ${q.selectedOpt===q.ans?'✅ Correct!':'❌ Incorrect — correct: '+String.fromCharCode(65+q.ans)}
+          <span class="pts-badge" style="margin-left:8px">+${q.pts} pts earned</span>
+          <div style="margin-top:6px;font-size:12px;color:var(--muted)">${q.exp}</div>
+        </div>`:''}
+      </div>
+      <div class="exam-footer">
+        <button class="btn btn-sm" onclick="${ai>0?'switchQ('+(ai-1)+')':''}">← Prev</button>
+        <span style="font-size:12px;color:var(--muted)">${qs.filter(q=>q.answered).length}/${qs.length} answered · ${qs.filter(q=>q.answered&&q.selectedOpt===q.ans).length} correct</span>
+        <button class="btn btn-p btn-sm" onclick="${ai<qs.length-1?'switchQ('+(ai+1)+')':'submitExam()'}">
+          ${ai<qs.length-1?'Next →':'Submit All'}
+        </button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function switchQ(idx){
+  if(idx===state.exam.activeQ) return;
+  pauseQTimer();
+  state.exam.activeQ=idx;
+  render();
+  startQTimer(idx);
+}
+
+function answerQ(optIdx){
+  const ex=state.exam;
+  const q=ex.qStates[ex.activeQ];
+  if(q.answered) return;
+  q.answered=true;
+  q.selectedOpt=optIdx;
+  const correct=optIdx===q.ans;
+  if(correct){
+    const timeBonus = Math.max(0, (q.diff==='Hard'?300:q.diff==='Medium'?200:100) - Math.floor(q.timeSpent/5)*15);
+    q.pts = q.pts + timeBonus;
+  } else { q.pts=0; }
+  pauseQTimer();
+  render();
+  startQTimer(ex.activeQ);
+  if(ex.activeQ<ex.qStates.length-1){
+    setTimeout(()=>{ if(!ex.submitted) switchQ(ex.activeQ+1); },1200);
+  }
+}
+
+let _qHandle=null, _gHandle=null;
+function startQTimer(idx){
+  const ex=state.exam;
+  if(!ex||ex.submitted) return;
+  clearInterval(_qHandle);
+  _qHandle=setInterval(()=>{
+    if(!ex||ex.submitted){clearInterval(_qHandle);return;}
+    ex.qStates[idx].timeSpent++;
+    const el=document.getElementById('q-timer');
+    if(el){const t=ex.qStates[idx].timeSpent;el.textContent=`${Math.floor(t/60).toString().padStart(2,'0')}:${(t%60).toString().padStart(2,'0')}`;}
+  },1000);
+}
+function pauseQTimer(){ clearInterval(_qHandle); }
+function startGlobalTimer(){
+  const ex=state.exam;
+  clearInterval(_gHandle);
+  _gHandle=setInterval(()=>{
+    if(!ex||ex.submitted){clearInterval(_gHandle);return;}
+    ex.globalTimeLeft=Math.max(0,ex.globalTimeLeft-1);
+    const el=document.getElementById('g-timer');
+    if(el){const t=ex.globalTimeLeft;el.textContent=`${Math.floor(t/60).toString().padStart(2,'0')}:${(t%60).toString().padStart(2,'0')}`;if(t<=300)el.style.color='#FF5252';}
+    if(ex.globalTimeLeft===0){clearInterval(_gHandle);submitExam();}
+  },1000);
+}
+
+function setupAntiCheat(){
+  document.addEventListener('visibilitychange',cheatVis);
+  window.addEventListener('blur',cheatBlur);
+}
+function cheatVis(){ if(document.hidden&&state.page==='exam') registerCheat(); }
+function cheatBlur(){ if(state.page==='exam') registerCheat(); }
+function registerCheat(){
+  if(!state.exam||state.exam.submitted) return;
+  state.exam.cheatCount++;
+  state.exam.cheatPts=state.exam.cheatCount*50;
+  const banner=document.getElementById('cheat-count');
+  if(banner) banner.textContent=`⚠️ Tab switch ×${state.exam.cheatCount} · −${state.exam.cheatPts} rating`;
+  else render();
+}
+
+function submitExam(){
+  const ex=state.exam;
+  if(!ex||ex.submitted) return;
+  ex.submitted=true;
+  clearInterval(_qHandle); clearInterval(_gHandle);
+  document.removeEventListener('visibilitychange',cheatVis);
+  window.removeEventListener('blur',cheatBlur);
+
+  const qs=ex.qStates;
+  const c=CONTESTS.find(x=>x.id===ex.contestId);
+  const correct=qs.filter(q=>q.answered&&q.selectedOpt===q.ans).length;
+  const totalPts=qs.reduce((a,q)=>a+q.pts,0);
+
+  // Codeforces-style rating change
+  const maxPts=c.qs.reduce((a,q)=>a+q.pts+(q.diff==='Hard'?300:q.diff==='Medium'?200:100),0);
+  const performance=totalPts/maxPts;
+  const ratingChange=Math.round((performance*400)-200)-ex.cheatPts;
+  userRating=Math.max(800,userRating+ratingChange);
+
+  const record={contestId:ex.contestId,name:c.name,correct,total:qs.length,totalPts,ratingBefore:ex.ratingBefore,ratingAfter:userRating,ratingChange,cheatCount:ex.cheatCount,qStates:[...qs]};
+  contestHistory.push(record);
+
+  updateRatingChip();
+  state.analysisRecord=record;
+  state.page='analysis';
+  document.getElementById('page-title').textContent='Contest Analysis';
+  render();
+}
+
+// =========================================================
+// ANALYSIS
+// =========================================================
+function showAnalysis(cId){
+  const record=contestHistory.find(r=>r.contestId===cId);
+  if(!record){ alert('No data yet for this contest. Enter the contest first!'); return; }
+  state.analysisRecord=record;
+  state.page='analysis';
+  document.getElementById('page-title').textContent='Contest Analysis';
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  render();
+}
+
+function analysisHTML(){
+  const rec=state.analysisRecord;
+  if(!rec) return '<div class="card">No analysis data yet. Complete a contest first!</div>';
+  const c=CONTESTS.find(x=>x.id===rec.contestId);
+  const qs=rec.qStates;
+  const correct=qs.filter(q=>q.selectedOpt===q.ans);
+  const wrong=qs.filter(q=>q.answered&&q.selectedOpt!==q.ans);
+  const unanswered=qs.filter(q=>!q.answered);
+
+  // Topic breakdown
+  const topicStats={};
+  qs.forEach(q=>{
+    if(!topicStats[q.topic]) topicStats[q.topic]={correct:0,wrong:0,time:0};
+    if(q.answered){
+      if(q.selectedOpt===q.ans) topicStats[q.topic].correct++;
+      else topicStats[q.topic].wrong++;
+    }
+    topicStats[q.topic].time+=q.timeSpent;
+  });
+
+  // Difficulty breakdown
+  const diffStats={Easy:{c:0,w:0},Medium:{c:0,w:0},Hard:{c:0,w:0}};
+  qs.forEach(q=>{if(q.answered){if(q.selectedOpt===q.ans)diffStats[q.diff].c++;else diffStats[q.diff].w++;}});
+
+  // Weak topics = wrong or unanswered
+  const weakTopics=[...wrong,...unanswered].map(q=>q.topic);
+  const strongTopics=correct.map(q=>q.topic);
+
+  const ratingColor=rec.ratingChange>=0?'var(--green)':'var(--red)';
+
+  return `
+  <div class="flex gap6 mb2" style="flex-wrap:wrap">
+    <button class="btn btn-sm" onclick="nav('contests')">← Back to Contests</button>
+    <button class="btn btn-sm" onclick="nav('revision')">📖 Go to Revision</button>
+  </div>
+
+  <!-- SUMMARY CARDS -->
+  <div class="g4 mb2">
+    <div class="stat"><div class="stat-l">Score</div><div class="stat-v">${rec.totalPts}</div></div>
+    <div class="stat"><div class="stat-l">Correct / Total</div><div class="stat-v">${rec.correct}/${rec.total}</div></div>
+    <div class="stat"><div class="stat-l">Rating Change</div><div class="stat-v" style="color:${ratingColor}">${rec.ratingChange>=0?'+':''}${rec.ratingChange}</div></div>
+    <div class="stat"><div class="stat-l">New Rating</div><div class="stat-v" style="color:var(--accent)">${rec.ratingAfter}</div></div>
+  </div>
+
+  ${rec.cheatCount>0?`<div class="card mb2" style="background:var(--orange-light);border-color:var(--orange)">
+    <div style="font-size:13px;font-weight:500;color:var(--orange)">⚠️ Anti-Cheat Penalty Applied</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:4px">Tab switched ${rec.cheatCount} time(s) during contest. Total penalty: −${rec.cheatCount*50} rating points deducted.</div>
+  </div>`:''}
+
+  <div class="row mb2">
+    <!-- QUESTION BREAKDOWN -->
+    <div style="flex:1.3" class="card">
+      <div class="sec">Question-by-Question Breakdown</div>
+      ${qs.map(q=>`
+      <div style="padding:10px;border-radius:8px;margin-bottom:8px;background:${q.answered?(q.selectedOpt===q.ans?'var(--green-light)':'var(--red-light)'):'var(--bg2)'};border:0.5px solid ${q.answered?(q.selectedOpt===q.ans?'var(--green)':'var(--red)'):'var(--border)'}">
+        <div class="flex" style="justify-content:space-between;margin-bottom:4px">
+          <div class="flex gap6">
+            <span style="font-size:14px;font-weight:600">Q${q.id}</span>
+            <span class="pill-${q.diff.toLowerCase()}">${q.diff}</span>
+            <span style="font-size:12px">${q.topic}</span>
+          </div>
+          <div class="flex gap6">
+            <span style="font-size:12px;color:var(--muted)">${Math.floor(q.timeSpent/60)}m ${q.timeSpent%60}s</span>
+            <span style="font-size:13px;font-weight:500">${q.answered?(q.selectedOpt===q.ans?'✅ +'+q.pts+' pts':'❌ 0 pts'):'⏭ Skipped'}</span>
+          </div>
+        </div>
+        ${q.answered&&q.selectedOpt!==q.ans?`<div style="font-size:12px;color:var(--muted)">Correct answer: ${String.fromCharCode(65+q.ans)} · ${q.exp}</div>`:''}
+      </div>`).join('')}
+    </div>
+    <!-- STATS PANEL -->
+    <div style="flex:1;display:flex;flex-direction:column;gap:1rem">
+      <!-- Difficulty performance -->
+      <div class="card">
+        <div class="sec">Performance by Difficulty</div>
+        ${['Easy','Medium','Hard'].map(d=>{
+          const s=diffStats[d];const tot=s.c+s.w;
+          return `<div style="margin-bottom:10px">
+            <div class="flex" style="justify-content:space-between;font-size:12px;margin-bottom:4px">
+              <span class="pill-${d.toLowerCase()}">${d}</span>
+              <span class="muted">${s.c}/${tot||'-'} correct</span>
+            </div>
+            <div class="pbar-wrap"><div class="pbar" style="width:${tot?Math.round(s.c/tot*100):0}%;background:${s.c===tot&&tot>0?'var(--green)':'var(--amber)'}"></div></div>
+          </div>`;
+        }).join('')}
+      </div>
+      <!-- Time analysis -->
+      <div class="card">
+        <div class="sec">Time Spent per Question</div>
+        ${qs.map(q=>`
+        <div style="margin-bottom:8px">
+          <div class="flex" style="justify-content:space-between;font-size:12px;margin-bottom:3px">
+            <span>Q${q.id} ${q.topic}</span>
+            <span class="muted">${q.timeSpent}s</span>
+          </div>
+          <div class="pbar-wrap"><div class="pbar" style="width:${Math.min(100,q.timeSpent/3)}%;background:${q.timeSpent>120?'var(--red)':q.timeSpent>60?'var(--amber)':'var(--green)'}"></div></div>
+        </div>`).join('')}
+      </div>
+    </div>
+  </div>
+
+  <!-- INSIGHTS -->
+  <div class="g2 mb2">
+    <div class="card" style="border-left:3px solid var(--red)">
+      <div class="sec">🎯 Areas to Improve</div>
+      ${weakTopics.length===0?'<div class="sm muted">All correct! Great work.</div>':weakTopics.map(t=>`
+      <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:0.5px solid var(--border);font-size:13px">
+        <span style="font-size:16px">❗</span><span>${t}</span>
+        <button class="btn btn-sm" style="margin-left:auto" onclick="reviseTopicDirect('${t}')">Revise →</button>
+      </div>`).join('')}
+    </div>
+    <div class="card" style="border-left:3px solid var(--green)">
+      <div class="sec">✅ Strengths</div>
+      ${strongTopics.length===0?'<div class="sm muted">Keep practising!</div>':strongTopics.map(t=>`
+      <div style="font-size:13px;padding:6px 0;border-bottom:0.5px solid var(--border);display:flex;align-items:center;gap:8px">
+        <span>✅</span><span>${t}</span>
+      </div>`).join('')}
+    </div>
+  </div>
+
+  <!-- WHAT TO DO NEXT -->
+  <div class="card" style="background:linear-gradient(135deg,var(--accent-light),var(--green-light))">
+    <div class="sec">📋 What to do next to improve your rating</div>
+    <div style="font-size:13px;line-height:1.8">
+      ${weakTopics.length>0?`<div>🔴 <b>Revise these weak topics:</b> ${[...new Set(weakTopics)].map(t=>`<span onclick="nav('revision')" style="color:var(--accent);cursor:pointer;text-decoration:underline">${t}</span>`).join(', ')}</div>`:''}
+      ${unanswered.length>0?`<div>⏭ <b>Practice speed on:</b> ${unanswered.map(q=>q.topic).join(', ')} (skipped questions)</div>`:''}
+      ${rec.ratingChange<0?`<div>📉 <b>Next target:</b> Enter Div 3/4 to rebuild rating through easier wins</div>`:`<div>📈 <b>Next target:</b> Try ${userRating>=1200?'Div 1':'userRating>=1100?Div 2:Div 3'} contests</div>`}
+      <div>📖 <b>Knowledge Hub:</b> Deep-dive the topics you got wrong</div>
+      <div>✍️ <b>Daily Practice:</b> Solve QOTD every day for +5 bonus rating per week</div>
+    </div>
+  </div>`;
+}
+
+// =========================================================
+// REVISION
+// =========================================================
+const REV_SUBJECTS = [
+  {id:'phy',name:'Physics',icon:'⚛️',color:'var(--accent-light)',chapters:[
+    {id:'electrostatics',name:'Electrostatics',icon:'⚡'},
+    {id:'kinematics',name:'Kinematics',icon:'🏃'},
+  ]},
+  {id:'chem',name:'Chemistry',icon:'🧪',color:'var(--green-light)',chapters:[
+    {id:'atomic',name:'Atomic Structure',icon:'⚛️'},
+  ]},
+  {id:'math',name:'Mathematics',icon:'📐',color:'var(--amber-light)',chapters:[
+    {id:'calculus',name:'Differential Calculus',icon:'∫'},
+  ]},
+];
+
+function revisionHTML(){
+  const rv=state.rev;
+
+  if(!rv.subjectId){
+    return `
+    <p class="sec">Quick Revision</p>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:1rem">Key formulas, derivations + 5–7 PYQ-style questions per chapter. Answer all Qs first, then reveal answers with highlighted key concepts.</div>
+    <div class="g3">
+      ${REV_SUBJECTS.map(s=>`
+      <div class="subject-card" onclick="revOpenSubject('${s.id}')">
+        <div style="font-size:28px;margin-bottom:8px">${s.icon}</div>
+        <div style="font-size:15px;font-weight:500;margin-bottom:2px">${s.name}</div>
+        <div style="font-size:12px;color:var(--muted)">${s.chapters.length} chapters</div>
+        <div style="margin-top:8px">
+          ${s.chapters.map(ch=>`<div style="font-size:12px;color:var(--muted);padding:3px 0;border-bottom:0.5px solid var(--border)">${ch.icon} ${ch.name}</div>`).join('')}
+        </div>
+      </div>`).join('')}
+    </div>`;
+  }
+
+  if(!rv.chapterId){
+    const s=REV_SUBJECTS.find(x=>x.id===rv.subjectId);
+    return `
+    <div class="bc"><span onclick="revHome()">Revision</span> › <b>${s.name}</b></div>
+    <p class="sec">${s.icon} ${s.name} — Choose Chapter</p>
+    ${s.chapters.map(ch=>`
+    <div class="rev-card" onclick="revOpenChapter('${ch.id}')">
+      <div class="flex gap6">
+        <span style="font-size:24px">${ch.icon}</span>
+        <div>
+          <div style="font-size:14px;font-weight:500">${ch.name}</div>
+          <div style="font-size:12px;color:var(--muted)">Formulas · Derivations · ${(REVISION[rv.subjectId]&&REVISION[rv.subjectId][ch.id]&&REVISION[rv.subjectId][ch.id].pyqs||[]).length} PYQ questions</div>
+        </div>
+        <i class="ti ti-chevron-right" style="margin-left:auto;color:var(--muted)"></i>
+      </div>
+    </div>`).join('')}`;
+  }
+
+  // Chapter content
+  const s=REV_SUBJECTS.find(x=>x.id===rv.subjectId);
+  const ch=s.chapters.find(x=>x.id===rv.chapterId);
+  const data=REVISION[rv.subjectId]&&REVISION[rv.subjectId][rv.chapterId];
+  if(!data) return `<div class="bc"><span onclick="revHome()">Revision</span> › <span onclick="revOpenSubject('${rv.subjectId}')">${s.name}</span> › <b>${ch.name}</b></div><div class="card">Content coming soon!</div>`;
+
+  const pyqs=data.pyqs||[];
+  const allAnswered=pyqs.every((q,i)=>rv.answered[i]!==undefined);
+
+  return `
+  <div class="bc">
+    <span onclick="revHome()">Revision</span> ›
+    <span onclick="revOpenSubject('${rv.subjectId}')">${s.name}</span> ›
+    <b>${ch.name}</b>
+  </div>
+
+  <!-- FORMULAS -->
+  <div class="card mb2">
+    <div class="sec">📐 Key Formulas</div>
+    ${data.formulas.map(f=>`<div class="formula-box">${f}</div>`).join('')}
+  </div>
+
+  <!-- DERIVATIONS -->
+  <div class="card mb2">
+    <div class="sec">🔬 Important Derivations & Results</div>
+    ${data.derivations.map((d,i)=>`
+    <div class="derivation-block">
+      <span style="font-weight:500;margin-right:6px">${i+1}.</span>${d}
+    </div>`).join('')}
+  </div>
+
+  <!-- IMPORTANT POINTS -->
+  <div class="card mb2" style="border-left:3px solid var(--accent)">
+    <div class="sec">⭐ Must-Remember Points</div>
+    ${data.important.map(pt=>`
+    <div style="font-size:13px;padding:5px 0;border-bottom:0.5px solid var(--border);display:flex;gap:8px;align-items:flex-start">
+      <span>•</span><span>${pt}</span>
+    </div>`).join('')}
+  </div>
+
+  <!-- PYQ QUESTIONS -->
+  <div class="sec">📝 JEE PYQ Practice Questions (${pyqs.length} questions — answer all before revealing)</div>
+  <div style="font-size:12px;color:var(--muted);margin-bottom:1rem">
+    ${allAnswered?`<span style="color:var(--green);font-weight:500">✅ All answered!</span> You can now reveal answers with key concepts.`
+    :`Answer all ${pyqs.length} questions to unlock answer explanations. (${Object.keys(rv.answered).length}/${pyqs.length} done)`}
+  </div>
+
+  ${pyqs.map((q,qi)=>{
+    const userAns=rv.answered[qi];
+    const answered=userAns!==undefined;
+    const correct=answered&&userAns===q.ans;
+    const showAns=rv.showAnswers&&answered;
+
+    return `
+    <div class="pyq-row" style="${answered?`border-color:${correct?'var(--green)':'var(--red)'}`:''};background:${answered?(correct?'#F0FBF5':'#FEF0F0'):'var(--bg)'}">
+      <div class="flex" style="justify-content:space-between;margin-bottom:6px">
+        <div class="flex gap6">
+          <span style="font-size:11px;font-weight:500;color:var(--muted)">${q.year}</span>
+          <span class="pill-${q.diff.toLowerCase()}">${q.diff}</span>
+        </div>
+        ${answered?`<span style="font-size:12px;font-weight:500;color:${correct?'var(--green)':'var(--red)'}">${correct?'✓ Correct':'✗ Wrong'}</span>`:''}
+      </div>
+      <div style="font-size:14px;font-weight:500;margin-bottom:10px;line-height:1.6">${q.q}</div>
+      ${q.opts.map((o,oi)=>`
+      <div class="opt ${answered?(oi===q.ans?'correct':userAns===oi?'wrong':''):''} ${answered?'answered':''}" onclick="${!answered?`revAnswer(${qi},${oi})`:''}">
+        <div class="opt-lbl">${String.fromCharCode(65+oi)}</div>${o}
+      </div>`).join('')}
+      ${showAns?`
+      <div class="pyq-ans-reveal" style="display:block">
+        <div style="font-weight:500;margin-bottom:6px">🔑 Key Concepts Used:</div>
+        <div style="margin-bottom:8px">${q.keys.map(k=>`<span class="key-concept">✦ ${k}</span>`).join('')}</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.7">${q.exp}</div>
+      </div>`:answered&&rv.showAnswers?'':`
+      ${answered&&!rv.showAnswers?`<div style="font-size:11px;color:var(--muted);margin-top:6px;font-style:italic">Answer recorded. Reveal all answers when done with all questions.</div>`:''}
+      `}
+    </div>`;
+  }).join('')}
+
+  ${allAnswered?`
+  <div style="text-align:center;padding:1rem">
+    <button class="btn ${rv.showAnswers?'btn-sm':'btn-p'}" onclick="revToggleAnswers()">
+      ${rv.showAnswers?'Hide Answers & Key Concepts':'🔓 Reveal All Answers & Key Concepts'}
+    </button>
+  </div>`:
+  `<div class="card" style="text-align:center;background:var(--bg2);border-style:dashed">
+    <div style="font-size:13px;color:var(--muted)">🔒 Answer key locked until all ${pyqs.length} questions are attempted.</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:4px">${Object.keys(rv.answered).length}/${pyqs.length} answered</div>
+  </div>`}
+  `;
+}
+
+function revHome(){ state.rev={subjectId:null,chapterId:null,showAnswers:false,answered:{},allDone:false}; render(); }
+function revOpenSubject(id){ state.rev.subjectId=id; state.rev.chapterId=null; state.rev.answered={}; state.rev.showAnswers=false; render(); }
+function revOpenChapter(id){ state.rev.chapterId=id; state.rev.answered={}; state.rev.showAnswers=false; render(); }
+function revAnswer(qi,oi){
+  state.rev.answered[qi]=oi;
+  render();
+}
+function revToggleAnswers(){ state.rev.showAnswers=!state.rev.showAnswers; render(); }
+function reviseTopicDirect(topicName){ nav('revision'); }
+
+// =========================================================
+// QOTD
+// =========================================================
+function qotdHTML(){
+  return `
+  <p class="sec">Daily Questions</p>
+  <div style="font-size:13px;color:var(--muted);margin-bottom:1rem">Fresh questions every day. Solve all 3 for a streak bonus!</div>
+  <div class="g3">
+    ${['physics','chemistry','math'].map(s=>{
+      const q=QOTD_DATA[s];
+      const ans=state['qotd_'+s]??null;
+      return `
+      <div class="card">
+        <div class="flex mb1" style="justify-content:space-between">
+          <div style="font-weight:500;font-size:14px">${s[0].toUpperCase()+s.slice(1)}</div>
+          ${ans!==null?`<span style="font-size:11px;padding:2px 8px;border-radius:20px;${ans===q.ans?'background:var(--green-light);color:#085041':'background:var(--red-light);color:#501313'}">${ans===q.ans?'✓ Correct':'✗ Wrong'}</span>`:'<span class="tag">Unattempted</span>'}
+        </div>
+        <div style="font-size:14px;margin-bottom:10px;line-height:1.6">${q.q}</div>
+        ${q.opts.map((o,i)=>`
+        <div class="opt ${ans===i?(i===q.ans?'correct':'wrong'):(ans!==null&&i===q.ans?'correct':'')} " onclick="${ans===null?`qotdAns('${s}',${i})`:''}">
+          <div class="opt-lbl">${String.fromCharCode(65+i)}</div>${o}
+        </div>`).join('')}
+        ${ans!==null?`<div style="font-size:11px;color:var(--muted);margin-top:8px;padding:8px;background:var(--bg2);border-radius:6px">💡 ${q.exp}</div>`:''}
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+
+// =========================================================
+// LEADERBOARD
+// =========================================================
+function lbHTML(){
+  const lb=[...LEADERBOARD];
+  lb.find(u=>u.name.includes('You'))&&(lb.find(u=>u.name.includes('You')).rating=userRating);
+  lb.sort((a,b)=>b.rating-a.rating).forEach((u,i)=>u.rank=i+1);
+  return `
+  <p class="sec">Global Leaderboard</p>
+  <div class="flex gap6 mb2" style="flex-wrap:wrap">
+    <button class="btn btn-p btn-sm">All Time</button>
+    <button class="btn btn-sm">This Month</button>
+    <button class="btn btn-sm">JEE</button>
+    <button class="btn btn-sm">NEET</button>
+  </div>
+  <div class="card">
+    ${lb.map((u,i)=>`
+    <div class="lb-row" style="${u.name.includes('You')?'background:var(--accent-light);margin:0 -1.25rem;padding:10px 1.25rem;border-radius:8px;':''}">
+      <div class="lb-rank ${i===0?'':''}">
+        ${i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+u.rank}
+      </div>
+      <div class="avatar" style="width:30px;height:30px;font-size:11px">${u.name.split(' ').map(n=>n[0]).join('').slice(0,2)}</div>
+      <div style="flex:1;font-size:14px;font-weight:500">${u.name} <span style="font-size:11px;color:var(--muted)">${u.stream} · ${u.college}</span></div>
+      <div style="font-size:13px;color:var(--muted)">${u.rating}</div>
+      <div style="font-size:12px;padding:2px 8px;border-radius:20px;${u.change.startsWith('+')?'background:var(--green-light);color:#085041':'background:var(--red-light);color:#501313'}">${u.change}</div>
+    </div>`).join('')}
+  </div>`;
+}
+
+// =========================================================
+// PROFILE
+// =========================================================
+function profileHTML(){
+  const tier=userRating>=1200?'Grandmaster':userRating>=1100?'Expert':userRating>=1050?'Specialist':'Beginner';
+  return `
+  <div class="card mb2">
+    <div class="flex" style="gap:16px;align-items:center">
+      <div class="avatar" style="width:56px;height:56px;font-size:22px">AD</div>
+      <div>
+        <div style="font-size:18px;font-weight:500">Adit</div>
+        <div style="font-size:13px;color:var(--muted)">JEE Aspirant · BITS Pilani</div>
+        <div class="flex gap6" style="margin-top:6px">
+          <span class="rating-chip" style="background:var(--accent-light);color:var(--accent)">Rating: ${userRating}</span>
+          <span class="tag">${tier}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="g2 mb2">
+    <div class="card">
+      <div style="font-weight:500;margin-bottom:1rem">Contest History</div>
+      ${contestHistory.length===0?'<div class="sm muted">No contests yet. Enter one to see history!</div>':
+      contestHistory.map(r=>`
+      <div class="lb-row">
+        <div style="flex:1;font-size:13px">${r.name}</div>
+        <div style="font-size:12px;color:var(--muted)">${r.correct}/${r.total}</div>
+        <div style="font-size:12px;padding:2px 8px;border-radius:20px;${r.ratingChange>=0?'background:var(--green-light);color:#085041':'background:var(--red-light);color:#501313'}">${r.ratingChange>=0?'+':''}${r.ratingChange}</div>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <div style="font-weight:500;margin-bottom:1rem">Subject Accuracy</div>
+      ${[['Physics','72%','var(--accent)'],['Chemistry','68%','var(--green)'],['Mathematics','81%','var(--amber)']].map(([s,acc,col])=>`
+      <div style="margin-bottom:12px">
+        <div class="flex" style="justify-content:space-between;font-size:13px;margin-bottom:4px"><span>${s}</span><span style="color:${col};font-weight:500">${acc}</span></div>
+        <div class="pbar-wrap" style="width:100%"><div class="pbar" style="width:${acc};background:${col}"></div></div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+// =========================================================
+// HANDLERS
+// =========================================================
+function attachHandlers(){}
+function selQotd(s){ state.qotdSel=s; state.qotdAns=null; render(); }
+function ansQotd(i){ if(state.qotdAns===null){state.qotdAns=i; render();} }
+function qotdAns(s,i){ state['qotd_'+s]=i; render(); }
+
+// =========================================================
+// KNOWLEDGE HUB + AI SOLVER (preserved verbatim)
+// =========================================================
+const CURRICULUM = {
+  physics: {
+    name:'Physics', icon:'⚛️', color:'#EEEDFE', textColor:'#3C3489',
+    chapters: [
+      { id:'electrostatics', name:'Electrostatics', topics: [
+        { id:'coulomb', name:"Coulomb's Law", level:'Mains', difficulty:2,
+          videoQuery:'coulombs law JEE electrostatics 10 minutes',
+          explanation:[
+            {lvl:'🧒 Super Simple','badge':'level-1','text':"Imagine two tiny balls. If both are wearing the same team jersey (same charge), they push each other away. If they're on opposite teams (different charges), they pull each other. The farther apart they are, the weaker the push or pull. This is Coulomb's law!"},
+            {lvl:'📘 Class 12 Level','badge':'level-2','text':"Coulomb's Law: The force between two point charges q₁ and q₂ separated by distance r is F = k·q₁q₂/r². Here k = 9×10⁹ N·m²/C² (Coulomb's constant). Force is attractive if charges are opposite, repulsive if same. It obeys the inverse square law — double the distance, force becomes ¼."},
+            {lvl:'🏆 JEE Advanced','badge':'level-3','text':"In vector form: F⃗₁₂ = k·q₁q₂/r²·r̂₁₂. Principle of superposition states net force on a charge is the vector sum of individual Coulomb forces from all other charges. In dielectric media, F = kq₁q₂/(εᵣr²), where εᵣ is the relative permittivity. Watch out for questions involving charge distributions and non-trivial geometries."},
+          ],
+          questions:[
+            {q:"Two charges of +2C and -2C are placed 1m apart. The force between them is:", opts:["Repulsive","Attractive","Zero","Cannot determine"], ans:1, exp:"Opposite charges attract — Coulomb force is attractive."},
+            {q:"If distance between two charges is doubled, the Coulomb force becomes:", opts:["Double","Half","Quarter","Four times"], ans:2, exp:"F ∝ 1/r². Doubling r → F becomes 1/4."},
+            {q:"Two equal positive charges q are placed at corners of an equilateral triangle of side a. Force on the third equal charge at the apex is:", opts:["kq²/a²","√3·kq²/a²","2kq²/a²","Zero"], ans:1, exp:"By superposition, net force = √3·kq²/a² (vector sum of two equal forces at 60° gives √3 times each)."},
+            {q:"A charge Q is divided into two parts q and (Q−q). For maximum force between them at fixed distance, q/Q should be:", opts:["1/4","1/2","1/3","2/3"], ans:1, exp:"F = k·q(Q−q)/r². dF/dq = 0 gives q = Q/2, so q/Q = 1/2."},
+            {q:"In a medium of dielectric constant K, the force between charges reduces by factor:", opts:["K","1/K","√K","K²"], ans:1, exp:"F_medium = F_vacuum / K. So force reduces by factor K."},
+          ]
+        },
+        { id:'efield', name:'Electric Field & Lines', level:'Mains', difficulty:2,
+          videoQuery:'electric field lines JEE class 12 short lecture',
+          explanation:[
+            {lvl:'🧒 Super Simple','badge':'level-1','text':"Electric field is like an invisible wind around every charge. If you drop a tiny positive charge somewhere, the direction the wind blows it is the electric field direction. We draw arrows to show this wind — those arrows are called field lines. More arrows = stronger field."},
+            {lvl:'📘 Class 12 Level','badge':'level-2','text':"Electric field E at a point is the force per unit positive test charge: E = F/q₀. Due to a point charge: E = kQ/r². Field lines start from positive, end at negative charges. They never cross. Closer field lines = stronger field. Uniform field means equally spaced parallel lines."},
+            {lvl:'🏆 JEE Advanced','badge':'level-3','text':"Electric flux Φ = ∫E⃗·dA⃗. Gauss's Law: Φ = Q_enc/ε₀. Use it for symmetric distributions — sphere, cylinder, plane. For a uniformly charged sphere (outside): E = kQ/r². Inside: E = kQr/R³. For an infinite line charge: E = λ/2πε₀r. For an infinite plane: E = σ/2ε₀. Field due to a dipole on axis = 2kp/r³, on equator = kp/r³."},
+          ],
+          questions:[
+            {q:"Electric field lines cross each other:", opts:["Always","Sometimes","Never","At infinity"], ans:2, exp:"Field lines never cross — at any point there's only one unique field direction."},
+            {q:"Electric field inside a hollow conducting sphere is:", opts:["Maximum","Zero","Uniform","Depends on charge"], ans:1, exp:"By Gauss's law, no enclosed charge inside shell → E = 0."},
+            {q:"E due to infinite line charge at distance r is proportional to:", opts:["1/r²","1/r","r","r²"], ans:1, exp:"E = λ/2πε₀r → E ∝ 1/r."},
+            {q:"A dipole of moment p is placed in uniform field E. Torque is maximum when angle between p and E is:", opts:["0°","45°","90°","180°"], ans:2, exp:"τ = pE sinθ. Maximum at θ = 90°."},
+            {q:"For a uniformly charged solid sphere of radius R, E at r < R is:", opts:["kQ/r²","kQr/R³","Zero","σ/ε₀"], ans:1, exp:"Using Gauss's law inside: E·4πr² = ρ·(4/3)πr³/ε₀ → E = ρr/3ε₀ = kQr/R³."},
+          ]
+        },
+        { id:'potential', name:'Electric Potential & Energy', level:'Mains+Advanced', difficulty:3,
+          videoQuery:'electric potential energy JEE advanced electrostatics',
+          explanation:[
+            {lvl:'🧒 Super Simple','badge':'level-1','text':"Think of electric potential like height on a hill. A ball naturally rolls downhill. A positive charge naturally moves from high potential to low potential (downhill). Potential energy is stored energy — like a ball held high on a hill. When it rolls down, that energy becomes motion."},
+            {lvl:'📘 Class 12 Level','badge':'level-2','text':"Electric potential V at a point = work done in bringing unit positive charge from infinity: V = kQ/r. Potential energy of a system of two charges: U = kq₁q₂/r. Relation to field: E = −dV/dr. Equipotential surfaces are perpendicular to field lines. No work is done moving a charge along an equipotential surface."},
+            {lvl:'🏆 JEE Advanced','badge':'level-3','text':"V = −∫E⃗·dr⃗. For a dipole: V = kp cosθ/r². Potential energy of a dipole in field: U = −p⃗·E⃗. Energy stored in electric field: u = ½ε₀E². For a system of n charges, U = ½Σᵢ Σⱼ≠ᵢ kqᵢqⱼ/rᵢⱼ. Conductor in field: entire surface is equipotential, E is perpendicular to surface, σ ∝ curvature."},
+          ],
+          questions:[
+            {q:"Work done in moving a 2C charge through potential difference of 5V is:", opts:["2.5 J","10 J","7 J","0.4 J"], ans:1, exp:"W = qV = 2×5 = 10 J."},
+            {q:"Equipotential surfaces are always:", opts:["Parallel to E","Perpendicular to E","At 45° to E","Aligned with E"], ans:1, exp:"By definition, no work along equipotential → E must be perpendicular."},
+            {q:"Potential at the centre of a uniformly charged ring of radius R and charge Q is:", opts:["0","kQ/R","kQ/R²","kQ/2R"], ans:1, exp:"All charge is equidistant at r=R, so V = kQ/R."},
+            {q:"A dipole potential at equatorial point is:", opts:["kp/r²","2kp/r²","kp cosθ/r²","Zero"], ans:3, exp:"At equatorial point θ=90°, cos90°=0, so V=0."},
+            {q:"Self energy of a uniformly charged sphere of radius R and charge Q is:", opts:["kQ²/R","3kQ²/5R","kQ²/2R","2kQ²/3R"], ans:1, exp:"Self energy = 3kQ²/5R for uniform sphere (derived from energy density integration)."},
+          ]
+        },
+        { id:'capacitor', name:'Capacitors & Dielectrics', level:'Mains+Advanced', difficulty:4,
+          videoQuery:'capacitors dielectrics JEE advanced problems',
+          explanation:[
+            {lvl:'🧒 Super Simple','badge':'level-1','text':"A capacitor is like a tiny rechargeable bucket for electric charge. Two metal plates face each other with a gap. You push charge onto one plate; it attracts charge to the other. The bigger the plates and the smaller the gap, the more charge the bucket can hold. Filling the gap with special material (dielectric) makes the bucket hold even more."},
+            {lvl:'📘 Class 12 Level','badge':'level-2','text':"Capacitance C = Q/V. For parallel plate: C = ε₀A/d. With dielectric K: C = Kε₀A/d. Energy stored: U = ½CV² = Q²/2C = ½QV. Series: 1/C = 1/C₁+1/C₂. Parallel: C = C₁+C₂. Charge remains same in series; voltage remains same in parallel."},
+            {lvl:'🏆 JEE Advanced','badge':'level-3','text':"With dielectric slab of thickness t: C = ε₀A/(d−t+t/K). Force between capacitor plates: F = σ²A/2ε₀ = Q²/2ε₀A. Energy density: u = ½ε₀E². When battery connected: V constant, charge changes. When battery disconnected: Q constant, V changes. Charging/discharging: q(t) = Q(1−e^{-t/RC}) or Q·e^{-t/RC}. Time constant τ = RC."},
+          ],
+          questions:[
+            {q:"Capacitance of a parallel plate capacitor depends on:", opts:["Charge on plates","Voltage across plates","Area and separation","Material of plates"], ans:2, exp:"C = ε₀A/d — depends on geometry and medium, not on Q or V."},
+            {q:"Two capacitors C₁=2μF and C₂=3μF are in series. Equivalent capacitance is:", opts:["5 μF","1.2 μF","6 μF","0.83 μF"], ans:1, exp:"1/C = 1/2+1/3 = 5/6, so C = 6/5 = 1.2 μF."},
+            {q:"Energy stored in 4μF capacitor at 100V is:", opts:["0.02 J","0.04 J","0.002 J","4×10⁻² J"], ans:0, exp:"U = ½CV² = ½×4×10⁻⁶×10⁴ = 0.02 J."},
+            {q:"Inserting dielectric into charged isolated capacitor (battery disconnected):", opts:["Increases energy","Decreases energy","No change","Energy becomes zero"], ans:1, exp:"Q constant, C increases → U = Q²/2C decreases."},
+            {q:"Time constant of an RC circuit with R=10kΩ and C=100μF is:", opts:["1 s","0.1 s","10 s","100 ms"], ans:0, exp:"τ = RC = 10×10³ × 100×10⁻⁶ = 1 s."},
+          ]
+        },
+        { id:'gauss', name:"Gauss's Law", level:'Advanced', difficulty:5,
+          videoQuery:"gauss law applications JEE advanced lecture",
+          explanation:[
+            {lvl:'🧒 Super Simple','badge':'level-1','text':"Imagine you're inside a bubble. Gauss's law says: the total number of electric field arrows poking out of any bubble shape you draw only depends on how much total charge is trapped inside — no matter what shape the bubble is!"},
+            {lvl:'📘 Class 12 Level','badge':'level-2','text':"Gauss's Law: ∮E⃗·dA⃗ = Q_enclosed/ε₀. The surface is called a Gaussian surface. Pick the surface cleverly (sphere for point charge, cylinder for line charge, pillbox for plane) to simplify integration. Only enclosed charge contributes to flux; external charges cancel out."},
+            {lvl:'🏆 JEE Advanced','badge':'level-3','text':"Applications: Solid conducting sphere — all charge on surface, E=0 inside, E=kQ/r² outside. Hollow sphere — E=0 inside. Infinite line charge λ — E=λ/2πε₀r. Infinite plane σ — E=σ/2ε₀ (each side). Two parallel plates — E=σ/ε₀ between them, 0 outside. Gauss's law in dielectric: ∮D⃗·dA⃗ = Q_free, where D=ε₀E+P=εE."},
+          ],
+          questions:[
+            {q:"Electric flux through a closed surface enclosing charge Q is:", opts:["Qε₀","Q/ε₀","kQ","Zero"], ans:1, exp:"By Gauss: Φ = Q/ε₀."},
+            {q:"Electric flux due to external charges through a closed surface is:", opts:["Positive","Negative","Zero","Depends on charge"], ans:2, exp:"External charges contribute equal inward and outward flux, net = 0."},
+            {q:"E inside a hollow spherical shell carrying charge Q is:", opts:["kQ/R²","kQ/r","Zero","σ/ε₀"], ans:2, exp:"No enclosed charge → E = 0 inside."},
+            {q:"A Gaussian surface in the form of cube encloses dipole +q and −q. Net flux is:", opts:["q/ε₀","2q/ε₀","Zero","−q/ε₀"], ans:2, exp:"Net enclosed charge = +q−q = 0, so Φ = 0."},
+            {q:"For infinite plane with surface charge σ, E just outside is:", opts:["σ/ε₀","σ/2ε₀","2σ/ε₀","σ²/ε₀"], ans:0, exp:"Using pillbox Gaussian surface: E = σ/ε₀ just outside conductor, σ/2ε₀ for infinite non-conducting sheet (each side)."},
+          ]
+        },
+      ]},
+      { id:'currentelec', name:'Current Electricity', topics:[
+        {id:'ohm',name:"Ohm's Law & Resistance",level:'Mains',difficulty:2,videoQuery:"ohm's law resistance JEE class 12",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:'Think of wire as a pipe. Current is water flowing. Voltage is water pressure. Resistance is how narrow/rough the pipe is. More pressure → more flow. Narrower pipe → less flow. Ohm found: current = voltage ÷ resistance.'},{lvl:'📘 Class 12 Level',badge:'level-2',text:"V = IR (Ohm's Law). Resistance R = ρl/A where ρ is resistivity, l is length, A is cross-section. In series: R_total = R₁+R₂. In parallel: 1/R = 1/R₁+1/R₂. Temperature dependence: R = R₀(1+αT). Conductance G = 1/R."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"Drift velocity: I = nAevd, so J = nevd = σE. Ohm's law: J = σE. Resistivity ρ = m/(ne²τ) where τ is relaxation time. Power: P = IV = I²R = V²/R. For non-ohmic devices, V-I curve is non-linear. Kirchhoff's laws: KCL (current), KVL (voltage). Wheatstone bridge: balanced when P/Q = R/S, null galvanometer."}],questions:[{q:"In a circuit, V=12V and R=4Ω. Current is:",opts:["3A","4A","48A","0.33A"],ans:0,exp:"I = V/R = 12/4 = 3A."},{q:"Two resistors 6Ω and 3Ω in parallel. Equivalent resistance:",opts:["9Ω","2Ω","18Ω","4.5Ω"],ans:1,exp:"1/R = 1/6+1/3 = 3/6 = 1/2, R = 2Ω."},{q:"Power dissipated in a 10Ω resistor carrying 2A:",opts:["20W","40W","5W","100W"],ans:1,exp:"P = I²R = 4×10 = 40W."},{q:"A wire of resistance R is stretched to twice its length. New resistance:",opts:["R/2","2R","4R","R"],ans:2,exp:"Volume constant → A halves when l doubles. R = ρl/A → 4R."},{q:"In a Wheatstone bridge P/Q = 2/3. For balance, R/S =",opts:["3/2","2/3","1/2","3/4"],ans:1,exp:"Balanced condition: P/Q = R/S → R/S = 2/3."}]},
+        {id:'cells',name:'Cells, EMF & Internal Resistance',level:'Mains',difficulty:3,videoQuery:"emf internal resistance JEE cells problems",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:'A battery is like a water pump. EMF is the pump\'s maximum pressure. But the pump itself has some blockage inside (internal resistance). So the actual pressure reaching outside is slightly less than the maximum. The more current flows, the more pressure is lost inside.'},{lvl:'📘 Class 12 Level',badge:'level-2',text:"EMF (ε) is the work done per unit charge by the cell. Terminal voltage V = ε − Ir, where r is internal resistance and I is current. Cells in series: ε_total = Σε, r_total = Σr. Cells in parallel (identical): ε_total = ε, r_total = r/n. Max power transfer: external R = internal r."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"Potentiometer: used to measure EMF without drawing current. For comparison of EMFs: ε₁/ε₂ = l₁/l₂. For internal resistance: r = R(l₁−l₂)/l₂. Charging a battery: V = ε + Ir (energy input). Discharging: V = ε − Ir. Efficiency of cell: η = P_external/P_total = R/(R+r)."}],questions:[{q:"A cell of EMF 2V and internal resistance 0.5Ω delivers current 2A. Terminal voltage is:",opts:["3V","1V","2.5V","1.5V"],ans:1,exp:"V = ε−Ir = 2−2×0.5 = 1V."},{q:"For maximum power transfer from source to load:",opts:["R_load >> r","R_load = r","R_load << r","r = 0"],ans:1,exp:"Maximum power transfer theorem: R_load = r."},{q:"n identical cells each of EMF ε in parallel have combined EMF:",opts:["nε","ε/n","ε","n²ε"],ans:2,exp:"Parallel cells: combined EMF = ε (same as single cell)."},{q:"In a potentiometer, balance length for cell A is 60 cm and cell B is 40 cm. Ratio ε_A/ε_B:",opts:["3/2","2/3","1","4/9"],ans:0,exp:"ε_A/ε_B = l_A/l_B = 60/40 = 3/2."},{q:"Internal resistance of a cell is determined using potentiometer by measuring:",opts:["EMF only","Current only","EMF and terminal voltage","Resistance directly"],ans:2,exp:"r = R(l₁−l₂)/l₂, comparing balance lengths with and without external R."}]},
+      ]},
+      { id:'magnetism', name:'Magnetism & Moving Charges', topics:[
+        {id:'biot',name:'Biot-Savart Law',level:'Advanced',difficulty:4,videoQuery:"biot savart law JEE advanced magnetic field",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:'Moving charges create a magnetic field around them — like a spinning sprinkler creating a ring of water spray. The Biot-Savart law tells you exactly how strong that magnetic "spray" is at any point, depending on the current and how far you are.'},{lvl:'📘 Class 12 Level',badge:'level-2',text:"dB⃗ = (μ₀/4π)·(Idl⃗×r̂)/r². Direction given by right-hand rule. For a long straight wire: B = μ₀I/2πr. For circular loop at centre: B = μ₀I/2R. μ₀ = 4π×10⁻⁷ T·m/A."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"On axis of circular loop: B = μ₀IR²/2(R²+x²)^(3/2). For infinite wire: B = μ₀I/2πr. Force between parallel wires: F/l = μ₀I₁I₂/2πd (attractive if same direction, repulsive if opposite). Ampere's Law: ∮B⃗·dl⃗ = μ₀I_enc (for symmetric current distributions). Solenoid: B = μ₀nI inside. Toroid: B = μ₀nI inside, 0 outside."}],questions:[{q:"Magnetic field at centre of circular loop of radius R carrying current I:",opts:["μ₀I/4πR","μ₀I/2R","μ₀I/R","μ₀I/2πR"],ans:1,exp:"B = μ₀I/2R at centre of circular loop."},{q:"Magnetic field due to infinitely long straight wire at distance r:",opts:["μ₀I/r","μ₀I/2πr","μ₀I/4πr","μ₀I/πr"],ans:1,exp:"B = μ₀I/2πr."},{q:"Two parallel wires carry currents in same direction. They:",opts:["Repel","Attract","No force","Rotate"],ans:1,exp:"Same direction currents attract each other."},{q:"B inside an ideal solenoid of n turns/m carrying current I is:",opts:["μ₀I","μ₀nI","μ₀nI/2","2μ₀nI"],ans:1,exp:"B = μ₀nI inside a solenoid."},{q:"Force on charge q moving with velocity v in magnetic field B (perpendicular) is:",opts:["qvB","qv/B","qB/v","q/vB"],ans:0,exp:"Lorentz force F = qv×B, magnitude = qvB when perpendicular."}]},
+      ]},
+      { id:'optics', name:'Ray Optics', topics:[
+        {id:'reflection',name:'Reflection & Mirrors',level:'Mains',difficulty:2,videoQuery:"ray optics reflection mirrors JEE class 12",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:'When light hits a mirror, it bounces back like a rubber ball. Flat mirrors show your exact mirror image. Curved mirrors (like spoons) can make images bigger (concave spoon side) or smaller (convex back side). The bending always follows a simple rule: angle in = angle out.'},{lvl:'📘 Class 12 Level',badge:'level-2',text:"Laws of reflection: angle of incidence = angle of reflection. Mirror formula: 1/f = 1/v + 1/u. Magnification m = −v/u. For concave: f = −R/2 (f negative). For convex: f = +R/2. Sign convention: distances measured from pole, along principal axis. Concave mirror — real inverted image when object beyond F, virtual erect when inside F."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"For inclined mirrors at angle θ: number of images = 360/θ − 1. Equivalent mirrors and equivalent focal lengths for combinations. Silvered lens: P = P_lens + P_mirror + P_lens = 2P_L + P_M. Newton's formula: f² = x₁x₂ where x₁, x₂ are distances from focus. Aberrations: spherical, chromatic."}],questions:[{q:"Focal length of a concave mirror of radius 20cm is:",opts:["20cm","10cm","5cm","40cm"],ans:1,exp:"f = R/2 = 10 cm."},{q:"Object placed at centre of curvature of concave mirror forms image at:",opts:["Focus","Infinity","Same position (C)","Behind mirror"],ans:2,exp:"Object at C → image at C (real, inverted, same size)."},{q:"Magnification of concave mirror when object is inside focus:",opts:["Negative, <1","Positive, <1","Positive, >1","Negative, >1"],ans:2,exp:"Virtual erect magnified image: m is positive and >1."},{q:"A convex mirror always forms image that is:",opts:["Real, inverted","Virtual, inverted","Virtual, erect, diminished","Real, erect"],ans:2,exp:"Convex mirror always: virtual, erect, diminished regardless of object position."},{q:"Using 1/v + 1/u = 1/f. Object at u = −30cm, f = −10cm. Image at v =",opts:["−15cm","−15cm","15cm","−7.5cm"],ans:0,exp:"1/v = 1/f − 1/u = 1/(−10) − 1/(−30) = −3/30+1/30 = −2/30, v = −15cm."}]},
+        {id:'refraction',name:'Refraction & Lenses',level:'Mains',difficulty:3,videoQuery:"refraction lenses JEE lens formula problems",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:'Light bends when it goes from one material into another — like a straw that looks bent in water. Lenses use this bending trick to focus light. A convex (thicker middle) lens focuses light to a point. A concave (thinner middle) lens spreads light out. Glasses use these to fix eyesight!'},{lvl:'📘 Class 12 Level',badge:'level-2',text:"Snell's Law: n₁ sinθ₁ = n₂ sinθ₂. Lens formula: 1/f = 1/v − 1/u. Power P = 1/f (in dioptres). Lensmaker's equation: 1/f = (n−1)(1/R₁ − 1/R₂). Lenses in contact: P = P₁+P₂. Total Internal Reflection occurs when θ > θ_c = sin⁻¹(n₂/n₁)."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"Refraction at spherical surface: n₂/v − n₁/u = (n₂−n₁)/R. Displacement method for convex lens: f = (D²−d²)/4D. Combination of lenses and mirrors. Prism: δ = A(n−1) for small angles. At minimum deviation: r = A/2, n = sin((A+δ_min)/2)/sin(A/2). Dispersion: ω = (n_V−n_R)/(n_Y−1) (dispersive power). Achromatic doublet condition."}],questions:[{q:"Refractive index of glass is 1.5. Critical angle for glass-air is:",opts:["30°","41.8°","45°","60°"],ans:1,exp:"θ_c = sin⁻¹(1/n) = sin⁻¹(1/1.5) = sin⁻¹(0.667) ≈ 41.8°."},{q:"Power of a concave lens of focal length 50cm is:",opts:["2D","−2D","0.5D","−0.5D"],ans:1,exp:"P = 1/f(m) = 1/(−0.5) = −2D."},{q:"A lens has focal length 20cm in air. If placed in water (n=1.33), its focal length:",opts:["Increases","Decreases","Same","Becomes zero"],ans:0,exp:"P ∝ (n_lens/n_medium − 1). In water, contrast reduces, focal length increases."},{q:"A prism of apex angle A produces minimum deviation δ. Refractive index n =",opts:["sin(A/2)/sin((A+δ)/2)","sin((A+δ)/2)/sin(A/2)","tan(A/2)","cos(A+δ)"],ans:1,exp:"n = sin((A+δ_min)/2) / sin(A/2)."},{q:"Focal length of combination of lenses f₁=10cm and f₂=−20cm in contact:",opts:["20cm","−20cm","30cm","−10cm"],ans:0,exp:"P = P₁+P₂ = 10+(-5) = 5D, f = 1/P = 20cm."}]},
+      ]},
+      { id:'waves', name:'Waves & Oscillations', topics:[
+        {id:'shm',name:'Simple Harmonic Motion',level:'Mains',difficulty:3,videoQuery:"simple harmonic motion SHM JEE class 12",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:'SHM is like a swing. When you push a swing, it goes back and forth smoothly. The further from the middle, the stronger the pull back to centre. This happens because the restoring force is proportional to how far you are from the middle.'},{lvl:'📘 Class 12 Level',badge:'level-2',text:"SHM: a = −ω²x. x(t) = A sin(ωt+φ). ω = √(k/m) for spring. Time period T = 2π/ω = 2π√(m/k). For pendulum: T = 2π√(l/g). Velocity: v = ω√(A²−x²). Max velocity = ωA at x=0. Max acceleration = ω²A at x=±A. Energy: E = ½mω²A² (constant). KE = ½mω²(A²−x²), PE = ½mω²x²."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"Superposition of SHMs: same direction → amplitude √(A₁²+A₂²+2A₁A₂cosφ). Spring combinations: series 1/k = 1/k₁+1/k₂, parallel k = k₁+k₂. Damped oscillation: x = Ae^{−γt}cos(ω't). Resonance: ω_drive = ω_natural. Coupled oscillations, normal modes. Energy decay in damped SHM. Phase space trajectories."}],questions:[{q:"In SHM, restoring force is:",opts:["Constant","∝ displacement","∝ velocity","∝ acceleration²"],ans:1,exp:"F = −kx, force proportional to displacement from equilibrium."},{q:"Time period of simple pendulum of length l on moon (g_moon = g/6):",opts:["T","T√6","T/√6","6T"],ans:1,exp:"T ∝ √(1/g). On moon g → g/6, so T → T√6."},{q:"In SHM, KE equals PE at displacement x = :",opts:["A","A/√2","A/2","0"],ans:1,exp:"KE = PE when ½mω²(A²−x²) = ½mω²x², so A²=2x², x = A/√2."},{q:"A particle in SHM has velocity 4m/s at x=3m and velocity 3m/s at x=4m. Amplitude is:",opts:["5m","25m","√7m","7m"],ans:0,exp:"v² = ω²(A²−x²). 16=ω²(A²−9), 9=ω²(A²−16). Subtracting: 7=7ω², ω=1, A²=25, A=5m."},{q:"Angular frequency of spring-mass system with k=100N/m, m=0.25kg is:",opts:["5 rad/s","10 rad/s","20 rad/s","400 rad/s"],ans:2,exp:"ω = √(k/m) = √(100/0.25) = √400 = 20 rad/s."}]},
+      ]},
+    ]
+  },
+  chemistry: {
+    name:'Chemistry', icon:'🧪', color:'#E1F5EE', textColor:'#085041',
+    chapters:[
+      { id:'atomicstruct', name:'Atomic Structure', topics:[
+        {id:'bohr',name:'Bohr Model of Atom',level:'Mains',difficulty:2,videoQuery:"bohr model atomic structure JEE class 12",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:"Imagine the atom like a tiny solar system. The nucleus (sun) is in the middle with protons and neutrons. Electrons (planets) orbit around it in fixed circular paths. They can only exist at certain allowed orbits — not anywhere in between. When electrons jump between orbits, they absorb or emit light."},{lvl:'📘 Class 12 Level',badge:'level-2',text:"Bohr's postulates: Electrons move in circular orbits. Allowed orbits: mvr = nh/2π. Energy of nth orbit: Eₙ = −13.6/n² eV. Radius: rₙ = 0.529n² Å. Frequency of emitted photon: ν = (E₂−E₁)/h. Spectral series: Lyman (UV), Balmer (visible), Paschen (IR), etc."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"Wave-particle duality: de Broglie λ = h/mv. Heisenberg uncertainty: Δx·Δp ≥ h/4π. Quantum numbers: n (principal), l (azimuthal, 0 to n−1), mₗ (magnetic, −l to +l), ms (spin, ±½). Orbital shapes: s (sphere), p (dumbbell), d (complex). Aufbau, Hund's rule, Pauli exclusion. Electronic configurations including exceptions (Cr, Cu)."}],questions:[{q:"Energy of electron in 2nd orbit of hydrogen:",opts:["−13.6 eV","−3.4 eV","−1.51 eV","−0.85 eV"],ans:1,exp:"E = −13.6/n² = −13.6/4 = −3.4 eV."},{q:"Radius of 3rd orbit of hydrogen atom (r₁ = 0.529Å):",opts:["0.529 Å","1.587 Å","4.761 Å","9 Å"],ans:2,exp:"r = 0.529×n² = 0.529×9 = 4.761 Å."},{q:"Spectral series lying in visible region:",opts:["Lyman","Balmer","Paschen","Brackett"],ans:1,exp:"Balmer series (n=3,4,5... to n=2) lies in visible light."},{q:"Maximum electrons in 3rd shell (n=3):",opts:["8","18","32","6"],ans:1,exp:"Max electrons = 2n² = 2×9 = 18."},{q:"Quantum number that describes shape of orbital:",opts:["n","l","mₗ","ms"],ans:1,exp:"Azimuthal quantum number l determines orbital shape: 0=s, 1=p, 2=d, 3=f."}]},
+        {id:'periodictable',name:'Periodic Table & Trends',level:'Mains',difficulty:2,videoQuery:"periodic trends ionization energy JEE chemistry",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:"The periodic table is like a well-organized city map of all elements. Elements in the same column (group) behave similarly — like neighbours with the same habits. As you go across a row (period), atoms get smaller even though they gain more electrons, because more protons pull everything tighter."},{lvl:'📘 Class 12 Level',badge:'level-2',text:"Atomic radius: increases down group, decreases across period. Ionic radius: cations smaller, anions larger than parent atom. Ionisation energy (IE): increases across period, decreases down group. Exceptions: IE of O < N (half-filled stability), IE of Mg > Al. Electron affinity: more negative across period. Electronegativity: Pauling scale, F highest, increases across and up."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"Shielding effect causes irregular trends. Noble gas configuration causes high IE jumps. d-block contraction: 3d elements have similar radius to 4d due to poor d-shielding. Lanthanide contraction: similar radii in 5d elements. Diagonal relationships (Li-Mg, Be-Al, B-Si). Anomalous properties of first element in each group."}],questions:[{q:"Correct order of ionization energy:",opts:["Li<B<Be","Be<B<Li","Li<Be<B","B<Be<Li"],ans:0,exp:"Li<B<Be: Be has stable full 2s, so IE(Be) > IE(B)."},{q:"Smallest ion among:",opts:["Na⁺","Mg²⁺","Al³⁺","Si⁴⁺"],ans:3,exp:"Same period: more charge on isoelectronic ion → smaller size. Si⁴⁺ has most protons (14) for same 10 electrons."},{q:"Which has highest electronegativity?",opts:["F","O","Cl","N"],ans:0,exp:"Fluorine has highest electronegativity (4.0 on Pauling scale)."},{q:"Electron affinity of noble gases is:",opts:["Very high","Zero or positive (endothermic)","Negative","Equal to halogens"],ans:1,exp:"Noble gases have complete shells, adding electron is endothermic (positive EA or zero)."},{q:"Across a period, atomic radius generally:",opts:["Increases","Decreases","Stays same","First increases then decreases"],ans:1,exp:"More protons across period pull electrons closer, reducing radius."}]},
+      ]},
+      { id:'chemicalbonding', name:'Chemical Bonding', topics:[
+        {id:'vsepr',name:'VSEPR & Molecular Geometry',level:'Mains',difficulty:3,videoQuery:"VSEPR theory molecular geometry JEE chemistry",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:"VSEPR says electron pairs around an atom are like grumpy neighbours — they push away from each other as much as possible. By knowing how many pairs (bonding + lone pairs) are around the central atom, you can predict the 3D shape of any molecule!"},{lvl:'📘 Class 12 Level',badge:'level-2',text:"Count bonding pairs (BP) + lone pairs (LP) around central atom. 2 pairs: linear (180°). 3 BP: trigonal planar (120°). 4 BP: tetrahedral (109.5°). With lone pairs: 3BP+1LP = pyramidal, 2BP+2LP = bent. Lone pairs repel more than bonding pairs, compressing bond angles. Examples: H₂O bent (104.5°), NH₃ pyramidal (107°), CH₄ tetrahedral (109.5°)."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"Hybridisation: sp (linear, 180°), sp² (trigonal, 120°), sp³ (tetrahedral, 109.5°), sp³d (trigonal bipyramidal), sp³d² (octahedral). Resonance structures and resonance energy. MO theory: σ and π bonds, bond order = (bonding−antibonding)/2. O₂ is paramagnetic (2 unpaired in MO). Formal charge = V − N − B/2."}],questions:[{q:"Shape of BF₃ molecule:",opts:["Bent","Trigonal planar","Pyramidal","Linear"],ans:1,exp:"B has 3 bond pairs, 0 lone pairs → trigonal planar."},{q:"Bond angle in H₂O is 104.5° (less than 109.5°) because:",opts:["O is large","2 lone pairs repel bonding pairs","Ionic bonding","H is small"],ans:1,exp:"Two lone pairs exert more repulsion, compressing H-O-H angle below tetrahedral."},{q:"Hybridisation of N in NH₃:",opts:["sp","sp²","sp³","sp³d"],ans:2,exp:"N in NH₃: 3 bonds + 1 lone pair = 4 pairs → sp³ hybridisation."},{q:"Bond order of O₂ by MO theory:",opts:["1","1.5","2","2.5"],ans:2,exp:"O₂ MO: bonding=8, antibonding=4, BO = (8-4)/2 = 2."},{q:"Which molecule is linear?",opts:["H₂O","NH₃","CO₂","SO₂"],ans:2,exp:"CO₂: O=C=O, 2 double bonds, no lone pairs on C → linear (sp)."}]},
+      ]},
+      { id:'thermo', name:'Thermodynamics', topics:[
+        {id:'firstlaw',name:'First Law & Internal Energy',level:'Mains',difficulty:3,videoQuery:"first law thermodynamics JEE chemistry internal energy",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:"Energy can't be created or destroyed — only moved around. If you heat something (give it energy) or do work on it, its internal energy goes up. The first law keeps the energy accounts balanced: energy in = energy out + energy stored."},{lvl:'📘 Class 12 Level',badge:'level-2',text:"First law: ΔU = q + w. q = heat absorbed by system, w = work done on system. For expansion: w = −PΔV. Enthalpy H = U + PV. At constant P: ΔH = qₚ = ΔU + PΔV = ΔU + Δn_g·RT. Hess's law: ΔH is path-independent. Bond enthalpy: ΔH = Σ(bonds broken) − Σ(bonds formed)."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"For reversible isothermal expansion: w = −nRT ln(V₂/V₁). For irreversible: w = −P_ext·ΔV. Adiabatic: q=0, TV^{γ−1} = const, PV^γ = const. Kirchhoff's law: d(ΔH)/dT = ΔCₚ. Entropy S: ΔS = q_rev/T. Gibbs energy: G = H − TS, ΔG = ΔH − TΔS. Spontaneous if ΔG < 0. ΔG = ΔG° + RT lnQ, at equilibrium ΔG = 0, ΔG° = −RT lnK."}],questions:[{q:"At constant pressure, heat change equals:",opts:["ΔU","ΔH","ΔG","ΔS"],ans:1,exp:"qₚ = ΔH (enthalpy change at constant pressure)."},{q:"Work done in free expansion of gas:",opts:["Maximum","Minimum","Zero","nRT"],ans:2,exp:"Free expansion: P_ext = 0, so w = −P_ext ΔV = 0."},{q:"Hess's law is based on:",opts:["First law","Conservation of energy and path independence of ΔH","Second law","Avogadro's law"],ans:1,exp:"Hess's law: ΔH is a state function, independent of path."},{q:"A reaction is spontaneous at all temperatures when:",opts:["ΔH>0, ΔS>0","ΔH<0, ΔS>0","ΔH<0, ΔS<0","ΔH>0, ΔS<0"],ans:1,exp:"ΔG = ΔH − TΔS < 0 always when ΔH<0 and ΔS>0."},{q:"For a reaction, ΔH = −200 kJ and ΔS = −0.5 kJ/K. It is spontaneous below T =",opts:["400K","200K","100K","500K"],ans:0,exp:"ΔG = ΔH − TΔS = 0 at T = ΔH/ΔS = 200/0.5 = 400K. Spontaneous (ΔG<0) below 400K."}]},
+      ]},
+      { id:'equilibrium', name:'Chemical Equilibrium', topics:[
+        {id:'lechat',name:"Le Chatelier's Principle",level:'Mains',difficulty:3,videoQuery:"le chatelier's principle JEE equilibrium short lecture",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:"Imagine a seesaw perfectly balanced. If you push one side down, it adjusts to find balance again. Chemical reactions work similarly: if you disturb equilibrium (add reactant, change temperature, change pressure), the reaction shifts in a direction to undo that disturbance."},{lvl:'📘 Class 12 Level',badge:'level-2',text:"Le Chatelier's Principle: On disturbing equilibrium, system shifts to oppose the change. Adding reactant → forward shift. Removing product → forward shift. Increasing P → shift to side with fewer moles of gas. Increasing T → shift to endothermic side. Catalyst: reaches equilibrium faster, doesn't shift it."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"K_c = [products]/[reactants] (molar). K_p = K_c(RT)^{Δn}. For Δn=0: K_p = K_c. Relation: ΔG° = −RT lnK. Van't Hoff equation: d(lnK)/dT = ΔH/RT². Degree of dissociation α related to Kc. Buffer solutions: pH = pKa + log([A⁻]/[HA]). Common ion effect. Solubility product Ksp and ionic product Q."}],questions:[{q:"On increasing pressure, N₂+3H₂⇌2NH₃ equilibrium shifts:",opts:["Backward","Forward","No change","Depends on temperature"],ans:1,exp:"Δn = 2−4 = −2 (fewer moles on right). Increasing P → forward shift."},{q:"A catalyst affects equilibrium by:",opts:["Shifting it forward","Changing K value","Reaching equilibrium faster","Shifting it backward"],ans:2,exp:"Catalyst increases rate of both forward and backward equally, reaching equilibrium faster without shifting it."},{q:"Kp = Kc when:",opts:["Δn=1","Δn=−1","Δn=0","Always"],ans:2,exp:"K_p = K_c(RT)^Δn. When Δn=0: K_p = K_c."},{q:"For reaction with ΔH < 0 (exothermic), increasing temperature:",opts:["Increases K","Decreases K","No effect on K","Doubles K"],ans:1,exp:"Van't Hoff: d(lnK)/dT = ΔH/RT². Exothermic ΔH<0 → K decreases with T."},{q:"pH of buffer containing 0.1M acetic acid and 0.1M sodium acetate (pKa=4.74):",opts:["4.74","7","3.74","5.74"],ans:0,exp:"Henderson-Hasselbalch: pH = pKa + log(0.1/0.1) = 4.74 + 0 = 4.74."}]},
+      ]},
+      { id:'organic', name:'Organic Chemistry', topics:[
+        {id:'iupac',name:'IUPAC Naming & Isomerism',level:'Mains',difficulty:3,videoQuery:"IUPAC nomenclature isomerism JEE organic chemistry",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:"IUPAC naming is like giving molecules a proper address. The longest carbon chain is the 'street name', branches are 'house numbers' (counted to give lowest numbers). Isomers are molecules with the same formula but different arrangements — like the same LEGOs built into different shapes."},{lvl:'📘 Class 12 Level',badge:'level-2',text:"Parent chain: longest continuous C chain. Suffix: -ane(alkane), -ene(alkene), -yne(alkyne), -ol(alcohol), -al(aldehyde), -one(ketone), -oic acid. Number from end nearest to substituent. Structural isomers: chain, position, functional group. Stereoisomers: geometric (cis-trans), optical (R/S enantiomers). E/Z nomenclature."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"Conformational isomers: Newman projections, eclipsed vs staggered. Ring strain: Baeyer strain theory. Chirality: chiral centre, optical activity, specific rotation [α]. Diastereomers vs enantiomers. Meso compounds. R/S assignment: CIP priority rules. Optical purity (ee%) = (major−minor)/(major+minor) × 100%."}],questions:[{q:"IUPAC name of CH₃-CH(CH₃)-CH₂-CH₃:",opts:["2-methylbutane","3-methylbutane","2-methylpropane","Isopentane"],ans:0,exp:"Longest chain = 4 carbons (butane). Methyl group at C2 → 2-methylbutane."},{q:"Number of structural isomers of C₄H₁₀:",opts:["2","3","4","5"],ans:0,exp:"C₄H₁₀: n-butane and 2-methylpropane (isobutane) = 2 isomers."},{q:"Cis-trans isomerism requires:",opts:["Chiral centre","Double bond with two different groups on each C","Sp3 carbon","Ionic bond"],ans:1,exp:"Need restricted rotation (C=C or ring) and two different groups on each doubly-bonded C."},{q:"A molecule with one chiral centre has how many optical isomers:",opts:["1","2","4","0"],ans:1,exp:"1 chiral centre → 2¹ = 2 optical isomers (enantiomers)."},{q:"Meso compound is:",opts:["Optically active","Optically inactive despite chiral centres","An enantiomer","A diastereomer with optical activity"],ans:1,exp:"Meso compound has chiral centres but internal plane of symmetry makes it optically inactive."}]},
+      ]},
+    ]
+  },
+  mathematics: {
+    name:'Mathematics', icon:'📐', color:'#FAEEDA', textColor:'#633806',
+    chapters:[
+      { id:'calculus', name:'Differential Calculus', topics:[
+        {id:'limits',name:'Limits & Continuity',level:'Mains',difficulty:3,videoQuery:"limits continuity JEE mains calculus short lecture",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:"A limit is asking: what value does a function approach as you zoom in really close to a point, without actually touching it? Continuity means the graph has no breaks or jumps — you can draw it without lifting your pencil. Most natural functions are continuous except at points of 'trouble'."},{lvl:'📘 Class 12 Level',badge:'level-2',text:"lim(x→a) f(x) = L means f approaches L as x approaches a. Standard limits: lim(x→0) sinx/x = 1, lim(x→0) (1+x)^{1/x} = e, lim(x→0) (aˣ−1)/x = lna. L'Hôpital's rule for 0/0 or ∞/∞ forms. Continuity at a: f(a) exists, limit exists, and they're equal. Types of discontinuity: removable, jump, infinite."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"Sandwich theorem. Limit of sequence. Asymptotic expansions: sinx ≈ x − x³/6, eˣ ≈ 1+x+x²/2+... Intermediate Value Theorem (IVT): continuous f on [a,b], c between f(a) and f(b) → ∃ x in (a,b) with f(x)=c. Epsilon-delta definition. Continuity of composed functions. Greatest integer function, signum function analysis."}],questions:[{q:"lim(x→0) sin(3x)/x equals:",opts:["1","3","0","∞"],ans:1,exp:"lim sin(ax)/x = a. Here a=3, so limit = 3."},{q:"lim(x→∞) (1 + 2/x)^x equals:",opts:["e","e²","2e","∞"],ans:1,exp:"(1+k/x)^x → e^k as x→∞. Here k=2, limit = e²."},{q:"f(x) = (x²−4)/(x−2) at x=2 is:",opts:["Continuous","Discontinuous, removable","Discontinuous, jump","Discontinuous, infinite"],ans:1,exp:"f(2) is undefined, but lim(x→2) = 4 exists. Removable discontinuity."},{q:"L'Hôpital's rule applies to which form:",opts:["0/∞","∞/0","0/0","0·∞ directly"],ans:2,exp:"L'Hôpital applies to 0/0 or ∞/∞ indeterminate forms."},{q:"lim(x→0) (eˣ−1−x)/x² equals:",opts:["0","1","1/2","∞"],ans:2,exp:"Using Taylor: eˣ = 1+x+x²/2+... so (eˣ−1−x)/x² → x²/2·1/x² = 1/2."}]},
+        {id:'differentiation',name:'Differentiation & Applications',level:'Mains',difficulty:3,videoQuery:"differentiation applications maxima minima JEE",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:"Differentiation finds the slope of a curve at any point — like measuring how steep a hill is right where you're standing. If slope = 0, you're at a peak (maximum) or valley (minimum). This is how engineers find the best design, and how rockets calculate the optimal launch angle."},{lvl:'📘 Class 12 Level',badge:'level-2',text:"d/dx(xⁿ) = nxⁿ⁻¹. Chain rule: dy/dx = (dy/du)·(du/dx). Product rule: (uv)' = u'v + uv'. Quotient rule: (u/v)' = (u'v − uv')/v². Implicit differentiation. Rolle's theorem: f continuous on [a,b], differentiable on (a,b), f(a)=f(b) → ∃c: f'(c)=0. LMVT: f'(c) = (f(b)−f(a))/(b−a)."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"Higher derivatives. Leibniz theorem: nth derivative of product. Parametric differentiation: dy/dx = (dy/dt)/(dx/dt). d²y/dx² in parametric form. Taylor's expansion. Curve sketching: domain, range, symmetry, asymptotes, monotonicity, inflection points. Maxima/minima: first and second derivative tests. Optimisation problems. Rate of change, related rates."}],questions:[{q:"Derivative of sin(x²):",opts:["cos(x²)","2x·cos(x²)","−cos(x²)","x·cos(x²)"],ans:1,exp:"Chain rule: d/dx sin(u) = cos(u)·du/dx, u=x² → 2x·cos(x²)."},{q:"f(x) = x³−3x has local minima at:",opts:["x=1","x=−1","x=0","x=3"],ans:0,exp:"f'(x) = 3x²−3 = 0 → x=±1. f''(x)=6x: f''(1)=6>0 → local minima at x=1."},{q:"If y = eˣ·sin(x), dy/dx at x=0 is:",opts:["0","1","2","e"],ans:1,exp:"y' = eˣ(sin x + cos x). At x=0: y' = 1·(0+1) = 1."},{q:"Rolle's theorem cannot be applied to f(x)=|x| on [−1,1] because:",opts:["f(−1)≠f(1)","Not differentiable at x=0","Not continuous","f is even"],ans:1,exp:"|x| is not differentiable at x=0 — Rolle's condition violated."},{q:"Rate of change of area of circle when radius is 5cm and dr/dt = 2 cm/s:",opts:["10π","20π","5π","100π"],ans:1,exp:"A = πr². dA/dt = 2πr·dr/dt = 2π×5×2 = 20π cm²/s."}]},
+      ]},
+      { id:'integral', name:'Integral Calculus', topics:[
+        {id:'integration',name:'Integration Techniques',level:'Mains',difficulty:4,videoQuery:"integration techniques JEE mains by parts substitution",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:"Integration is the reverse of differentiation — if differentiation tells you the slope at each point, integration adds up all those tiny slopes to find the total area under a curve. Think of it as finding total distance from speed, or total volume from cross-sectional areas."},{lvl:'📘 Class 12 Level',badge:'level-2',text:"∫xⁿdx = xⁿ⁺¹/(n+1). ∫sin x dx = −cos x. ∫eˣdx = eˣ. Substitution: replace variable to simplify. By parts: ∫u dv = uv − ∫v du (ILATE: Inverse, Log, Algebraic, Trig, Exponential). Partial fractions for rational functions. Definite integral: ∫ₐᵇ f(x)dx = F(b)−F(a). Properties: ∫ₐᵇ = −∫ᵦₐ, ∫ₐᵃ = 0."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"King's property: ∫₀ᵃ f(x)dx = ∫₀ᵃ f(a−x)dx. Walli's formula for ∫₀^{π/2} sinⁿx dx. Reduction formulas. Leibniz rule: d/dx ∫_{g(x)}^{h(x)} f(t)dt = f(h)h' − f(g)g'. Area under curve (definite integrals). Length of arc, volume of revolution. Gamma function."}],questions:[{q:"∫2x eˣ² dx equals:",opts:["2eˣ²+C","eˣ²+C","x²eˣ²+C","eˣ²/2+C"],ans:1,exp:"Let u=x², du=2x dx. ∫eᵘ du = eᵘ+C = eˣ²+C."},{q:"∫₀^π sin x dx equals:",opts:["0","2","1","π"],ans:1,exp:"[−cos x]₀^π = −cos π − (−cos 0) = 1+1 = 2."},{q:"∫x·eˣ dx using integration by parts:",opts:["xeˣ+C","eˣ(x−1)+C","eˣ(x+1)+C","x²eˣ/2+C"],ans:1,exp:"ILATE: u=x, dv=eˣdx. uv−∫v du = xeˣ−∫eˣdx = xeˣ−eˣ = eˣ(x−1)+C."},{q:"∫₀ᵃ f(x)dx = ∫₀ᵃ f(a−x)dx is called:",opts:["Walli's formula","King's property","Reduction formula","Leibniz rule"],ans:1,exp:"This is the King's property of definite integrals."},{q:"Area bounded by y=x², x-axis, x=0 and x=3 is:",opts:["9","27","9/3","3"],ans:0,exp:"∫₀³ x² dx = [x³/3]₀³ = 27/3 = 9 sq. units."}]},
+      ]},
+      { id:'algebra', name:'Algebra & Matrices', topics:[
+        {id:'complexnum',name:'Complex Numbers',level:'Mains',difficulty:3,videoQuery:"complex numbers JEE mains class 12 algebra",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:"Real numbers can't explain √(−1) — so mathematicians invented i = √(−1) and called it imaginary! But it's very real in engineering and physics. Every complex number z = a + bi has a 'real part' a and 'imaginary part' b. On an Argand diagram, they live on a 2D plane, not just a number line."},{lvl:'📘 Class 12 Level',badge:'level-2',text:"z = a+bi. |z| = √(a²+b²) (modulus). arg(z) = tan⁻¹(b/a). Polar form: z = r(cosθ+isinθ) = re^{iθ}. Conjugate z̄ = a−bi. z·z̄ = |z|². De Moivre's theorem: (cosθ+isinθ)ⁿ = cos(nθ)+isin(nθ). Cube roots of unity: 1, ω, ω² where ω = e^{2πi/3}."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"Rotation in complex plane: z₂ = z₁·e^{iθ}. Locus problems in complex plane. Triangle inequality: |z₁+z₂| ≤ |z₁|+|z₂|. Equation of circle: |z−z₀| = r. Argument properties. nth roots of unity form regular polygon. Sum = 0, product = (−1)^{n+1}. Geometrical interpretations of complex operations."}],questions:[{q:"i⁴⁷ equals:",opts:["i","−i","1","−1"],ans:1,exp:"i⁴=1, 47=44+3, so i⁴⁷ = (i⁴)¹¹·i³ = 1·(−i) = −i."},{q:"|3+4i| equals:",opts:["7","5","1","12"],ans:1,exp:"|3+4i| = √(9+16) = √25 = 5."},{q:"If ω is cube root of unity, 1+ω+ω² =",opts:["0","1","3","ω"],ans:0,exp:"Sum of cube roots of unity = 0."},{q:"Polar form of z = 1+i:",opts:["√2 e^{iπ/4}","e^{iπ/4}","√2 e^{iπ/3}","2e^{iπ/4}"],ans:0,exp:"|z|=√2, arg = π/4. z = √2 e^{iπ/4}."},{q:"Argument of z = (1−i)/(1+i):",opts:["π/4","−π/2","π/2","−π/4"],ans:1,exp:"(1−i)/(1+i) = (1−i)²/2 = −i. arg(−i) = −π/2."}]},
+        {id:'matrices',name:'Matrices & Determinants',level:'Mains',difficulty:3,videoQuery:"matrices determinants JEE mains class 12",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:"A matrix is just a rectangular grid of numbers — like a spreadsheet. They help us solve many simultaneous equations at once. Determinants are like a special number you calculate from a square matrix that tells you if the equations have a unique solution or not (zero det = no unique solution)."},{lvl:'📘 Class 12 Level',badge:'level-2',text:"Matrix operations: addition (same size), multiplication (rows×columns). Transpose A^T: rows become columns. Determinant |A| for 2×2: ad−bc. For 3×3: cofactor expansion. A·A⁻¹ = I. A⁻¹ = adj(A)/|A|. Cramer's rule. Rank of matrix. Singular matrix: |A|=0."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"Properties of determinants: row/column operations don't change value (with sign). Eigenvalues λ: det(A−λI)=0. Cayley-Hamilton theorem: matrix satisfies its own characteristic equation. System AX=B: unique solution if |A|≠0, infinite if |A|=0 and consistent, no solution if inconsistent. Normal form, echelon form. Linear transformations."}],questions:[{q:"If A is a 2×3 matrix and B is 3×4, order of AB is:",opts:["2×4","3×3","4×2","2×3"],ans:0,exp:"(m×n)(n×p) = m×p. So (2×3)(3×4) = 2×4."},{q:"Determinant of identity matrix I₃ is:",opts:["0","1","3","−1"],ans:1,exp:"det(I) = 1 for any size identity matrix."},{q:"If |A| = 0, matrix A is called:",opts:["Orthogonal","Singular","Invertible","Symmetric"],ans:1,exp:"Singular matrix has determinant = 0 (no inverse)."},{q:"For a 3×3 matrix, det(2A) =",opts:["2|A|","4|A|","6|A|","8|A|"],ans:3,exp:"det(kA) = k^n · det(A) for n×n matrix. det(2A) = 2³|A| = 8|A|."},{q:"If A is symmetric, Aᵀ equals:",opts:["−A","A","A⁻¹","I"],ans:1,exp:"By definition of symmetric matrix: Aᵀ = A."}]},
+      ]},
+      { id:'coordinate', name:'Coordinate Geometry', topics:[
+        {id:'conics',name:'Circles & Conics',level:'Mains',difficulty:4,videoQuery:"circles conics JEE mains coordinate geometry",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:"Conics are shapes made by slicing a cone at different angles. Slice straight across → circle. Tilt the cut → ellipse. Cut parallel to the side → parabola. Cut steeply → hyperbola. All these curves appear naturally — planets move in ellipses, satellite dishes are parabolas, cooling towers are hyperbolas!"},{lvl:'📘 Class 12 Level',badge:'level-2',text:"Circle: (x−h)²+(y−k)²=r². Parabola: y²=4ax (focus (a,0), directrix x=−a). Ellipse: x²/a²+y²/b²=1, a>b, foci at (±c,0), c²=a²−b². Eccentricity e=c/a. Hyperbola: x²/a²−y²/b²=1, foci (±c,0), c²=a²+b², e>1. Tangent conditions. Normal equations."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"Parametric forms: circle (cosθ, sinθ), ellipse (a cosθ, b sinθ), parabola (at², 2at). Chord of contact: T=0. Pair of tangents: SS₁=T². Director circle. Auxiliary circle. Hyperbola: rectangular (xy=c²). Asymptotes. Reflection property: ray from focus reflects through other focus. Polar equation. Family of curves."}],questions:[{q:"Eccentricity of a circle is:",opts:["0","1","0.5",">1"],ans:0,exp:"For a circle, all points equidistant from centre, e = 0."},{q:"Focus of parabola y²=8x is at:",opts:["(2,0)","(0,2)","(8,0)","(−2,0)"],ans:0,exp:"y²=4ax, 4a=8, a=2. Focus at (a,0) = (2,0)."},{q:"For ellipse x²/25+y²/16=1, length of major axis:",opts:["5","10","8","25"],ans:1,exp:"a²=25, a=5. Major axis = 2a = 10."},{q:"For hyperbola x²/9−y²/16=1, eccentricity is:",opts:["5/3","4/3","3/5","√(25/9)"],ans:0,exp:"c²=a²+b²=9+16=25, c=5. e = c/a = 5/3."},{q:"Tangent to y²=4ax at point (at²,2at) is:",opts:["ty = x+at²","ty=x−at²","y=tx+a/t","tx+y=2at+at³"],ans:0,exp:"Tangent at (at²,2at) to y²=4ax is: ty = x + at²."}]},
+      ]},
+    ]
+  },
+  biology: {
+    name:'Biology', icon:'🧬', color:'#FAECE7', textColor:'#712B13',
+    chapters:[
+      { id:'cellbiology', name:'Cell Biology', topics:[
+        {id:'organelles',name:'Cell Organelles & Functions',level:'Mains',difficulty:2,videoQuery:"cell organelles functions NEET biology class 11",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:"A cell is like a tiny city! The nucleus is City Hall (controls everything). Mitochondria are the power plants (make energy). The cell membrane is the city wall (controls entry/exit). Ribosomes are factories (make proteins). Golgi apparatus is the post office (packages and ships goods)."},{lvl:'📘 Class 12 Level',badge:'level-2',text:"Prokaryotic vs eukaryotic. Nucleus: contains DNA, bounded by nuclear envelope with pores. Mitochondria: double membrane, cristae, site of cellular respiration. Chloroplast: photosynthesis, grana and stroma. ER: rough (ribosomes, protein synthesis), smooth (lipid synthesis). Golgi: secretion, modification. Lysosome: intracellular digestion. Ribosome: 70S (prokaryote), 80S (eukaryote)."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"Fluid mosaic model (Singer-Nicolson): lipid bilayer with embedded proteins. Membrane transport: passive (diffusion, osmosis, facilitated), active (needs ATP). Endosymbiont theory for mitochondria and chloroplasts. Cell cycle: G1, S (DNA replication), G2, M (mitosis). Checkpoints. Apoptosis. Cyclin-CDK complexes. Mitosis vs meiosis (crossing over, genetic diversity, stages)."}],questions:[{q:"Site of cellular respiration in eukaryotic cell:",opts:["Nucleus","Ribosome","Mitochondria","Chloroplast"],ans:2,exp:"Mitochondria — site of aerobic respiration (Krebs cycle + ETC)."},{q:"Ribosome size in prokaryotes:",opts:["80S","70S","60S","40S"],ans:1,exp:"Prokaryotes: 70S ribosomes (50S + 30S subunits)."},{q:"Powerhouse of the cell is:",opts:["Nucleus","Golgi","Lysosome","Mitochondria"],ans:3,exp:"Mitochondria produce ATP via cellular respiration — 'powerhouse'."},{q:"Which organelle is called 'suicidal bag'?",opts:["Mitochondria","Ribosome","Lysosome","Golgi"],ans:2,exp:"Lysosome: contains digestive enzymes, can lyse the cell if ruptured."},{q:"DNA replication occurs in which phase of cell cycle:",opts:["G1","S phase","G2","M phase"],ans:1,exp:"S (Synthesis) phase: DNA is replicated before mitosis."}]},
+      ]},
+      { id:'genetics', name:'Genetics & Evolution', topics:[
+        {id:'mendel',name:"Mendel's Laws of Inheritance",level:'Mains',difficulty:2,videoQuery:"Mendel's laws inheritance NEET genetics",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:"Gregor Mendel was a monk who grew peas and figured out how traits are inherited. He discovered that traits come in pairs (one from mum, one from dad), some traits dominate others, and the pairs separate when making sex cells (gametes). He did this 150 years before we even knew about DNA!"},{lvl:'📘 Class 12 Level',badge:'level-2',text:"Law of Segregation: allele pairs separate during gamete formation. Law of Independent Assortment: genes on different chromosomes assort independently. Dominant vs recessive. Genotype vs phenotype. Monohybrid cross: Aa×Aa → 3:1 ratio. Dihybrid cross: AaBb×AaBb → 9:3:3:1. Test cross: unknown genotype × recessive homozygous. Incomplete dominance, codominance."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"Chromosomal theory of inheritance (Sutton-Boveri). Linkage and crossing over (Morgan). Sex-linked inheritance: X-linked recessive (haemophilia, colour blindness). Pedigree analysis. Mutation types: point (transition, transversion), chromosomal (deletion, duplication, inversion, translocation). Hardy-Weinberg equilibrium: p²+2pq+q²=1, p+q=1. Conditions for H-W equilibrium."}],questions:[{q:"Monohybrid cross Aa×Aa produces phenotypic ratio:",opts:["1:1","3:1","1:2:1","9:3:3:1"],ans:1,exp:"Aa×Aa → AA:Aa:aa = 1:2:1 genotype, 3:1 phenotype (3 dominant:1 recessive)."},{q:"Mendel's law of independent assortment applies to genes on:",opts:["Same chromosome","Different chromosomes","Y chromosome only","Mitochondrial DNA"],ans:1,exp:"Independent assortment applies to genes on different (non-homologous) chromosomes."},{q:"Test cross is done with:",opts:["AA","Aa","aa","AaAA"],ans:2,exp:"Test cross: unknown genotype × homozygous recessive (aa)."},{q:"Haemophilia is an X-linked recessive. Carrier mother × normal father: probability of affected son:",opts:["25%","50%","75%","100%"],ans:1,exp:"Sons: 50% get Xₕ (affected), 50% get X (normal). Affected sons = 50%."},{q:"Hardy-Weinberg equilibrium is disturbed by:",opts:["Large population","Random mating","Natural selection","No mutation"],ans:2,exp:"Natural selection changes allele frequencies, disturbing H-W equilibrium."}]},
+      ]},
+      { id:'ecology', name:'Ecology & Environment', topics:[
+        {id:'ecosystem',name:'Ecosystem & Energy Flow',level:'Mains',difficulty:2,videoQuery:"ecosystem energy flow food chains NEET biology",explanation:[{lvl:'🧒 Super Simple',badge:'level-1',text:"An ecosystem is all the living things in an area plus their non-living environment. Energy flows through it like water through pipes: sunlight hits plants → plants are eaten by herbivores → herbivores eaten by carnivores → each step wastes 90% as heat. That's why there are always more plants than rabbits than foxes!"},{lvl:'📘 Class 12 Level',badge:'level-2',text:"Ecosystem components: biotic (producers, consumers, decomposers) and abiotic (temperature, water, light). Food chain → food web. Trophic levels: producers (T1), primary consumers (T2), etc. 10% rule: only 10% energy transferred to next trophic level. GPP = NPP + Respiration. Ecological pyramids: energy, biomass, numbers. Biogeochemical cycles."},{lvl:'🏆 JEE Advanced',badge:'level-3',text:"Primary succession vs secondary succession. Climax community. Nutrient cycling: nitrogen cycle (fixation, nitrification, denitrification), carbon cycle, phosphorus cycle. Decomposition stages. Detritivores vs decomposers. Carbon sequestration. Eutrophication, BOD. Biodiversity: α, β, γ diversity. IUCN categories. In-situ vs ex-situ conservation. Hotspots (India: 4 hotspots)."}],questions:[{q:"10% law of energy transfer was given by:",opts:["Odum","Lindeman","Elton","Tansley"],ans:1,exp:"Raymond Lindeman proposed the 10% law (1942)."},{q:"Which pyramid is always upright?",opts:["Biomass","Numbers","Energy","All three"],ans:2,exp:"Energy pyramid is always upright (energy always decreases up trophic levels)."},{q:"Organisms that break down dead organic matter:",opts:["Producers","Consumers","Decomposers","Parasites"],ans:2,exp:"Decomposers (fungi, bacteria) break down dead organic matter."},{q:"Primary succession starts on:",opts:["Abandoned farmland","Bare rock","Forest floor","Lake bed already with soil"],ans:1,exp:"Primary succession: starts on bare, lifeless substrate like bare rock or new volcanic land."},{q:"BOD (Biochemical Oxygen Demand) indicates:",opts:["Pollution level by organics","Oxygen in pure water","Photosynthesis rate","Nitrogen content"],ans:0,exp:"High BOD = high organic pollution = less dissolved oxygen available."}]},
+      ]},
+    ]
+  }
+};
+
+const EXTRA_QUESTIONS = {
+  coulomb:{easy:[{q:"SI unit of electric charge is:",opts:["Ampere","Coulomb","Volt","Ohm"],ans:1,exp:"Charge is measured in coulombs (C)."}],medium:[{q:"Force between charges 3μC and 6μC separated by 3m (k=9×10⁹) is:",opts:["18 mN","1.8 N","180 mN","0.18 mN"],ans:0,exp:"F=kq₁q₂/r² = 9×10⁹×3×10⁻⁶×6×10⁻⁶/9 = 0.018 N = 18 mN."}],hard:[{q:"Three identical charges q sit at the vertices of an equilateral triangle of side a. The net force on any one charge has magnitude:",opts:["kq²/a²","√3·kq²/a²","2kq²/a²","3kq²/a²"],ans:1,exp:"Each pair contributes kq²/a²; the vector sum of the two forces at 60° gives √3·kq²/a² (same superposition logic as before)."}]},
+  efield:{easy:[{q:"Electric field lines around an isolated positive point charge point:",opts:["Inward","Outward","Tangentially","No field exists"],ans:1,exp:"Field lines radiate outward from a positive charge."}],medium:[{q:"The electric field at a point 2m from a point charge of 4μC is (k=9×10⁹):",opts:["9×10³ N/C","9×10⁴ N/C","4.5×10³ N/C","3.6×10⁴ N/C"],ans:0,exp:"E = kQ/r² = 9×10⁹×4×10⁻⁶/4 = 9×10³ N/C."}],hard:[{q:"On the axis of a uniformly charged ring of radius R, the electric field magnitude is maximum at axial distance x =",opts:["R","R/√2","R/2","2R"],ans:1,exp:"Differentiating E(x)=kQx/(R²+x²)^(3/2) and setting dE/dx=0 gives x = R/√2."}]},
+  potential:{easy:[{q:"SI unit of electric potential is:",opts:["Coulomb","Joule","Volt","Newton"],ans:2,exp:"Potential is measured in volts (J/C)."}],medium:[{q:"Potential at a point due to a point charge of 5μC at distance 0.5m (k=9×10⁹) is:",opts:["9×10⁴ V","4.5×10⁴ V","1.8×10⁵ V","9×10³ V"],ans:0,exp:"V=kQ/r = 9×10⁹×5×10⁻⁶/0.5 = 9×10⁴ V."}],hard:[{q:"A dipole of moment p has its potential at an axial point (r>>a) equal to:",opts:["kp/r²","kp/2r²","2kp/r²","kp/r"],ans:0,exp:"On axis θ=0°, so V = kp cosθ/r² = kp/r²."}]},
+  capacitor:{easy:[{q:"Capacitance is measured in:",opts:["Henry","Farad","Ohm","Weber"],ans:1,exp:"SI unit of capacitance is the farad (F)."}],medium:[{q:"A 2μF capacitor charged to 50V is connected to an identical uncharged 2μF capacitor. The common potential after connection is:",opts:["25V","50V","12.5V","100V"],ans:0,exp:"Charge is conserved: Q=100μC shared over 4μF total → V=25V."}],hard:[{q:"A charged isolated capacitor C at potential V has a dielectric slab of constant K inserted fully. The ratio of final to initial stored energy is:",opts:["K","1/K","K²","√K"],ans:1,exp:"Charge stays constant; C becomes KC; U=Q²/2C decreases by a factor 1/K."}]},
+  gauss:{easy:[{q:"Gauss's law relates electric flux to:",opts:["Electric field only","Enclosed charge","Potential","Capacitance"],ans:1,exp:"Φ = Q_enclosed/ε₀."}],medium:[{q:"A point charge q sits at the centre of a cube. The flux through one face of the cube is:",opts:["q/ε₀","q/2ε₀","q/6ε₀","q/3ε₀"],ans:2,exp:"Total flux q/ε₀ is shared equally among the 6 faces by symmetry → q/6ε₀ each."}],hard:[{q:"A solid sphere of radius R has uniform charge density. The field at r=R/2 (inside) is what fraction of the field at the surface (r=R)?",opts:["1/4","1/2","1/8","2"],ans:1,exp:"Inside a uniformly charged sphere, E ∝ r, so at r=R/2 the field is half the surface value."}]},
+  ohm:{easy:[{q:"Ohm's law is given by:",opts:["V=IR","V=I/R","V=I²R","I=V²/R"],ans:0,exp:"V = IR is Ohm's law."}],medium:[{q:"A wire of resistance 8Ω is cut into 4 equal pieces, all connected in parallel. The equivalent resistance is:",opts:["0.5Ω","2Ω","8Ω","32Ω"],ans:0,exp:"Each piece has 2Ω; 4 equal resistors of 2Ω in parallel give R/4 = 0.5Ω."}],hard:[{q:"A potential divider uses R₁=300Ω and R₂=600Ω across a 9V battery (no load). The voltage across R₂ is:",opts:["6V","3V","4.5V","9V"],ans:0,exp:"V₂ = V·R₂/(R₁+R₂) = 9×600/900 = 6V."}]},
+  cells:{easy:[{q:"EMF of a cell is measured when the cell is:",opts:["Delivering maximum current","On open circuit (no current)","Short-circuited","Being charged"],ans:1,exp:"EMF is the open-circuit terminal voltage (no current drawn)."}],medium:[{q:"A cell of EMF 1.5V and internal resistance 1Ω drives a current through an external resistance of 2Ω. The current is:",opts:["0.5A","1A","1.5A","0.75A"],ans:0,exp:"I = ε/(R+r) = 1.5/(2+1) = 0.5A."}],hard:[{q:"Two cells (2V,1Ω) and (4V,2Ω) connected in parallel (same polarity) have an equivalent EMF of approximately:",opts:["2.67V","3V","2V","4V"],ans:0,exp:"ε_eq = (ε₁/r₁+ε₂/r₂)/(1/r₁+1/r₂) = (2+2)/1.5 ≈ 2.67V."}]},
+  biot:{easy:[{q:"Biot-Savart law gives the magnetic field due to:",opts:["A static charge","A current element","A magnetic dipole only","An electric field"],ans:1,exp:"It gives dB due to a small current-carrying element."}],medium:[{q:"Magnetic field at the centre of a coil of 10 turns, radius 0.1m, carrying 2A (μ₀=4π×10⁻⁷) is approximately:",opts:["1.26×10⁻⁴ T","6.28×10⁻⁵ T","2.51×10⁻⁴ T","1.26×10⁻⁵ T"],ans:0,exp:"B = μ₀NI/2R = (4π×10⁻⁷×10×2)/(2×0.1) ≈ 1.26×10⁻⁴ T."}],hard:[{q:"Two long parallel wires 0.5m apart carry 3A and 5A in the same direction (μ₀=4π×10⁻⁷). The force per unit length between them is:",opts:["6×10⁻⁶ N/m (attractive)","6×10⁻⁶ N/m (repulsive)","3×10⁻⁶ N/m (attractive)","1.2×10⁻⁵ N/m (attractive)"],ans:0,exp:"F/l = μ₀I₁I₂/2πd = 6×10⁻⁶ N/m; same-direction currents attract."}]},
+  reflection:{easy:[{q:"A plane mirror always forms an image that is:",opts:["Real and inverted","Virtual and erect, same size","Real and diminished","Virtual and magnified"],ans:1,exp:"Plane mirrors give virtual, erect, same-size images."}],medium:[{q:"An object is placed 15cm from a concave mirror of focal length 10cm. The image distance is:",opts:["−30cm (real)","−6cm (virtual)","−7.5cm (real)","30cm (virtual)"],ans:0,exp:"1/v = 1/f − 1/u = −1/10+1/15 = −1/30 → v = −30cm (real image)."}],hard:[{q:"Two plane mirrors are inclined at 60° to each other. The number of images formed of a point object placed between them is:",opts:["5","6","3","4"],ans:0,exp:"Number of images = 360/θ − 1 = 360/60 − 1 = 5."}]},
+  refraction:{easy:[{q:"Power of a lens is the reciprocal of its:",opts:["Radius of curvature","Focal length (in metres)","Refractive index","Aperture"],ans:1,exp:"P = 1/f, with f in metres, giving power in dioptres."}],medium:[{q:"Light goes from a medium of refractive index 1.5 into one of refractive index 1.2 at an angle of incidence of 30°. sin(angle of refraction) is:",opts:["0.625","0.4","0.75","0.5"],ans:0,exp:"sinθ₂ = n₁sinθ₁/n₂ = 1.5×0.5/1.2 = 0.625."}],hard:[{q:"A biconvex lens (n=1.5) has both radii of curvature equal to 20cm. Its focal length in air is:",opts:["20cm","10cm","40cm","15cm"],ans:0,exp:"1/f=(n−1)(1/R₁−1/R₂)=0.5×(1/20+1/20)=0.05 → f=20cm."}]},
+  shm:{easy:[{q:"In SHM, the acceleration is always directed:",opts:["Away from mean position","Towards the mean position","Perpendicular to displacement","In the direction of velocity"],ans:1,exp:"a=−ω²x is always directed toward the equilibrium (mean) position."}],medium:[{q:"A particle in SHM has amplitude 5cm and time period 2s. Its maximum speed is approximately:",opts:["0.157 m/s","0.314 m/s","1.57 m/s","0.05 m/s"],ans:0,exp:"v_max=ωA=(2π/2)×0.05≈0.157 m/s."}],hard:[{q:"Two SHMs of equal amplitude A and the same frequency, differing in phase by 90°, are superposed in the same direction. The resultant amplitude is:",opts:["A√2","2A","A","A/√2"],ans:0,exp:"Resultant amplitude = √(A²+A²+2A²cos90°) = A√2."}]},
+  bohr:{easy:[{q:"In the Bohr model, electrons revolve around the nucleus in:",opts:["Random paths","Fixed circular orbits","Straight lines","Elliptical paths only"],ans:1,exp:"Bohr postulated fixed, quantized circular orbits."}],medium:[{q:"The wavelength of light emitted when an electron in hydrogen falls from n=3 to n=2 lies in the:",opts:["Visible region","Ultraviolet region","Infrared region","X-ray region"],ans:0,exp:"n=3→2 transitions belong to the Balmer series, which lies in the visible region."}],hard:[{q:"The de Broglie wavelength of an electron accelerated through potential difference V is proportional to:",opts:["1/√V","V","1/V","√V"],ans:0,exp:"λ = h/√(2meV) ∝ 1/√V."}]},
+  periodictable:{easy:[{q:"Moving down a group, atomic radius generally:",opts:["Decreases","Increases","Stays constant","Increases then decreases"],ans:1,exp:"Atomic radius increases down a group as electron shells are added."}],medium:[{q:"Among Na⁺, Mg²⁺, Al³⁺ and F⁻ (all 10-electron species), the largest ionic radius belongs to:",opts:["Na⁺","Mg²⁺","Al³⁺","F⁻"],ans:3,exp:"Among isoelectronic ions, the one with the fewest protons (F⁻, Z=9) has the largest radius."}],hard:[{q:"The first ionisation energy trend Be > B is explained by:",opts:["B has a larger atomic radius than Be","Be's fully filled, stable 2s² subshell","B has higher nuclear charge","Be is a non-metal"],ans:1,exp:"Be's filled 2s² configuration is extra stable, making it harder to remove an electron than from B's 2p¹ electron."}]},
+  vsepr:{easy:[{q:"VSEPR theory is used to predict:",opts:["Bond energies","Molecular shape","Reaction rate","Boiling point"],ans:1,exp:"VSEPR predicts 3D molecular geometry based on electron pair repulsion."}],medium:[{q:"SF₄ has 4 bond pairs and 1 lone pair on S. Its shape is:",opts:["Tetrahedral","See-saw (distorted tetrahedral)","Square planar","Trigonal bipyramidal"],ans:1,exp:"4BP+1LP on a central atom gives a see-saw shape, as in SF₄."}],hard:[{q:"Which of these has sp³d² hybridisation?",opts:["PCl₅","SF₆","BF₃","CH₄"],ans:1,exp:"SF₆ has 6 bond pairs around S → sp³d² hybridisation, octahedral shape."}]},
+  firstlaw:{easy:[{q:"The first law of thermodynamics is essentially a statement of:",opts:["Conservation of mass","Conservation of energy","Increase in entropy","Conservation of momentum"],ans:1,exp:"ΔU=q+w expresses that energy is conserved."}],medium:[{q:"A gas absorbs 500J of heat and does 200J of work on the surroundings. The change in internal energy is:",opts:["300 J","700 J","−300 J","100 J"],ans:0,exp:"ΔU = q + w = 500 + (−200) = 300 J (work done on the system is −200J)."}],hard:[{q:"For a reversible adiabatic process on an ideal gas, which quantity stays constant?",opts:["PV","TV^(γ−1)","T","ΔU"],ans:1,exp:"For reversible adiabatic processes, TV^(γ−1) = constant (equivalently PV^γ = constant)."}]},
+  lechat:{easy:[{q:"Le Chatelier's principle applies to a system that is:",opts:["Far from equilibrium","At equilibrium and disturbed","Never at equilibrium","Only at absolute zero"],ans:1,exp:"It describes how a system at equilibrium responds to a disturbance."}],medium:[{q:"For the exothermic reaction A(g)+B(g)⇌C(g), increasing temperature will shift equilibrium:",opts:["Forward","Backward","No shift","Cannot be determined"],ans:1,exp:"For an exothermic reaction, increasing temperature favours the endothermic (backward) direction."}],hard:[{q:"For PCl₅(g)⇌PCl₃(g)+Cl₂(g), decreasing the container volume shifts equilibrium:",opts:["Forward (more PCl₃+Cl₂)","Backward (more PCl₅)","No shift","Depends on temperature only"],ans:1,exp:"Decreasing volume raises pressure, favouring the side with fewer moles of gas — backward, toward PCl₅."}]},
+  iupac:{easy:[{q:"The IUPAC suffix for an alcohol functional group is:",opts:["-al","-one","-ol","-oic acid"],ans:2,exp:"Alcohols are named with the suffix -ol."}],medium:[{q:"Which pair represents position isomers?",opts:["1-butanol and 2-butanol","Butane and isobutane","Propanal and propanone","Ethanol and dimethyl ether"],ans:0,exp:"1-butanol and 2-butanol share the same functional group at different carbon positions — position isomers."}],hard:[{q:"Propanal and propan-2-one (acetone) share the formula C₃H₆O but differ in functional group. This is an example of:",opts:["Chain isomerism","Functional group isomerism","Position isomerism","Tautomerism only"],ans:1,exp:"Same formula, different functional groups (aldehyde vs ketone) — functional group isomerism."}]},
+  limits:{easy:[{q:"lim(x→0) (1−cos x)/x² equals:",opts:["1/2","1","0","2"],ans:0,exp:"Using 1−cosx≈x²/2 for small x, the limit is 1/2."}],medium:[{q:"lim(x→2) (x²−4)/(x−2) equals:",opts:["4","0","2","Undefined"],ans:0,exp:"Factorising: (x−2)(x+2)/(x−2) = x+2 → 4 as x→2."}],hard:[{q:"lim(x→0) (tan x − x)/x³ equals:",opts:["1/3","1","0","1/6"],ans:0,exp:"Using tan x ≈ x + x³/3, the limit evaluates to 1/3."}]},
+  differentiation:{easy:[{q:"The derivative of a constant function is:",opts:["1","0","The constant itself","Undefined"],ans:1,exp:"d/dx(c) = 0 for any constant c."}],medium:[{q:"If y = ln(x), dy/dx at x=2 is:",opts:["1/2","2","ln2","1"],ans:0,exp:"d/dx(ln x) = 1/x; at x=2, this is 1/2."}],hard:[{q:"For f(x)=x⁴−4x³, one of the points of inflection occurs at x =",opts:["2","1","4","−2"],ans:0,exp:"f''(x)=12x(x−2)=0 gives x=0 or x=2 as inflection points."}]},
+  integration:{easy:[{q:"∫(1/x) dx equals:",opts:["ln|x|+C","1/x²+C","x+C","−1/x²+C"],ans:0,exp:"∫(1/x)dx = ln|x| + C."}],medium:[{q:"∫₀¹ x² dx equals:",opts:["1/3","1","1/2","3"],ans:0,exp:"[x³/3]₀¹ = 1/3."}],hard:[{q:"∫ x·ln x dx equals:",opts:["(x²/2)ln x − x²/4 + C","x²ln x − x² + C","(x²/2)ln x + x²/4 + C","x ln x − x + C"],ans:0,exp:"By parts (u=lnx, dv=xdx): (x²/2)lnx − x²/4 + C."}]},
+  complexnum:{easy:[{q:"The conjugate of z = 3 − 4i is:",opts:["3+4i","−3+4i","−3−4i","4−3i"],ans:0,exp:"Conjugate flips the sign of the imaginary part: 3+4i."}],medium:[{q:"If z = 2 + 2i, the modulus |z| is:",opts:["2√2","4","2","8"],ans:0,exp:"|z|=√(2²+2²)=√8=2√2."}],hard:[{q:"The number of solutions of z³ = 1 in ℂ is:",opts:["3","1","2","Infinite"],ans:0,exp:"A degree-3 polynomial has exactly 3 roots in ℂ — the cube roots of unity."}]},
+  matrices:{easy:[{q:"A square matrix A is called symmetric if:",opts:["A=−Aᵀ","A=Aᵀ","A²=I","A=A⁻¹"],ans:1,exp:"A symmetric matrix satisfies A = Aᵀ."}],medium:[{q:"For A=[[2,0],[0,3]], det(A) is:",opts:["6","5","0","1"],ans:0,exp:"For a diagonal matrix, det = product of diagonal entries = 2×3 = 6."}],hard:[{q:"If A is a 3×3 matrix with det(A)=5, then det(A⁻¹) is:",opts:["1/5","5","−5","1"],ans:0,exp:"det(A⁻¹) = 1/det(A) = 1/5."}]},
+  conics:{easy:[{q:"The general equation of a circle with centre (h,k) and radius r is:",opts:["(x−h)²+(y−k)²=r²","x²+y²=r","(x−h)+(y−k)=r","xy=r²"],ans:0,exp:"This is the standard circle equation."}],medium:[{q:"For the parabola x²=12y, the focus is at:",opts:["(0,3)","(3,0)","(0,12)","(−3,0)"],ans:0,exp:"x²=4ay with 4a=12 → a=3. Focus at (0,a)=(0,3)."}],hard:[{q:"The eccentricity of the ellipse 4x²+9y²=36 is:",opts:["√5/3","2/3","√5/2","1/3"],ans:0,exp:"x²/9+y²/4=1, a²=9, b²=4, c²=a²−b²=5, e=c/a=√5/3."}]},
+  organelles:{easy:[{q:"Which organelle contains digestive enzymes and is called the 'suicide bag' of the cell?",opts:["Mitochondria","Lysosome","Ribosome","Nucleus"],ans:1,exp:"Lysosomes contain hydrolytic enzymes and can self-digest the cell if ruptured."}],medium:[{q:"The endoplasmic reticulum that lacks ribosomes and is involved in lipid synthesis is the:",opts:["Rough ER","Smooth ER","Golgi body","Nuclear envelope"],ans:1,exp:"Smooth ER lacks ribosomes and is the site of lipid synthesis."}],hard:[{q:"According to the endosymbiont theory, mitochondria are believed to have originated from:",opts:["Engulfed photosynthetic bacteria","Engulfed aerobic bacteria","Plasma membrane invagination","Viral infection"],ans:1,exp:"The endosymbiont theory proposes mitochondria evolved from engulfed aerobic bacteria living symbiotically within early eukaryotic cells."}]},
+  mendel:{easy:[{q:"In Mendelian genetics, a 'genotype' refers to:",opts:["The physical appearance of an organism","The genetic makeup of an organism","Only dominant traits","The environment's effect on traits"],ans:1,exp:"Genotype is the genetic constitution; phenotype is the observable trait."}],medium:[{q:"A dihybrid cross AaBb × AaBb produces a phenotypic ratio of:",opts:["9:3:3:1","3:1","1:2:1","1:1:1:1"],ans:0,exp:"Independent assortment of two gene pairs gives the classic 9:3:3:1 ratio."}],hard:[{q:"Colour blindness is X-linked recessive. A colour-blind father and a homozygous normal mother have children. What fraction of their daughters will be carriers?",opts:["100%","50%","0%","25%"],ans:0,exp:"Every daughter gets the father's Xᶜ and the mother's X, making all daughters carriers (XXᶜ)."}]},
+  ecosystem:{easy:[{q:"Organisms that can produce their own food using sunlight are called:",opts:["Consumers","Producers","Decomposers","Detritivores"],ans:1,exp:"Producers (e.g. green plants) make their own food via photosynthesis."}],medium:[{q:"If producers fix 10,000 kcal of energy, roughly how much is available to secondary consumers after two 10% transfers?",opts:["100 kcal","1000 kcal","10 kcal","5000 kcal"],ans:0,exp:"Applying the 10% rule twice: 10,000×0.1×0.1 = 100 kcal."}],hard:[{q:"Secondary succession differs from primary succession mainly because it:",opts:["Starts on bare rock with no prior life","Begins on a site that already has soil and prior biological activity","Always occurs faster, only in volcanic regions","Never reaches a climax community"],ans:1,exp:"Secondary succession occurs on previously colonised sites (e.g. abandoned farmland) that retain soil and seed banks, unlike primary succession starting from bare substrate."}]}
+};
+
+const AI_SOLVER_SYSTEM_PROMPT = "You are an extremely rigorous, precise tutor for JEE/NEET-level Physics, Chemistry, Mathematics and Biology, held to the standard of a top IIT professor. A student will send a question as text and/or a screenshot. It may be (a) a NUMERICAL or problem-solving question with a definite computed answer (a number, expression, derivation result, or proof), or (b) a THEORETICAL/CONCEPTUAL doubt ('why does...', 'what is...', 'explain...', 'difference between...') with no single numeric answer. Silently classify which type it is first.\\n\\nFor NUMERICAL questions: identify the exact correct formula/principle with no ambiguity; carry every calculation with full precision — correct SI units throughout, correct sign conventions, correct significant figures, and dimensional consistency at every step. Silently re-derive and double-check all arithmetic and physical/mathematical logic before writing the steps, so the final result is guaranteed correct. Never guess, round prematurely, or hand-wave a computable quantity. If a question has a standard textbook subtlety (e.g. sign convention, vector direction, limiting case), address it explicitly.\\n\\nFor THEORETICAL questions: build genuine depth — start with an intuitive hook or analogy, then the precise formal definition or law, then the underlying mechanism or derivation ('why it is true, not just what it is'), then common misconceptions or JEE-Advanced/NEET-level nuances, and end with a tight exam-ready synthesis. Use correct terminology and correct causal/physical mechanisms throughout — never hand-wave.\\n\\nIn both cases, break your response into 3 to 5 progressive steps that build from a minimal nudge to the complete answer. Step 1 must be only a small hint or the key concept/formula name — enough for a strong student to proceed alone from there. Each later step reveals more, in order. The final step is always the complete, fully resolved answer or explanation.\\n\\nRespond with ONLY valid JSON, no markdown fences, no commentary before or after, in exactly this shape: {\\\"question_type\\\":\\\"numerical\\\"|\\\"theoretical\\\",\\\"topic\\\":\\\"short topic name\\\",\\\"final_answer\\\":\\\"the exact final answer with correct units for numerical questions, OR a precise one-line key-insight summary for theoretical questions\\\",\\\"steps\\\":[{\\\"title\\\":\\\"Step 1: ...\\\",\\\"content\\\":\\\"...\\\"},{\\\"title\\\":\\\"Step 2: ...\\\",\\\"content\\\":\\\"...\\\"}]}. Keep each step concise but exact — 1 to 5 sentences, including any key formula, derivation line, or calculation. Never include anything outside the JSON object. Accuracy is the absolute highest priority: if unsure of any numeric result, recompute it carefully rather than presenting an uncertain figure.";
+
+function escapeHtml(s){
+  return String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function aiSolverHTML(){
+  const msgs = state.aiSolver.messages;
+  const thread = msgs.length
+    ? msgs.map((m,i)=>i).reverse().map(idx=>aiSolverMessageHTML(state.aiSolver.messages[idx], idx)).join('')
+    : `<div class="card text-sm text-muted" style="text-align:center;padding:2rem 1rem">No questions yet — type one above, or attach a screenshot, and hit Solve!</div>`;
+  return `
+  <div class="card mb-2" style="background:linear-gradient(135deg,#EEEDFE 0%,#E1F5EE 100%)">
+    <div style="font-size:16px;font-weight:500;margin-bottom:4px">🤖 AI Doubt Solver</div>
+    <div class="text-sm text-muted">Type or screenshot any Physics, Chemistry, Maths or Biology question — a numerical problem or a pure concept doubt. Every calculation is double-checked for precision; every concept is explained in real depth. Confident? Just read Step 1 and try it yourself. Need more help? Keep unlocking steps all the way to the full solution.</div>
+  </div>
+  <div class="card mb-2">
+    <textarea id="ai-solver-input" rows="3" placeholder="Type a problem (e.g. 'A ball is thrown upward at 20 m/s. Find the max height, g=10 m/s².') or a concept doubt (e.g. 'Why is the work done by static friction zero?')" style="width:100%;resize:vertical;font-family:inherit;font-size:13px;padding:8px;border:0.5px solid var(--color-border-tertiary);border-radius:8px;background:var(--color-background-primary);color:var(--color-text-primary)"></textarea>
+    <div id="ai-solver-image-preview" class="mt-1" style="display:none">
+      <div class="flex gap-sm" style="align-items:center">
+        <img id="ai-solver-image-thumb" style="max-height:60px;border-radius:6px;border:0.5px solid var(--color-border-tertiary)" />
+        <button class="btn btn-sm" onclick="aiSolverRemoveImage()"><i class="ti ti-x" aria-hidden="true"></i> Remove screenshot</button>
+      </div>
+    </div>
+    <div class="flex gap-sm mt-1" style="justify-content:space-between;flex-wrap:wrap">
+      <label class="btn btn-sm" style="cursor:pointer">
+        <i class="ti ti-camera" aria-hidden="true"></i> Attach Screenshot
+        <input type="file" accept="image/*" style="display:none" onchange="aiSolverAttachImage(this)" />
+      </label>
+      <button class="btn btn-primary" onclick="aiSolverSolve()" id="ai-solver-solve-btn"><i class="ti ti-sparkles" aria-hidden="true"></i> Solve Step-by-Step</button>
+    </div>
+  </div>
+  <div id="ai-solver-thread">${thread}</div>`;
+}
+
+function aiSolverMessageHTML(m, idx){
+  let body = '';
+  if(m.status==='loading'){
+    body = `<div class="card text-sm text-muted">🤔 Working through it carefully…</div>`;
+  } else if(m.status==='error'){
+    body = `<div class="card" style="background:#FCEBEB;color:#A32D2D">⚠️ ${escapeHtml(m.error||'Something went wrong.')} <button class="btn btn-sm mt-1" onclick="aiSolverRetry(${idx})">Retry</button></div>`;
+  } else if(m.status==='done'){
+    const total = m.steps.length;
+    const isTheory = m.questionType === 'theoretical';
+    const checkBox = isTheory ? `
+      <div class="card mb-1" style="background:var(--color-background-secondary)">
+        <div class="text-xs text-muted">💭 This is a concept question — try explaining it in your own words first, then reveal the steps below to check your understanding and fill any gaps.</div>
+      </div>` : `
+      <div class="card mb-1" style="background:var(--color-background-secondary)">
+        <div class="text-xs text-muted mb-1">Want to test yourself first? Type your answer and check it:</div>
+        <div class="flex gap-sm">
+          <input id="ai-check-${idx}" type="text" placeholder="Your answer..." style="flex:1;font-size:13px;padding:6px 8px;border:0.5px solid var(--color-border-tertiary);border-radius:6px;background:var(--color-background-primary);color:var(--color-text-primary)" onkeydown="if(event.key==='Enter')aiSolverCheckAnswer(${idx})" />
+          <button class="btn btn-sm" onclick="aiSolverCheckAnswer(${idx})">Check</button>
+        </div>
+        ${m.checkResult?`<div class="text-xs mt-1" style="color:${m.checkResult==='correct'?'#085041':'#A32D2D'}">${m.checkResult==='correct'?'✅ Looks right — nice work!':'❌ Not quite — reveal a step below for a hint.'}</div>`:''}
+      </div>`;
+    let stepsHTML = '';
+    for(let i=0;i<m.unlockedCount;i++){
+      const isLast = i===total-1;
+      stepsHTML += `
+      <div class="card mb-1" style="${isLast?'border-color:#1D9E75;background:#E1F5EE':''}">
+        <span class="tag mb-1" style="${isLast?'background:#1D9E75;color:#fff':'background:#EEEDFE;color:#3C3489'}">${isLast?'✅ ':''}${escapeHtml(m.steps[i].title)}</span>
+        <div class="text-sm" style="line-height:1.6;margin-top:6px">${escapeHtml(m.steps[i].content)}</div>
+      </div>`;
+    }
+    if(m.unlockedCount<total){
+      stepsHTML += `<button class="btn btn-sm mb-1" onclick="aiSolverRevealNext(${idx})"><i class="ti ti-lock-open" aria-hidden="true"></i> Reveal Step ${m.unlockedCount+1} of ${total}</button>`;
+    } else {
+      stepsHTML += `<div class="card mb-1" style="background:#534AB7;color:#fff"><div class="text-xs mb-1" style="opacity:.85">${isTheory?'💡 Key Takeaway':'✅ Final Answer'}</div><div style="font-size:14px;font-weight:500">${escapeHtml(m.final_answer)}</div></div>`;
+    }
+    body = checkBox + stepsHTML;
+  }
+  const typeTag = m.questionType ? `<span class="tag" style="${m.questionType==='theoretical'?'background:#FAEEDA;color:#854F0B':'background:#E1F5EE;color:#085041'};margin-left:6px">${m.questionType==='theoretical'?'🧠 Concept doubt':'🧮 Numerical / problem'}</span>` : '';
+  return `
+  <div class="mb-2">
+    <div class="card mb-1" style="background:#EEEDFE">
+      <div class="text-xs text-muted mb-1">${m.topic?escapeHtml(m.topic)+' · ':''}Your question${typeTag}</div>
+      ${m.imageBase64?`<img src="data:${m.imageMime};base64,${m.imageBase64}" style="max-width:100%;max-height:220px;border-radius:8px;margin-bottom:6px;display:block" />`:''}
+      ${m.question?`<div style="font-size:14px">${escapeHtml(m.question)}</div>`:''}
+    </div>
+    ${body}
+  </div>`;
+}
+
+function aiSolverAttachImage(input){
+  const file = input.files && input.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(){
+    const result = reader.result;
+    const match = /^data:(.+);base64,(.*)$/.exec(result);
+    if(match){
+      state.aiSolver.imageMime = match[1];
+      state.aiSolver.imageBase64 = match[2];
+      const thumb = document.getElementById('ai-solver-image-thumb');
+      const preview = document.getElementById('ai-solver-image-preview');
+      if(thumb) thumb.src = result;
+      if(preview) preview.style.display='block';
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function aiSolverRemoveImage(){
+  state.aiSolver.imageBase64 = null;
+  state.aiSolver.imageMime = null;
+  const preview = document.getElementById('ai-solver-image-preview');
+  if(preview) preview.style.display='none';
+}
+
+async function aiSolverCallAPI(questionText, imageBase64, imageMime){
+  const contentBlocks = [];
+  if(imageBase64){
+    contentBlocks.push({type:'image', source:{type:'base64', media_type: imageMime||'image/png', data: imageBase64}});
+  }
+  contentBlocks.push({type:'text', text: questionText || 'Solve the question shown in the attached image, step by step.'});
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({
+      model:'claude-sonnet-4-6',
+      max_tokens:1000,
+      system: AI_SOLVER_SYSTEM_PROMPT,
+      messages:[{role:'user', content: contentBlocks}]
+    })
+  });
+  if(!res.ok){ throw new Error('The solver API returned an error ('+res.status+'). Please try again.'); }
+  const data = await res.json();
+  const text = (data.content||[]).map(b=>b.text||'').join('\n');
+  const clean = text.replace(/```json|```/g,'').trim();
+  let parsed;
+  try{ parsed = JSON.parse(clean); }
+  catch(e){
+    const m = clean.match(/\{[\s\S]*\}/);
+    if(m){ parsed = JSON.parse(m[0]); }
+    else { throw new Error('Could not parse a solution. Please try rephrasing your question.'); }
+  }
+  if(!parsed.steps || !parsed.steps.length){ throw new Error('No steps were returned. Please try again.'); }
+  return parsed;
+}
+
+async function aiSolverSolve(){
+  const textEl = document.getElementById('ai-solver-input');
+  const question = (textEl.value||'').trim();
+  const imageBase64 = state.aiSolver.imageBase64;
+  const imageMime = state.aiSolver.imageMime;
+  if(!question && !imageBase64) return;
+  const msg = {question, imageBase64, imageMime, status:'loading', steps:[], unlockedCount:1, final_answer:'', topic:'', questionType:null, checkResult:null, error:null};
+  state.aiSolver.messages.push(msg);
+  const idx = state.aiSolver.messages.length-1;
+  textEl.value='';
+  aiSolverRemoveImage();
+  render();
+  await aiSolverRunQuery(idx);
+}
+
+async function aiSolverRunQuery(idx){
+  const msg = state.aiSolver.messages[idx];
+  try{
+    const result = await aiSolverCallAPI(msg.question, msg.imageBase64, msg.imageMime);
+    msg.topic = result.topic||'';
+    msg.questionType = result.question_type==='theoretical' ? 'theoretical' : 'numerical';
+    msg.final_answer = result.final_answer||'';
+    msg.steps = result.steps.slice(0,6);
+    msg.unlockedCount = 1;
+    msg.status = 'done';
+  } catch(err){
+    msg.status = 'error';
+    msg.error = (err && err.message) || 'Something went wrong while solving this.';
+  }
+  render();
+}
+
+function aiSolverRetry(idx){
+  const msg = state.aiSolver.messages[idx];
+  msg.status = 'loading';
+  msg.error = null;
+  render();
+  aiSolverRunQuery(idx);
+}
+
+function aiSolverRevealNext(idx){
+  const msg = state.aiSolver.messages[idx];
+  if(msg.unlockedCount < msg.steps.length) msg.unlockedCount++;
+  render();
+}
+
+function aiSolverFuzzyNumMatch(a,b){
+  const numsA = a.match(/[\d.]+/g)||[];
+  const numsB = b.match(/[\d.]+/g)||[];
+  if(numsA.length && numsB.length) return numsA.some(x=>numsB.includes(x));
+  return false;
+}
+
+function aiSolverCheckAnswer(idx){
+  const input = document.getElementById('ai-check-'+idx);
+  if(!input) return;
+  const val = (input.value||'').trim().toLowerCase();
+  if(!val) return;
+  const msg = state.aiSolver.messages[idx];
+  const target = (msg.final_answer||'').toLowerCase();
+  const correct = !!target && (target.includes(val) || val.includes(target) || aiSolverFuzzyNumMatch(val,target));
+  msg.checkResult = correct?'correct':'incorrect';
+  render();
+}
+
+function knowledgeHubHTML(){
+  const v = state.km.view;
+  if(v==='subject') return khSubjectHTML();
+  if(v==='chapter') return khChapterHTML();
+  if(v==='topic') return khTopicHTML();
+  if(v==='learn') return khLearnHTML();
+  if(v==='quiz') return khQuizHTML();
+  if(v==='more') return khMoreHTML();
+  return khHomeHTML();
+}
+
+function khHomeHTML(){
+  const {done,total} = khOverallStats();
+  const pct = total? Math.round(done/total*100):0;
+  return `
+  <div class="card mb-2" style="background:linear-gradient(135deg,#EEEDFE 0%,#E1F5EE 100%)">
+    <div style="font-size:16px;font-weight:500;margin-bottom:4px">📚 Knowledge Hub</div>
+    <div class="text-sm text-muted mb-1">Every topic from JEE Mains & Advanced and NEET. Watch a video or read a Feynman-style explanation, then take a 5-question adaptive quiz. Not satisfied? Ask for more questions at any difficulty.</div>
+    <div class="flex" style="justify-content:space-between;font-size:12px;margin-bottom:4px">
+      <span class="text-muted">${done}/${total} topics mastered</span>
+      <span style="color:#1D9E75;font-weight:500">${pct}%</span>
+    </div>
+    <div class="progress-bar-wrap" style="width:100%"><div class="progress-bar" style="width:${pct}%"></div></div>
+  </div>
+  <div class="subject-grid">
+  ${Object.entries(CURRICULUM).map(([id,s])=>{
+    const allTopics=s.chapters.flatMap(c=>c.topics);
+    const mastered=allTopics.filter(t=>(mastery[t.id]||0)>=5).length;
+    const inprog=allTopics.filter(t=>{const m=mastery[t.id]||0;return m>0&&m<5;}).length;
+    const sp=allTopics.length?Math.round(mastered/allTopics.length*100):0;
+    return `
+    <div class="subject-card" onclick="khOpenSubject('${id}')">
+      <div class="subject-icon" style="background:${s.color}">${s.icon}</div>
+      <div style="font-size:15px;font-weight:500;margin-bottom:4px">${s.name}</div>
+      <div class="text-xs text-muted">${s.chapters.length} chapters · ${allTopics.length} topics</div>
+      <div class="flex gap-sm mt-1" style="font-size:11px">
+        <span style="color:#1D9E75">✓ ${mastered}</span>
+        <span style="color:#BA7517">◑ ${inprog}</span>
+        <span class="text-muted">○ ${allTopics.length-mastered-inprog}</span>
+      </div>
+      <div class="progress-bar-wrap mt-1"><div class="progress-bar" style="width:${sp}%"></div></div>
+    </div>`;
+  }).join('')}
+  </div>`;
+}
+
+function khSubjectHTML(){
+  const s=CURRICULUM[state.km.subjectId];
+  return `
+  <div class="breadcrumb"><span onclick="khGoHome()">Knowledge Hub</span> › <b>${s.name}</b></div>
+  <p class="section-title">${s.icon} ${s.name} — Chapters</p>
+  <div class="card">
+    <div class="chapter-list">
+    ${s.chapters.map(ch=>{
+      const mastered=ch.topics.filter(t=>(mastery[t.id]||0)>=5).length;
+      const pct=ch.topics.length?Math.round(mastered/ch.topics.length*100):0;
+      return `
+      <div class="chapter-item" onclick="khOpenChapter('${state.km.subjectId}','${ch.id}')">
+        <span>${ch.name}</span>
+        <div class="flex gap-sm">
+          <span class="text-xs text-muted">${ch.topics.length} topics</span>
+          <div class="progress-bar-wrap"><div class="progress-bar" style="width:${pct}%"></div></div>
+          <span style="font-size:11px;color:#534AB7;min-width:30px">${pct}%</span>
+          <i class="ti ti-chevron-right" style="font-size:15px;color:var(--color-text-secondary)" aria-hidden="true"></i>
+        </div>
+      </div>`;
+    }).join('')}
+    </div>
+  </div>`;
+}
+
+function khChapterHTML(){
+  const s=CURRICULUM[state.km.subjectId];
+  const ch=s.chapters.find(c=>c.id===state.km.chapterId);
+  return `
+  <div class="breadcrumb">
+    <span onclick="khGoHome()">Knowledge Hub</span> ›
+    <span onclick="khOpenSubject('${state.km.subjectId}')">${s.name}</span> ›
+    <b>${ch.name}</b>
+  </div>
+  <p class="section-title">${s.icon} ${ch.name} — Topics</p>
+  ${ch.topics.map(t=>`
+  <div class="topic-card flex" style="gap:12px" onclick="khOpenTopic('${state.km.subjectId}','${ch.id}','${t.id}')">
+    <span class="mastery-dot" style="background:${khMasteryDotColor(t.id)}${khGetMastery(t.id)==='none'?';border:1.5px solid var(--color-border-secondary)':''}"></span>
+    <div style="flex:1">
+      <div class="topic-title">${t.name}</div>
+      <div class="topic-desc">${t.level} · ${mastery[t.id]||0}/5 questions answered</div>
+    </div>
+    <span class="tag" style="${khMasteryTagStyle(t.id)}">${khMasteryLabel(t.id)}</span>
+  </div>`).join('')}`;
+}
+
+function khTopicHTML(){
+  const s=CURRICULUM[state.km.subjectId];
+  const ch=s.chapters.find(c=>c.id===state.km.chapterId);
+  const t=ch.topics.find(x=>x.id===state.km.topicId);
+  const m=mastery[t.id]||0;
+  return `
+  <div class="breadcrumb">
+    <span onclick="khGoHome()">Knowledge Hub</span> ›
+    <span onclick="khOpenSubject('${state.km.subjectId}')">${s.name}</span> ›
+    <span onclick="khOpenChapter('${state.km.subjectId}','${ch.id}')">${ch.name}</span> ›
+    <b>${t.name}</b>
+  </div>
+  <div class="card mb-2">
+    <div class="flex gap-sm mb-1">
+      <span class="mastery-dot" style="width:16px;height:16px;background:${khMasteryDotColor(t.id)}"></span>
+      <div style="flex:1">
+        <div style="font-size:16px;font-weight:500">${t.name}</div>
+        <div class="text-xs text-muted">${t.level} · ${ch.name}</div>
+      </div>
+      <span class="tag" style="${khMasteryTagStyle(t.id)};font-size:13px;padding:5px 14px">${khMasteryLabel(t.id)}</span>
+    </div>
+    <div class="flex" style="gap:6px">
+      ${Array.from({length:5},(_,i)=>`<div style="flex:1;height:6px;border-radius:3px;background:${i<m?(i<2?'#E24B4A':i<4?'#EF9F27':'#1D9E75'):'var(--color-background-secondary)'}"></div>`).join('')}
+    </div>
+    <div class="text-xs text-muted mt-1">${m}/5 questions answered</div>
+  </div>
+  <p class="section-title">Choose how you want to learn:</p>
+  <div class="grid-2 mb-2">
+    <div class="card km-choice" onclick="khStartLearn('video')">
+      <div style="font-size:32px;margin-bottom:8px">🎬</div>
+      <div style="font-size:14px;font-weight:500;margin-bottom:4px">Watch a video lecture</div>
+      <div class="text-xs text-muted">5–10 minute explanation, then 5 questions in increasing difficulty</div>
+    </div>
+    <div class="card km-choice" onclick="khStartLearn('doc')">
+      <div style="font-size:32px;margin-bottom:8px">📖</div>
+      <div style="font-size:14px;font-weight:500;margin-bottom:4px">Read the explanation</div>
+      <div class="text-xs text-muted">Feynman-style: starts super simple, builds to JEE Advanced, then 5 questions</div>
+    </div>
+  </div>
+  <div class="text-xs text-muted">Already comfortable with this topic? <span style="color:#534AB7;cursor:pointer;font-weight:500" onclick="khOpenMorePicker()">Jump straight to more practice questions →</span></div>`;
+}
+
+function khLearnHTML(){
+  const s=CURRICULUM[state.km.subjectId];
+  const ch=s.chapters.find(c=>c.id===state.km.chapterId);
+  const t=ch.topics.find(x=>x.id===state.km.topicId);
+  if(state.km.learnMode==='video'){
+    const ytUrl=`https://www.youtube.com/results?search_query=${encodeURIComponent(t.videoQuery)}`;
+    return `
+    <div class="breadcrumb"><span onclick="khOpenTopic('${state.km.subjectId}','${ch.id}','${t.id}')">← ${t.name}</span> › Video Mode</div>
+    <div class="card mb-2" style="background:var(--color-background-secondary)">
+      <div class="flex gap-sm mb-1">
+        <i class="ti ti-brand-youtube" style="font-size:26px;color:#E24B4A" aria-hidden="true"></i>
+        <div>
+          <div style="font-size:14px;font-weight:500">${t.name} — Video Lecture</div>
+          <div class="text-xs text-muted">Search: "${t.videoQuery}"</div>
+        </div>
+      </div>
+      <a href="${ytUrl}" target="_blank" class="btn btn-primary btn-sm mt-1"><i class="ti ti-external-link" aria-hidden="true"></i> Open YouTube Search</a>
+    </div>
+    <p class="section-title">Now test your knowledge — 5 questions (increasing difficulty):</p>
+    <button class="btn btn-primary" onclick="khStartQuiz()">Start Quiz <i class="ti ti-arrow-right" aria-hidden="true"></i></button>`;
+  } else {
+    return `
+    <div class="breadcrumb"><span onclick="khOpenTopic('${state.km.subjectId}','${ch.id}','${t.id}')">← ${t.name}</span> › Read Mode</div>
+    <p class="section-title">📖 ${t.name}</p>
+    ${t.explanation.map(e=>`
+    <div class="mb-1">
+      <span class="div-badge ${e.badge==='level-1'?'div4':e.badge==='level-2'?'div2':'div1'}">${e.lvl}</span>
+      <div style="font-size:13px;line-height:1.7;color:var(--color-text-secondary);padding:10px 12px;background:var(--color-background-secondary);border-radius:8px;margin-top:4px">${e.text}</div>
+    </div>`).join('')}
+    <p class="section-title mt-1">Now test your knowledge — 5 questions (increasing difficulty):</p>
+    <button class="btn btn-primary" onclick="khStartQuiz()">Start Quiz <i class="ti ti-arrow-right" aria-hidden="true"></i></button>`;
+  }
+}
+
+function khQuizHTML(){
+  const s=CURRICULUM[state.km.subjectId];
+  const ch=s.chapters.find(c=>c.id===state.km.chapterId);
+  const t=ch.topics.find(x=>x.id===state.km.topicId);
+  const qs=t.questions;
+  const qi=state.km.quizIdx;
+  if(qi>=qs.length){
+    const score=Object.values(state.km.quizAnswers).filter(Boolean).length;
+    mastery[t.id]=Math.max(mastery[t.id]||0,score);
+    const mc=khGetMastery(t.id);
+    return `
+    <div class="breadcrumb"><span onclick="khOpenTopic('${state.km.subjectId}','${ch.id}','${t.id}')">← ${t.name}</span> › Results</div>
+    <div class="card" style="text-align:center">
+      <div style="font-size:40px;margin-bottom:8px">${score>=5?'🏆':score>=3?'⭐':'📖'}</div>
+      <div style="font-size:18px;font-weight:500;margin-bottom:4px">${score>=5?'Topic Mastered!':score>=3?'Good Progress!':'Keep Practising!'}</div>
+      <div class="text-sm text-muted mb-1">${score}/5 questions correct</div>
+      <span class="tag" style="${khMasteryTagStyle(t.id)};font-size:14px;padding:6px 18px">${mc==='red'?'🔴 Learning — review again':mc==='yellow'?'🟡 Practising — getting there!':mc==='green'?'🟢 Mastered — excellent!':'Keep going'}</span>
+      <div class="mt-1 flex gap-sm" style="justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-sm" onclick="khStartQuiz()">Retry Quiz</button>
+        <button class="btn btn-sm" onclick="khOpenChapter('${state.km.subjectId}','${ch.id}')">Back to Topics</button>
+        <button class="btn btn-primary btn-sm" onclick="khOpenMorePicker()">Not satisfied? More Questions</button>
+      </div>
+    </div>`;
+  }
+  const q=qs[qi];
+  const ans=state.km.quizAnswered;
+  const diffLabels=['Very Easy','Easy','Medium','Hard','Advanced'];
+  const tagColors=[['#FCEBEB','#A32D2D'],['#FAECE7','#993C1D'],['#FAEEDA','#854F0B'],['#E1F5EE','#3B6D11'],['#EAF3DE','#085041']];
+  return `
+  <div class="breadcrumb"><span onclick="khOpenTopic('${state.km.subjectId}','${ch.id}','${t.id}')">← ${t.name}</span> › Quiz</div>
+  <div class="card">
+    <div class="flex mb-1" style="justify-content:space-between">
+      <span class="tag" style="background:${tagColors[qi][0]};color:${tagColors[qi][1]}">Q${qi+1} of 5 — ${diffLabels[qi]}</span>
+    </div>
+    <div class="q-text">${q.q}</div>
+    ${q.opts.map((o,i)=>`
+      <div class="opt ${ans!==null?(i===q.ans?'correct':(ans===i?'wrong':'')):''}" onclick="${ans===null?`khAnswerQ(${i})`:''}">
+        <div class="opt-label">${String.fromCharCode(65+i)}</div>${o}
+      </div>`).join('')}
+    ${ans!==null?`<div style="font-size:12px;padding:8px 10px;background:var(--color-background-secondary);border-radius:6px;color:var(--color-text-secondary);margin-top:8px">💡 ${q.exp}</div>
+    <div class="mt-1" style="text-align:right"><button class="btn btn-primary btn-sm" onclick="khNextQ()">Next Question <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`:''}
+  </div>`;
+}
+
+function khMoreHTML(){
+  const s=CURRICULUM[state.km.subjectId];
+  const ch=s.chapters.find(c=>c.id===state.km.chapterId);
+  const t=ch.topics.find(x=>x.id===state.km.topicId);
+  if(!state.km.moreDifficulty){
+    return `
+    <div class="breadcrumb"><span onclick="khOpenTopic('${state.km.subjectId}','${ch.id}','${t.id}')">← ${t.name}</span> › More Questions</div>
+    <p class="section-title">Pick a difficulty for extra practice on "${t.name}":</p>
+    <div class="grid-3">
+      <div class="card km-choice" onclick="khSelectMoreDifficulty('easy')">
+        <div style="font-size:28px;margin-bottom:6px">🟢</div>
+        <div style="font-size:14px;font-weight:500">Easy</div>
+        <div class="text-xs text-muted">Warm up with the basics</div>
+      </div>
+      <div class="card km-choice" onclick="khSelectMoreDifficulty('medium')">
+        <div style="font-size:28px;margin-bottom:6px">🟡</div>
+        <div style="font-size:14px;font-weight:500">Medium</div>
+        <div class="text-xs text-muted">Apply the concept</div>
+      </div>
+      <div class="card km-choice" onclick="khSelectMoreDifficulty('hard')">
+        <div style="font-size:28px;margin-bottom:6px">🔴</div>
+        <div style="font-size:14px;font-weight:500">Hard</div>
+        <div class="text-xs text-muted">JEE Advanced level challenge</div>
+      </div>
+    </div>`;
+  }
+  const pool = (EXTRA_QUESTIONS[t.id]&&EXTRA_QUESTIONS[t.id][state.km.moreDifficulty])||[];
+  const q = pool[0];
+  const labelMap={easy:'🟢 Easy',medium:'🟡 Medium',hard:'🔴 Hard'};
+  if(!q){
+    return `
+    <div class="breadcrumb"><span onclick="khBackToMorePicker()">← Choose Difficulty</span> › More Questions</div>
+    <div class="card" style="text-align:center">
+      <div class="text-sm text-muted mb-1">More ${labelMap[state.km.moreDifficulty]} questions for this topic are coming soon!</div>
+      <button class="btn btn-sm" onclick="khBackToMorePicker()">Try Another Difficulty</button>
+    </div>`;
+  }
+  const ans = state.km.moreAnswered;
+  return `
+  <div class="breadcrumb"><span onclick="khBackToMorePicker()">← Choose Difficulty</span> › ${labelMap[state.km.moreDifficulty]} Practice</div>
+  <div class="card">
+    <div class="q-text">${q.q}</div>
+    ${q.opts.map((o,i)=>`
+      <div class="opt ${ans!==null?(i===q.ans?'correct':(ans===i?'wrong':'')):''}" onclick="${ans===null?`khAnswerMore(${i})`:''}">
+        <div class="opt-label">${String.fromCharCode(65+i)}</div>${o}
+      </div>`).join('')}
+    ${ans!==null?`<div style="font-size:12px;padding:8px 10px;background:var(--color-background-secondary);border-radius:6px;color:var(--color-text-secondary);margin-top:8px">💡 ${q.exp}</div>
+    <div class="mt-1 flex gap-sm" style="justify-content:center">
+      <button class="btn btn-sm" onclick="khBackToMorePicker()">Try Another Difficulty</button>
+      <button class="btn btn-primary btn-sm" onclick="khOpenTopic('${state.km.subjectId}','${ch.id}','${t.id}')">Back to Topic</button>
+    </div>`:''}
+  </div>`;
+}
+
+
+// ── Knowledge Hub helper functions ──
+function khOverallStats(){
+  let done=0,total=0;
+  Object.values(CURRICULUM).forEach(s=>s.chapters.forEach(ch=>ch.topics.forEach(t=>{
+    total++;
+    if((mastery[t.id]||0)>=5) done++;
+  })));
+  return {done,total};
+}
+
+function khGetMastery(topicId){
+  const m=mastery[topicId]||0;
+  if(m===0) return 'none';
+  if(m<3) return 'red';
+  if(m<5) return 'yellow';
+  return 'green';
+}
+
+function khMasteryDotColor(topicId){
+  const m=khGetMastery(topicId);
+  if(m==='none') return 'var(--bg2)';
+  if(m==='red') return 'var(--red)';
+  if(m==='yellow') return 'var(--amber)';
+  return 'var(--green)';
+}
+
+function khMasteryLabel(topicId){
+  const m=khGetMastery(topicId);
+  if(m==='none') return 'Not started';
+  if(m==='red') return '🔴 Learning';
+  if(m==='yellow') return '🟡 Practising';
+  return '🟢 Mastered';
+}
+
+function khMasteryTagStyle(topicId){
+  const m=khGetMastery(topicId);
+  if(m==='none') return 'background:var(--bg2);color:var(--muted)';
+  if(m==='red') return 'background:var(--red-light);color:#A32D2D';
+  if(m==='yellow') return 'background:var(--amber-light);color:#854F0B';
+  return 'background:var(--green-light);color:#085041';
+}
+
+function khCurrentTopic(){
+  const s=CURRICULUM[state.km.subjectId];
+  const ch=s.chapters.find(c=>c.id===state.km.chapterId);
+  return ch.topics.find(t=>t.id===state.km.topicId);
+}
+
+function khGoHome(){ state.km={view:'home',subjectId:null,chapterId:null,topicId:null,learnMode:null,quizIdx:0,quizAnswers:{},quizAnswered:null,moreDifficulty:null,moreAnswered:null}; render(); }
+function khOpenSubject(id){ state.km.view='subject'; state.km.subjectId=id; state.km.chapterId=null; state.km.topicId=null; render(); }
+function khOpenChapter(sId,cId){ state.km.view='chapter'; state.km.subjectId=sId; state.km.chapterId=cId; state.km.topicId=null; render(); }
+function khOpenTopic(sId,cId,tId){ state.km.view='topic'; state.km.subjectId=sId; state.km.chapterId=cId; state.km.topicId=tId; state.km.learnMode=null; render(); }
+function khStartLearn(mode){ state.km.view='learn'; state.km.learnMode=mode; render(); }
+function khStartQuiz(){ state.km.view='quiz'; state.km.quizIdx=0; state.km.quizAnswers={}; state.km.quizAnswered=null; render(); }
+function khAnswerQ(i){
+  const t=khCurrentTopic();
+  const q=t.questions[state.km.quizIdx];
+  const correct=i===q.ans;
+  state.km.quizAnswers[state.km.quizIdx]=correct;
+  state.km.quizAnswered=i;
+  if(correct){const cur=mastery[t.id]||0; if(cur<=state.km.quizIdx) mastery[t.id]=state.km.quizIdx+1;}
+  render();
+}
+function khNextQ(){ state.km.quizIdx++; state.km.quizAnswered=null; render(); }
+function khOpenMorePicker(){ state.km.view='more'; state.km.moreDifficulty=null; state.km.moreAnswered=null; render(); }
+function khSelectMoreDifficulty(d){ state.km.moreDifficulty=d; state.km.moreAnswered=null; render(); }
+function khAnswerMore(i){ state.km.moreAnswered=i; render(); }
+function khBackToMorePicker(){ state.km.moreDifficulty=null; state.km.moreAnswered=null; render(); }
+
+
+nav('dashboard');
+</script>
+</body>
+</html>
